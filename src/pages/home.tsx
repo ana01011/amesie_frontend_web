@@ -4,7 +4,7 @@ import Hero from '../components/Hero';
 import CategoriesCarousel from '../components/CategoriesCarousel';
 import RestaurantsSection from '../components/RestaurantsSection';
 import FooterNav from '../components/FooterNav';
-import './Home.css';
+import './home.css';
 
 interface Restaurant {
   id: number;
@@ -152,7 +152,7 @@ const House: React.FC = () => {
   // ============================================
 
   return (
-    <div className="house">
+    <div className="home">
       {/* Header Component */}
       <Header
         userAddress={userAddress}
