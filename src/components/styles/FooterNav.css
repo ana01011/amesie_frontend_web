@@ -1,0 +1,116 @@
+/* ============================================
+   FOOTER NAVIGATION
+   ============================================ */
+.footer-nav {
+  background: var(--color-white);
+  border-top: 1px solid var(--color-border);
+  padding: var(--spacing-md) 0;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.footer-nav__container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+  gap: 16px;
+  width: 100%;
+}
+
+.footer-nav__item {
+  background: none;
+  border: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  color: var(--color-text-light);
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.footer-nav__item:hover {
+  transform: translateY(-2px);
+}
+
+.footer-nav__item img {
+  width: 24px;
+  height: 24px;
+  filter: grayscale(0.5);
+}
+
+.footer-nav__item--active {
+  color: var(--color-primary);
+}
+
+.footer-nav__item--active img {
+  filter: none;
+  filter: brightness(1) saturate(2);
+}
+
+/* ============================================
+   MOBILE LOGO SECTION
+   ============================================ */
+.footer-nav__mobile-logo {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  flex: 1;
+}
+
+.footer-nav__logo-wrapper {
+  width: 36px;
+  height: 36px;
+  background: var(--color-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.footer-nav__logo-icon {
+  width: 32px;
+  height: 11px;
+  object-fit: contain;
+}
+
+.footer-nav__logo-text {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--color-text-dark);
+  text-transform: capitalize;
+}
+
+/* ============================================
+   RESPONSIVE - SHOW LOGO ON MOBILE
+   ============================================ */
+
+@media (max-width: 768px) {
+  .footer-nav__mobile-logo {
+    display: flex !important;
+  }
+
+  .footer-nav__item {
+    font-size: 11px;
+  }
+}
+
+@media (min-width: 769px) {
+  .footer-nav__mobile-logo {
+    display: none !important;
+  }
+}

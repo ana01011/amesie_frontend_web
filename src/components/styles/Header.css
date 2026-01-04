@@ -1,0 +1,372 @@
+/* ============================================
+   HEADER NAVBAR
+   ============================================ */
+.header__navbar {
+  background: var(--color-white);
+  border-bottom: 1px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.header__navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: var(--spacing-md) var(--spacing-lg);
+  gap: 32px;
+  padding-left: 85px;
+  padding-right: 85px;
+}
+
+.header__navbar-container .header__nav-right {
+  margin-left: auto;
+}
+
+
+
+/* ============================================
+   MENU BUTTON
+   ============================================ */
+.header__menu-btn {
+  background: #f5f3f3;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header__menu-btn:hover {
+  background: #e8e8e8;
+}
+
+.header__menu-icon {
+  width: 20px;
+  height: 20px;
+  filter: grayscale(0.3);
+}
+
+.header__menu-btn:hover .header__menu-icon {
+  filter: grayscale(0);
+}
+
+/* DESKTOP: Rectangle + Right Position */
+@media (min-width: 769px) {
+  .header__menu-btn {
+    order: 5;
+    border-radius: 8px !important;
+    width: 44px;
+    height: 36px;
+    background: #faf8f8 !important;
+    border: 1px solid #e9ecef;
+  }
+
+  .header__menu-icon {
+    width: 27px !important;
+    height: 27px !important;
+  }
+
+  .header__menu-btn:hover {
+    background: #e8e8e8 !important;
+  }
+}
+
+
+
+/* ============================================
+   LOGO
+   ============================================ */
+.header__logo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  flex-shrink: 0;
+}
+
+.header__logo-wrapper {
+  width: 44px;
+  height: 44px;
+  background: var(--color-dark);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.header__logo-icon {
+  width: 40px;
+  height: 13px;
+  object-fit: fill;
+}
+
+/* ============================================
+   CURSIVE AMESIE FONT
+   ============================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+
+.header__logo-text {
+  font-family: 'Allura', cursive;
+  font-size: 36px;
+  font-weight: 900;
+  color: var(--color-dark);
+  letter-spacing: 0.5px;
+  display: none;
+  margin-left: 0px;
+   margin-right: 84px; 
+  align-self: center;
+}
+
+
+/* ============================================
+   LOCATION BADGE
+   ============================================ */
+.header__nav-location {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  background: var(--color-location-bg);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+  flex-shrink: 0;
+  width: auto;
+}
+
+.header__location-pin {
+  width: 20px;
+  height: 20px;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.header__nav-location > div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header__nav-location-label {
+  font-size: 10px;
+  color: var(--color-primary);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0;
+}
+
+.header__nav-location-value {
+  font-size: 14px;
+  color: var(--color-text-dark);
+  font-weight: 500;
+  margin: 0;
+}
+
+
+
+/* ============================================
+   RIGHT NAVIGATION
+   ============================================ */
+.header__nav-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  flex-shrink: 0;
+}
+
+.header__search-btn,
+.header__cart-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-sm);
+  transition: transform 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__search-btn:hover,
+.header__cart-btn:hover {
+  transform: scale(1.1);
+}
+
+.header__search-btn img,
+.header__cart-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.header__cart-btn {
+  position: relative;
+  background: var(--color-dark);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+}
+
+.header__cart-btn img {
+  filter: brightness(0) invert(1);
+  width: 20px;
+  height: 20px;
+}
+
+.header__cart-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  background: #ff3b30;
+  color: white;
+  font-size: 10px;
+  font-weight: bold;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+
+/* ============================================
+   RESPONSIVE: TABLET (481px - 768px)
+   ============================================ */
+@media (min-width: 481px) and (max-width: 768px) {
+  .header__navbar-container {
+    padding-left: 16px;
+    padding-right: 16px;
+    gap: 12px;
+  }
+
+  .header__logo {
+    display: none;
+  }
+}
+
+
+
+/* ============================================
+   RESPONSIVE: MOBILE (max 480px)
+   ============================================ */
+@media (max-width: 480px) {
+  .header__navbar {
+    padding: 12px 0;
+    padding-top: 20px;
+  }
+
+  .header__menu-btn {
+    order: -1 !important;
+    margin-right: 10px !important;
+    background: #e8e8e8 !important;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .header__menu-icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  .header__logo {
+    display: none !important;
+  }
+
+  .header__nav-right {
+    order: 999 !important;
+  }
+
+  .header__navbar-container {
+    padding: 0 var(--spacing-lg);
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    gap: 8px !important;
+  }
+
+  .header__nav-location {
+    padding: 6px 12px;
+    flex-shrink: 0;
+    order: 0;
+    margin-right: auto !important;
+  }
+
+  .header__nav-location-label {
+    font-size: 9px;
+  }
+
+  .header__nav-location-value {
+    font-size: 12px;
+  }
+
+  .header__search-btn {
+    display: none;
+  }
+
+  .header__cart-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .header__cart-badge {
+    width: 16px;
+    height: 16px;
+    font-size: 9px;
+  }
+}
+
+
+
+/* ============================================
+   RESPONSIVE: TABLET LANDSCAPE (769px - 1023px)
+   ============================================ */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .header__navbar-container {
+    padding-left: 48px;
+    padding-right: 48px;
+  }
+}
+
+
+
+/* ============================================
+   RESPONSIVE: DESKTOP (1024px+)
+   ============================================ */
+@media (min-width: 1024px) {
+  .header__navbar-container {
+    padding-left: 95px;
+    padding-right: 95px;
+  }
+}
+
+/* ============================================
+   RESPONSIVE - SHOW TEXT ON DESKTOP
+   ============================================ */
+
+@media (min-width: 768px) {
+  .header__logo-text {
+    display: block;
+  }
+}
+
+@media (max-width: 767px) {
+  .header__logo-text {
+    display: none;
+  }
+}
+
