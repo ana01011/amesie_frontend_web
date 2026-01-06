@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap');
+.restaurant-section {
+  padding: 16px 0;
+}
+
+.restaurant-section__header {
+  padding: 16px 0px 12px;
+}
+
+.restaurant-section__title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 400;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  font-family: 'Sen', sans-serif;
+}
+
+.restaurant-section__list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 16px;
+}
+
+.restaurant-section__loading {
+  padding: 32px 16px;
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .restaurant-section {
+    padding: 12px 0;
+    margin: 0px 40px;
+  }
+
+  .restaurant-section__header {
+    padding: 12px 0px 8px;
+  }
+
+  .restaurant-section__list {
+    gap: 10px;
+    padding: 0 0px;
+  }
+}

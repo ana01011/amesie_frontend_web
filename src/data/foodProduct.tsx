@@ -14,17 +14,7 @@ export const foodProducts: FoodProduct[] = [
     rating: 4.5,
     prepTime: '5 min'
   },
-  {
-    id: 'burger-classic',
-    name: 'Classic Burger',
-    restaurant: 'Burger House',
-    price: 45,
-    image: '/images/burger.png',
-    category: 'burgers',
-    tags: ['bestseller'],
-    rating: 4.7,
-    prepTime: '7 min'
-  },
+  
 
   // Detailed pizza card [file:31]
   {
@@ -33,13 +23,24 @@ export const foodProducts: FoodProduct[] = [
     restaurant: 'Coffee House',
     description: 'Prosciutto E Funghi - A pizza variety that is topped with tomato sauce',
     price: 20,
-    image: '/images/pizza-prosciutto.jpg',
+    image: '/images/pizza-i.png',
     category: 'pizza',
-    tags: ['featured'],
+    tags: ['popular','featured'],
     rating: 4.7,
     prepTime: '20 min',
     sizes: ['10"', '14"', '16"'],
     ingredients: ['salt', 'chicken', 'garlic', 'veg']
+  },
+  {
+    id: 'burger-classic',
+    name: 'Classic Burger',
+    restaurant: 'Burger House',
+    price: 45,
+    image: '/images/burger.png',
+    category: 'burgers',
+    tags: ['popular','bestseller'],
+    rating: 4.7,
+    prepTime: '7 min'
   },
 
   // Signature coffee from code snippet [file:30]
@@ -61,7 +62,7 @@ export const foodProducts: FoodProduct[] = [
     name: 'Margherita Pizza',
     restaurant: 'Pizza Palace',
     price: 35,
-    image: '/images/pizza-marghe.jpg',
+    image: '/images/pizza-i.png',
     category: 'pizza',
     tags: ['popular'],
     rating: 4.6,

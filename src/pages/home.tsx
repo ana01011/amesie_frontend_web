@@ -25,7 +25,7 @@ interface Category {
 
 type FooterTab = 'shop' | 'food' | 'instamart' | 'cart';
 
-const House: React.FC = () => {
+const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [userAddress, setUserAddress] = useState<string>('123 Oak Street');
@@ -51,12 +51,7 @@ const House: React.FC = () => {
       icon: '/images/pizza-i.png',
       description: 'Fresh pizzas',
     },
-    {
-      id: 'coffee',
-      label: 'Coffee',
-      icon: '/images/all-foods-i.png',
-      description: 'Premium coffee',
-    },
+    
     {
       id: 'snacks',
       label: 'Snacks',
@@ -194,4 +189,4 @@ const House: React.FC = () => {
   );
 };
 
-export default House;
+export default Home;

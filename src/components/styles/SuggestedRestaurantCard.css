@@ -1,0 +1,160 @@
+/* ============================================
+   SUGGESTED RESTAURANT CARD
+   ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap');
+.suggested-restaurant-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 22px 10px;
+  background-color: transparent;
+  border-radius: 0;
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.10);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* .suggested-restaurant-card:last-child {
+  border-bottom: none;
+} */
+
+.suggested-restaurant-card:hover {
+  opacity: 0.8;
+}
+
+.suggested-restaurant-card:active {
+  transform: scale(0.98);
+}
+
+/* Thumbnail Image Container - WITH BORDER & SHADOW */
+.card-image-container {
+  flex-shrink: 0;
+  width: 106px;
+  height: 88px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--color-border);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); */
+}
+
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.2s ease;
+}
+
+.suggested-restaurant-card:hover .card-image {
+  transform: scale(1.05);
+}
+
+/* Card Content - Name & Rating Stacked */
+.card-content {
+  flex: 1;
+  min-width: 0;
+  padding: 2px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0px;
+}
+
+/* Restaurant Name - Larger Font */
+.card-name {
+  font-size: 16px;
+  font-weight: 400;
+  margin: 0;
+  color: var(--color-text);
+  word-break: break-word;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  font-family: 'Sen', sans-serif;
+}
+
+/* Card Rating - Below Name */
+.card-rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.star {
+  font-size: 25px;
+ 
+  line-height: 1;
+  color: #FDC500;
+ /* yellow/gold */
+}
+
+
+.rating-value {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
+  font-family: 'Sen', sans-serif;
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+  .suggested-restaurant-card {
+    gap: 10px;
+    padding: 10px 0px 10px;
+  }
+
+  .card-image-container {
+    width: 96px;
+  height: 68px;
+    border-radius: 14px;
+    margin: 0px 4px;
+  }
+
+  .card-name {
+    font-size: 16px;
+    font-family: 'Sen', sans-serif;
+  }
+
+  .star {
+  font-size: 18px;
+ 
+  line-height: 1;
+  color: #FDC500;
+ /* yellow/gold */
+}
+
+  .rating-value {
+    font-size: 16px;
+    font-family: 'Sen', sans-serif;
+  }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+  .suggested-restaurant-card {
+    /* border-bottom-color: rgba(255, 255, 255, 0.1); */
+  }
+
+  .suggested-restaurant-card:hover {
+    opacity: 0.75;
+  }
+
+  .card-image-container {
+    border-color: rgba(255, 255, 255, 0.1);
+    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); */
+  }
+}
+
+[data-color-scheme="dark"] .suggested-restaurant-card {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+[data-color-scheme="dark"] .suggested-restaurant-card:hover {
+  opacity: 0.75;
+}
+
+[data-color-scheme="dark"] .card-image-container {
+  border-color: rgba(255, 255, 255, 0.1);
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); */
+}

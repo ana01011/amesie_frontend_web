@@ -1,6 +1,8 @@
 /* ============================================
    CATEGORIES CAROUSEL
    ============================================ */
+   @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap');
+
 .categories-carousel {
   background: var(--color-white);
   padding: var(--spacing-xl) var(--spacing-lg);
@@ -21,10 +23,11 @@
 }
 
 .categories-carousel__header h2 {
-  font-size: 28px;
-  font-weight: 700;
-  color: var(--color-text-dark);
+  font-size: 20px;
+  font-weight: 400;
+  color: #32343E;
   margin: 0;
+  font-family: 'Sen', sans-serif;
 }
 
 /* Carousel - Single line scrolling (DEFAULT) */
@@ -104,6 +107,7 @@
   font-size: 14px;
   margin: 0;
   font-weight: 500;
+  font-family: 'Sen', sans-serif;
 }
 
 .categories-carousel__card p {
@@ -111,6 +115,7 @@
   margin: 0;
   font-size: 12px;
   color: var(--color-text-light);
+  font-family: 'Sen', sans-serif;
 }
 
 /* Show description on desktop (1024px+) */
@@ -118,6 +123,9 @@
   .categories-carousel__card p {
     display: block;
   }
+}
+.categories-carousel__header {
+  margin-bottom: var(--spacing-md);
 }
 
 .categories-carousel__see-all-btn {
@@ -132,6 +140,7 @@
   align-items: center;
   gap: 6px;
   transition: all 0.2s ease;
+  font-family: 'Sen', sans-serif;
 }
 
 .categories-carousel__see-all-btn:hover {
@@ -143,9 +152,35 @@
    ============================================ */
 
 @media (max-width: 480px) {
+
+  .categories-carousel {
+  background: var(--color-white);
+  padding: 0px ;
+  border-bottom: 0px solid var(--color-border);
+  margin-left: 35px;
+  font-family: 'Sen', sans-serif;
+}
+
+.categories-carousel__grid {
+  
+  padding: 6px 0 !important;
+  
+}
+
+.categories-carousel__container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0px;
+}
   .categories-carousel__header h2 {
     font-size: 20px;
+    font-weight: 400px !important;
+    margin-left: 5px;
+    font-family: 'Sen', sans-serif;
   }
+  .categories-carousel__see-all-btn {
+  margin-right: 32px;
+}
 
   .categories-carousel__card {
     min-width: 110px;

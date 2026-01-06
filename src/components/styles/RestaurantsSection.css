@@ -1,9 +1,10 @@
 /* ============================================
    RESTAURANTS SECTION
    ============================================ */
+   @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap');
 .restaurants-section {
   background: var(--color-white);
-  padding: var(--spacing-xl) var(--spacing-lg);
+  padding: var(--spacing-lg) var(--spacing-lg);
 }
 
 .restaurants-section__container {
@@ -20,10 +21,11 @@
 }
 
 .restaurants-section__header h2 {
-  font-size: 28px;
-  font-weight: 700;
+  font-size: 20px;
+  font-weight: 400;
   color: var(--color-text-dark);
   margin: 0;
+  font-family: 'Sen', sans-serif;
 }
 
 .restaurants-section__grid {
@@ -43,6 +45,7 @@
 
   .restaurants-section__header h2 {
     font-size: 20px;
+    font-family: 'Sen', sans-serif;
   }
 
   .restaurants-section__grid {
