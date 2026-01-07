@@ -190,14 +190,9 @@
    RESPONSIVE DESIGN
    ============================================ */
 
-@media (min-width: 768px) {
-  .search-wrapper {
-    max-width: 600px;
-    margin: 0 auto;
-  }
-}
 
-@media (max-width: 480px) {
+
+@media (max-width: 1253px) {
   .search-top-bar {
     padding: 10px 12px;
   }
@@ -210,3 +205,21 @@
     padding: 12px;
   }
 }
+
+/* @media (min-width: 1254px) {
+  .search-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;  
+    gap: 22px;                         
+    padding: 0 32px;
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+} */
+
+/* @media (min-width: 768px) {
+  .search-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+} */

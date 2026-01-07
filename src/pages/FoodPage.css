@@ -1,0 +1,84 @@
+/* ============================================
+   FOOD PAGE
+============================================ */
+
+.food-page {
+  background: var(--color-white);
+  min-height: 100vh;
+}
+
+/* ============================================
+   FOOD SECTION
+============================================ */
+
+.food-section {
+  padding: 16px 0;
+  margin: 0 0px;
+}
+
+/* .section-title {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  color: var(--color-text-dark);
+} */
+
+/* ============================================
+   FOOD GRID
+============================================ */
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+
+/* ============================================
+   FOOD CARD
+============================================ */
+
+
+
+/* ============================================
+   FOOD INFO
+============================================ */
+
+
+/* ============================================
+   FOOD BOTTOM
+============================================ */
+
+
+
+@media (max-width: 640px) {
+
+    .food-section {
+  padding: 16px 0;
+  margin: 0;
+ 
+}
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+   margin: 0 20px 0 20px;
+}
+
+/* .section-title {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 12px;
+  color: var(--color-text-dark);
+} */
+
+/* ============================================
+   FOOD GRID
+============================================ */
+
+.food-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+
+}

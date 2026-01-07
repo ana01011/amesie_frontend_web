@@ -201,54 +201,57 @@ const Search: React.FC = () => {
   // Render
   // ============================================
 
-  return (
-    <div className="search-page">
-      {/* Header Component */}
-      <Header
-        userAddress={userAddress}
-        cartCount={0}
-        onMenuClick={handleMenuClick}
-        onCartClick={handleCartClick}
-        onSearchClick={handleSearchClick}
-        onSearchChange={handleHeaderSearchChange}
+  // Search.tsx - Updated JSX Structure
+
+return (
+  <div className="search-page">
+    {/* Header Component */}
+    <Header
+      userAddress={userAddress}
+      cartCount={0}
+      onMenuClick={handleMenuClick}
+      onCartClick={handleCartClick}
+      onSearchClick={handleSearchClick}
+      onSearchChange={handleHeaderSearchChange}
+    />
+
+    {/* Hero Component */}
+    <Hero
+      greeting="Good Afternoon!"
+      userName="Abc"
+      searchQuery={searchQuery}
+      onSearchChange={handleHeaderSearchChange}
+    />
+
+    {/* Categories Carousel Component */}
+    <CategoriesCarousel
+      categories={categories}
+      selectedCategory={selectedCategory}
+      onCategorySelect={handleCategorySelect}
+    />
+
+    {/* Main Content Wrapper - GRID LAYOUT */}
+    <div className="search-wrapper">
+      {/* LEFT COLUMN - Restaurant Section */}
+      <SuggestedRestaurantSection
+        title={searchQuery.trim() !== '' ? "Suggested Restaurants" : "Suggested Restaurants"}
+        restaurants={searchQuery.trim() !== '' ? searchResults : defaultRestaurants}
+        isLoading={isLoading}
+        onRestaurantClick={(restaurant) => handleRestaurantClick(restaurant.id)}
       />
 
-      {/* Hero Component */}
-      <Hero
-        greeting="Good Afternoon!"
-        userName="Abc"
-        searchQuery={searchQuery}
-        onSearchChange={handleHeaderSearchChange}
+      {/* RIGHT COLUMN - Food Section */}
+      <FoodSection
+        title="Popular Fast Food"
+        foods={getPopularFoods()}
+        emoji="✨"
+        onFoodClick={handleFoodClick}
+        onAddFood={handleAddFood}
       />
-
-      {/* Categories Carousel Component */}
-      <CategoriesCarousel
-        categories={categories}
-        selectedCategory={selectedCategory}
-        onCategorySelect={handleCategorySelect}
-      />
-
-      {/* Main Content Wrapper */}
-      <div className="search-wrapper">
-        {/* Restaurant Section */}
-        <SuggestedRestaurantSection
-          title={searchQuery.trim() !== '' ? "Suggested Restaurants" : "Suggested Restaurants"}
-          restaurants={searchQuery.trim() !== '' ? searchResults : defaultRestaurants}
-          isLoading={isLoading}
-          onRestaurantClick={(restaurant) => handleRestaurantClick(restaurant.id)}
-        />
-
-        {/* Food Section - Using FoodProducts Data */}
-        <FoodSection
-          title="Popular Fast Food"
-          foods={getPopularFoods()}
-          emoji="✨"
-          onFoodClick={handleFoodClick}
-          onAddFood={handleAddFood}
-        />
-      </div>
     </div>
-  );
+  </div>
+);
+
 };
 
 export default Search;

@@ -13,6 +13,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.10);
   cursor: pointer;
   transition: all 0.2s ease;
+  
 }
 
 /* .suggested-restaurant-card:last-child {
@@ -95,6 +96,15 @@
   color: var(--color-text);
   letter-spacing: -0.01em;
   font-family: 'Sen', sans-serif;
+}
+
+@media (min-width: 640px) {
+   .suggested-restaurant-card {
+    gap: 10px;
+    padding: 10px 10px 10px;
+    width: 437px;
+    
+  }
 }
 
 /* Responsive */

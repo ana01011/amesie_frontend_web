@@ -7,16 +7,16 @@
   flex-direction: column;
   background: #ffffff;
   border-radius: 12px;
-  overflow:hidden;
+  overflow: hidden;
   cursor: pointer;
   transition: all 0.3s ease;
   box-shadow: none;
   height: 193px;
   width: 164px;
-   border: 0 1px 1px 0 solid rgba(0, 0, 0, 0.08);
-  box-shadow:  5px 15px 25px  rgba(33, 32, 32, 0.08); 
-  
-  
+  border: 0 1px 1px 0 solid rgba(0, 0, 0, 0.08);
+  box-shadow: 5px 15px 25px rgba(33, 32, 32, 0.08);
+
+
 }
 
 .food-card:hover {
@@ -32,7 +32,7 @@
   border-radius: 12px;
   background: #fffdfd;
   /* margin-bottom: 16px; */
-  display: flex; 
+  display: flex;
   align-items: center;
   justify-content: center;
 }
@@ -42,7 +42,7 @@
   height: 90px;
   /* object-fit: cover; */
   transition: transform 0.3s ease;
-  flex-shrink: 0;  
+  flex-shrink: 0;
 }
 
 .food-card:hover .food-card__image {
@@ -51,11 +51,11 @@
 
 /* Card Content - Calculated height ~72.94px */
 .food-card__content {
-    height: 139.5px;
+  height: 139.5px;
   display: flex;
   flex-direction: column;
   gap: 4px;
-  padding: 0 16px;
+  padding: 0 16px 10px;
   flex: 1;
   justify-content: space-between;
   border-radius: 25px;
@@ -67,7 +67,7 @@
   font-size: 16px;
   font-weight: 600;
   color: #1a1a1a;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:  'Segoe UI', sans-serif;
   line-height: 1.3;
   letter-spacing: -0.2px;
 }
@@ -75,10 +75,10 @@
 /* Restaurant Name - 11px */
 .food-card__restaurant {
   margin: 0;
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 400;
   color: #888888;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'Segoe UI', sans-serif;
   line-height: 1.2;
 }
 
@@ -94,21 +94,19 @@
 
 /* Price - 12px */
 .food-card__price {
-  font-size: 12px;
+  font-size: 17.5px;
   font-weight: 600;
   color: #1a1a1a;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family:'Segoe UI', sans-serif;
 }
 
 /* Add Button - 32.16px (32px rounded) with #FDC500 */
 .food-card__add-btn {
-  width: 32px;
-  height: 32px;
+
   border-radius: 50%;
   border: none;
   background: #FDC500;
   color: #efebeb;
-  font-size: 22px;
   font-weight: 700;
   cursor: pointer;
   display: flex;
@@ -116,10 +114,14 @@
   justify-content: center;
   transition: all 0.2s ease;
   padding: 0;
-  min-width: 32px;
-  min-height: 32px;
   box-shadow: 0 2px 6px rgba(253, 197, 0, 0.2);
   flex-shrink: 0;
+
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  font-size: 22px;
 }
 
 .food-card__add-btn:hover {
@@ -138,7 +140,7 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   .food-card {
     width: 150px;
     height: 180px;
@@ -147,7 +149,7 @@
   .food-card__image-wrapper {
     height: 110px;
     margin-bottom: 14px;
-    
+
   }
 
   .food-card__name {
@@ -169,55 +171,58 @@
     min-height: 28px;
     font-size: 22px;
   }
-}
+} */
 
-@media (max-width: 480px) {
+@media (max-width: 589px) {
   .food-card {
     height: 193px;
-  width: 164px;
-    
+    width: 164px;
+
   }
 
   .food-card:hover {
-  transform: translateY(-2px);
-}
-.food-card:hover .food-card__image {
-  transform: scale(1);
-}
+    transform: translateY(-2px);
+  }
+
+  .food-card:hover .food-card__image {
+    transform: scale(1);
+  }
 
 
   .food-card__image-wrapper {
-  position: relative;
-  width: 164px;
-  height: 90px;
-  overflow: hidden;
-  border-radius: 12px;
-  background: #fffdfd;
-  /* margin-bottom: 16px; */
-  display: flex;  
-  flex-shrink: 0;
-  align-items: center;
-  justify-content: center;
-}
-.food-card__image {
-  width: 131px !important;
-  height: 90px;
-  /* object-fit: cover; */
-  /* transition: transform 0.3s ease; */
-  flex-shrink: 0;  
-}
+    position: relative;
+    width: 164px;
+    height: 90px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fffdfd;
+    /* margin-bottom: 16px; */
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .food-card__image {
+    width: 131px !important;
+    height: 90px;
+    /* object-fit: cover; */
+    /* transition: transform 0.3s ease; */
+    flex-shrink: 0;
+  }
 
   .food-card__content {
-    
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 0 16px 10px;
-  flex: 1;
-  justify-content: space-between;
-  border-radius: 25px;
-  border: #1a1a1a !important;
-}
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 0 16px 10px;
+    flex: 1;
+    justify-content: space-between;
+    border-radius: 25px;
+    border: #1a1a1a !important;
+  }
+
   .food-card__name {
     font-size: 16px;
   }
