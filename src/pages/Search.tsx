@@ -5,7 +5,10 @@ import CategoriesCarousel from '../components/CategoriesCarousel';
 import SuggestedRestaurantSection from '../components/SuggestedRestaurantSection';
 import FoodSection from '../components/FoodSection';
 import { foodProducts } from '../data/foodProduct';
+import { useNavigate } from 'react-router-dom';
+
 import './Search.css';
+
 
 
 interface Restaurant {
@@ -30,6 +33,10 @@ const Search: React.FC = () => {
   const [searchResults, setSearchResults] = useState<Restaurant[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [userAddress, setUserAddress] = useState<string>('Varanasi, UP');
+  const navigate = useNavigate();
+  const [showLocationModal, setShowLocationModal] = useState(false);
+
+
 
 
   // ============================================
@@ -207,13 +214,15 @@ return (
   <div className="search-page">
     {/* Header Component */}
     <Header
-      userAddress={userAddress}
-      cartCount={0}
-      onMenuClick={handleMenuClick}
-      onCartClick={handleCartClick}
-      onSearchClick={handleSearchClick}
-      onSearchChange={handleHeaderSearchChange}
-    />
+  variant="search"
+  locationValue= {userAddress}
+  cartCount={1}
+  onBackClick={() => navigate(-1)}
+  onLocationClick={() => setShowLocationModal(true)}
+  onSearchClick={() => navigate('/search')}
+  onCartClick={() => navigate('/cart')}
+/>
+
 
     {/* Hero Component */}
     <Hero

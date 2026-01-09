@@ -3,6 +3,8 @@ import Header from '../components/Header';
 import RestaurantsSection from '../components/RestaurantsSection';
 import './FoodPage.css';
 import { foodProducts } from '../data/foodProduct';
+import { useNavigate } from 'react-router-dom';
+
 import FoodSection from '../components/FoodSection';
 
 // interface FoodItem {
@@ -27,6 +29,9 @@ const FoodPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [userAddress] = useState('123 Oak Street');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const navigate = useNavigate();
+  const [showFilters, setShowFilters] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
   // Food items (Popular Burgers section)
   // const foodItems: FoodItem[] = [
@@ -132,13 +137,16 @@ const FoodPage: React.FC = () => {
     <div className="food-page">
       {/* Header */}
       <Header
-        userAddress={userAddress}
-        cartCount={2}
-        onMenuClick={() => console.log('menu')}
-        onCartClick={() => console.log('cart')}
-        onSearchClick={() => console.log('search')}
-        onSearchChange={setSearchQuery}
-      />
+  variant="category"
+  title="Pizza"
+  titleType="pill"
+  cartCount={2}
+  onBackClick={() => navigate(-1)}
+  onTitleClick={() => setShowFilters(!showFilters)}
+  onSearchClick={() => setShowSearch(true)}
+  
+/>
+
 
       {/* FOOD SECTION */}
       <FoodSection

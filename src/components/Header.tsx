@@ -1,82 +1,149 @@
-import React, { useState } from 'react';
-import './styles/Header.css'; // Separate CSS file
+import React, { ReactNode } from 'react';
+import './styles/Header.css';
 
-interface HeaderProps {
-  userAddress?: string;
+export interface HeaderProps {
+  variant?: 'home' | 'category' | 'restaurant' | 'details' | 'search' | 'default';
+  showMenu?: boolean;
+  showBack?: boolean;
+  showLocation?: boolean;
+  showSearch?: boolean;
+  showCart?: boolean;
+  title?: string;
+  titleType?: 'text' | 'pill';
+  locationLabel?: string;
+  locationValue?: string;
   cartCount?: number;
-  onSearchChange?: (query: string) => void;
   onMenuClick?: () => void;
-  onCartClick?: () => void;
+  onBackClick?: () => void;
+  onLocationClick?: () => void;
+  onTitleClick?: () => void;
   onSearchClick?: () => void;
+  onCartClick?: () => void;
+  onMoreClick?: () => void;
+  rightElement?: ReactNode;
 }
 
 const Header: React.FC<HeaderProps> = ({
-  userAddress = '123 Oak Street',
-  cartCount = 2,
-  onSearchChange,
+  variant = 'default',
+  showMenu,
+  showBack,
+  showLocation,
+  showSearch,
+  showCart,
+  title,
+  titleType = 'text',
+  locationLabel = 'DELIVER TO',
+  locationValue = 'Location',
+  cartCount = 0,
   onMenuClick,
-  onCartClick,
+  onBackClick,
+  onLocationClick,
+  onTitleClick,
   onSearchClick,
+  onCartClick,
+  onMoreClick,
+  rightElement,
 }) => {
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const isHome = variant === 'home';
+  const isCategory = variant === 'category';
+  const isRestaurant = variant === 'restaurant';
+  const isDetails = variant === 'details';
+  const isSearchPage = variant === 'search';
 
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    setSearchQuery(query);
-    onSearchChange?.(query);
-  };
+  const visibleMenu = showMenu ?? isHome;
+  const visibleBack = showBack ?? (isCategory || isRestaurant || isDetails || isSearchPage);
+  const visibleLocation = showLocation ?? (isHome || isSearchPage);
+  const visibleSearch = showSearch ?? isCategory;
+  const visibleCart = showCart ?? (isHome || isRestaurant || isSearchPage);
+  const visibleMore = isRestaurant;
 
   return (
-    <nav className="header__navbar">
-      <div className="header__navbar-container">
-        {/* Menu Button */}
-        <button
-          className="header__menu-btn"
-          onClick={onMenuClick}
-          aria-label="Open menu"
-        >
-          <img src="/images/drawer-i.png" alt="Menu" className="header__menu-icon" />
-        </button>
+    <header className="header">
+      <div className="header__container">
+        <div className="header__left">
+          {visibleMenu && (
+            <button className="btn-circle btn-grey" onClick={onMenuClick} aria-label="Menu">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+                <line x1="4" y1="7" x2="10" y2="7" />
+                <line x1="4" y1="12" x2="21" y2="12" />
+                <line x1="4" y1="17" x2="16" y2="17" />
+              </svg>
+            </button>
+          )}
 
-        {/* Logo */}
-        <div className="header__logo">
-          <div className="header__logo-wrapper">
-            <img src="/images/amesie-i.png" alt="Amesie" className="header__logo-icon" />
-          </div>
-          <span className="header__logo-text">Amesie</span>
+          {visibleBack && (
+            <button className="btn-circle btn-grey" onClick={onBackClick} aria-label="Go Back">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6" />
+              </svg>
+            </button>
+          )}
+
+          {visibleLocation && (
+            <div className="header__location" onClick={onLocationClick}>
+              <span className="location-label">{locationLabel}</span>
+              <div className="location-value-row">
+                <span className="location-value">{locationValue}
+                <span className="location-arrow">▼</span>
+                </span>
+               
+              </div>
+            </div>
+          )}
+
+          {title && !visibleLocation && (
+            <div className="header__title-area">
+              {titleType === 'pill' ? (
+                <button className="title-pill" onClick={onTitleClick}>
+                  <span className="title-pill-text">{title}</span>
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#F59E0B">
+                    <path d="M7 10l5 5 5-5z" />
+                  </svg>
+                </button>
+              ) : (
+                <span className="title-text">{title}</span>
+              )}
+            </div>
+          )}
         </div>
 
-        {/* Location Badge */}
-        <div className="header__nav-location">
-          <div>
-            <p className="header__nav-location-label">DELIVER TO</p>
-            <p className="header__nav-location-value">{userAddress} <span>▼</span></p>
-          </div>
-        </div>
+        <div className="header__right">
+          {visibleMore && (
+            <button className="btn-circle btn-grey" onClick={onMoreClick} aria-label="More options">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="5" cy="12" r="2" />
+                <circle cx="12" cy="12" r="2" />
+                <circle cx="19" cy="12" r="2" />
+              </svg>
+            </button>
+          )}
 
-        {/* Right Navigation */}
-        <div className="header__nav-right">
-          {/* Search Button */}
-          <button
-            className="header__search-btn"
-            onClick={onSearchClick}
-            aria-label="Search"
-          >
-            <img src="/images/search-i.png" alt="Search" />
-          </button>
+          {visibleSearch && (
+            <button className="btn-circle btn-black" onClick={onSearchClick} aria-label="Search">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3" strokeLinecap="round">
+                <circle cx="11" cy="11" r="8" />
+                <line x1="21" y1="21" x2="16.65" y2="16.65" />
+              </svg>
+            </button>
+          )}
 
-          {/* Cart Button */}
-          <button
-            className="header__cart-btn"
-            onClick={onCartClick}
-            aria-label="Shopping cart"
-          >
-            <img src="/images/shopping-bag-i.png" alt="Cart" />
-            <span className="header__cart-badge">{cartCount}</span>
-          </button>
+          {visibleCart && (
+            <button className="btn-circle btn-black" onClick={onCartClick} aria-label="Cart">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="21" r="1" />
+                <circle cx="20" cy="21" r="1" />
+                <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6" />
+              </svg>
+              {cartCount > 0 && (
+                <span className="cart-badge">{cartCount}</span>
+              )}
+            </button>
+          )}
+
+          {rightElement}
         </div>
       </div>
-    </nav>
+    </header>
   );
 };
 

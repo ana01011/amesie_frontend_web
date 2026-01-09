@@ -4,6 +4,7 @@ import Hero from '../components/Hero';
 import CategoriesCarousel from '../components/CategoriesCarousel';
 import RestaurantsSection from '../components/RestaurantsSection';
 import FooterNav from '../components/FooterNav';
+import { useNavigate } from 'react-router-dom';
 import './home.css';
 
 interface Restaurant {
@@ -30,7 +31,7 @@ const Home: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [userAddress, setUserAddress] = useState<string>('123 Oak Street');
   const [activeFooterTab, setActiveFooterTab] = useState<FooterTab>('food');
-
+  const navigate = useNavigate();
   // Data
   const categories: Category[] = [
     {
@@ -102,6 +103,9 @@ const Home: React.FC = () => {
   // ============================================
   // Header Callbacks
   // ============================================
+  const handleHeroSearchClick = () => {
+    navigate('/search');
+  };
 
   const handleMenuClick = () => {
     console.log('Menu clicked');
@@ -149,14 +153,16 @@ const Home: React.FC = () => {
   return (
     <div className="home">
       {/* Header Component */}
-      <Header
-        userAddress={userAddress}
-        cartCount={2}
-        onMenuClick={handleMenuClick}
-        onCartClick={handleCartClick}
-        onSearchClick={handleSearchClick}
-        onSearchChange={handleHeaderSearchChange}
-      />
+     <Header
+  variant="home"
+  cartCount={3}
+  locationValue="Varanasi, UP"
+  onMenuClick={() => console.log('Menu')}
+  onLocationClick={() => console.log('Location')}
+  onSearchClick={() => console.log('Search')}
+  onCartClick={() => console.log('Cart')}
+/>
+
 
       {/* Hero Component */}
       <Hero
@@ -164,6 +170,7 @@ const Home: React.FC = () => {
         userName="Abc"
         searchQuery={searchQuery}
         onSearchChange={handleHeaderSearchChange}
+        onSearchClick={handleHeroSearchClick} 
       />
 
       {/* Categories Carousel Component */}

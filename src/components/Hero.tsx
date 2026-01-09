@@ -6,13 +6,16 @@ interface HeroProps {
   userName?: string;
   searchQuery?: string;
   onSearchChange?: (query: string) => void;
+  onSearchClick?: () => void;
 }
+
 
 const Hero: React.FC<HeroProps> = ({
   greeting = 'Good Afternoon!',
   userName = 'Abc',
   searchQuery = '',
   onSearchChange,
+  onSearchClick,
 }) => {
   return (
     <section className="hero">
@@ -21,7 +24,8 @@ const Hero: React.FC<HeroProps> = ({
           Hey {userName}, <strong>{greeting}</strong>
         </p>
 
-        <div className="hero__search-wrapper">
+        <div className="hero__search-wrapper"  >
+          
           <img src="/images/search-i.png" alt="Search" className="hero__search-icon" />
           <input
             type="text"
@@ -29,6 +33,7 @@ const Hero: React.FC<HeroProps> = ({
             placeholder="Search dishes, restaurants"
             value={searchQuery}
             onChange={(e) => onSearchChange?.(e.target.value)}
+            onClick={onSearchClick}
           />
         </div>
       </div>
