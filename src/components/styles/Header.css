@@ -400,8 +400,8 @@
   right: -6px;
   background: var(--color-error);
   color: var(--color-white);
-  font-size: 10px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   height: 20px;
   width: 20px;
   border-radius: var(--radius-full);
@@ -491,7 +491,7 @@
   .cart-badge {
     width: 24px;
     height: 24px;
-    font-size: 9px;
+    font-size: 12px;
     top: -4px;
     right: -4px;
   }
