@@ -5,6 +5,7 @@
 .restaurants-section {
   background: var(--color-white);
   padding: var(--spacing-lg) var(--spacing-lg);
+  
 }
 
 .restaurants-section__container {

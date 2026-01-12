@@ -5,24 +5,14 @@ import CategoriesCarousel from '../components/CategoriesCarousel';
 import RestaurantsSection from '../components/RestaurantsSection';
 import FooterNav from '../components/FooterNav';
 import { useNavigate } from 'react-router-dom';
+import { restaurants } from '../data/restaurants';
+import { Category } from '../types';
+import { categories } from '../data/category';
 import './home.css';
 
-interface Restaurant {
-  id: number;
-  name: string;
-  cuisine: string;
-  rating: number;
-  delivery: string;
-  time: string;
-  image: string;
-}
 
-interface Category {
-  id: string;
-  label: string;
-  icon: string;
-  description: string;
-}
+
+
 
 type FooterTab = 'shop' | 'food' | 'instamart' | 'cart';
 
@@ -33,72 +23,9 @@ const Home: React.FC = () => {
   const [activeFooterTab, setActiveFooterTab] = useState<FooterTab>('food');
   const navigate = useNavigate();
   // Data
-  const categories: Category[] = [
-    {
-      id: 'all',
-      label: 'All',
-      icon: '/images/all-foods-i.png',
-      description: 'Explore all',
-    },
-    {
-      id: 'burger',
-      label: 'Burger',
-      icon: '/images/burger-i.png',
-      description: 'Delicious burgers',
-    },
-    {
-      id: 'pizza',
-      label: 'Pizza',
-      icon: '/images/pizza-i.png',
-      description: 'Fresh pizzas',
-    },
-    
-    {
-      id: 'snacks',
-      label: 'Snacks',
-      icon: '/images/burger-i.png',
-      description: 'Gourmet snacks',
-    },
-  ];
+  
 
-  const restaurants: Restaurant[] = [
-    {
-      id: 1,
-      name: 'Restaurant Name',
-      cuisine: 'Burger · Chicken · Riche · Wings',
-      rating: 4.7,
-      delivery: 'Free',
-      time: '20 Min',
-      image: '/images/restro-1.png',
-    },
-    {
-      id: 2,
-      name: 'Restaurant Name',
-      cuisine: 'Burger · Chicken · Riche · Wings',
-      rating: 4.7,
-      delivery: 'Free',
-      time: '20 Min',
-      image: '/images/restro-2.png',
-    },
-    {
-      id: 3,
-      name: 'Restaurant Name',
-      cuisine: 'Burger · Chicken · Riche · Wings',
-      rating: 4.7,
-      delivery: 'Free',
-      time: '20 Min',
-      image: '/images/restro-1.png',
-    },
-    {
-      id: 4,
-      name: 'Restaurant Name',
-      cuisine: 'Burger · Chicken · Riche · Wings',
-      rating: 4.7,
-      delivery: 'Free',
-      time: '20 Min',
-      image: '/images/restro-2.png',
-    },
-  ];
+ 
 
   // ============================================
   // Header Callbacks
@@ -129,16 +56,26 @@ const Home: React.FC = () => {
   // ============================================
   // Component Callbacks
   // ============================================
+  const getOpenRestaurants = () =>
+    restaurants.filter(r => r.isOpen).slice(0, 6);
+  const openRestaurants = getOpenRestaurants();
+
+  // console.log('Home getOpenRestaurants():', openRestaurants);
+  // console.log('Home restaurants length:', openRestaurants.length);
+
 
   const handleCategorySelect = (categoryId: string) => {
-    setSelectedCategory(categoryId);
-    console.log('Category selected:', categoryId);
-  };
+  setSelectedCategory(categoryId);
+  console.log('Category selected:', categoryId);
+  navigate('/foodpage', { 
+    state: { selectedCategory: categoryId }  // ← Pass category here
+  });
+};
 
-  const handleRestaurantClick = (restaurantId: number) => {
+
+  const handleRestaurantClick = (restaurantId: string) => {
     console.log('Restaurant clicked:', restaurantId);
-    // Navigate to restaurant details page
-    // navigate(`/restaurant/${restaurantId}`);
+    navigate(`/restaurant/${restaurantId}`);
   };
 
   const handleFooterTabChange = (tab: FooterTab) => {
@@ -153,15 +90,15 @@ const Home: React.FC = () => {
   return (
     <div className="home">
       {/* Header Component */}
-     <Header
-  variant="home"
-  cartCount={3}
-  locationValue="Varanasi, UP"
-  onMenuClick={() => console.log('Menu')}
-  onLocationClick={() => console.log('Location')}
-  onSearchClick={() => console.log('Search')}
-  onCartClick={() => console.log('Cart')}
-/>
+      <Header
+        variant="home"
+        cartCount={3}
+        locationValue="Varanasi, UP"
+        onMenuClick={() => console.log('Menu')}
+        onLocationClick={() => console.log('Location')}
+        onSearchClick={() => console.log('Search')}
+        onCartClick={() => console.log('Cart')}
+      />
 
 
       {/* Hero Component */}
@@ -170,7 +107,7 @@ const Home: React.FC = () => {
         userName="Abc"
         searchQuery={searchQuery}
         onSearchChange={handleHeaderSearchChange}
-        onSearchClick={handleHeroSearchClick} 
+        onSearchClick={handleHeroSearchClick}
       />
 
       {/* Categories Carousel Component */}
@@ -182,9 +119,8 @@ const Home: React.FC = () => {
 
       {/* Restaurants Section Component */}
       <RestaurantsSection
-        restaurants={restaurants}
         title="Open Restaurants"
-        onRestaurantClick={handleRestaurantClick}
+        restaurants={getOpenRestaurants()}
       />
 
       {/* Footer Navigation Component */}

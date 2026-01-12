@@ -1,17 +1,13 @@
-export interface Product {
+export interface Category {
   id: string;
-  name: string;
+  label: string;
+  icon: string;
   description: string;
-  price: number;
-  image: string;
-  category: 'coffee' | 'snacks' | 'juices' | 'beverages' | 'salads';
-  tags: string[];
-  rating: number;
-  prepTime: string;
 }
 
-export interface CartItem extends Product {
-  quantity: number;
+export interface Keyword {
+  id: string;
+  label: string;
 }
 
 // src/types.ts (or inline in data file)
@@ -27,5 +23,22 @@ export interface FoodProduct {
   rating?: number;  // 4.7
   prepTime?: string;  // "20 min"
   sizes?: string[];  // ["10\"", "14\"", "16\""]
-  ingredients?: string[];  // Icons for toppings
+  ingredients: string[];  // Icons for toppings
+  deliveryFee?: number; // 0 = Free
+
+}
+
+// src/types/index.ts (add to existing)
+export interface Restaurant {
+  id: string;
+  name: string;
+  rating: number;
+  image: string;  // Hero banner or logo
+  cuisine: string[];  // ["Burger", "Sandwich", "Pizza"]
+  deliveryTime: string;  // "30 min"
+  deliveryFee: number;  // 0 for free
+  isOpen: boolean;
+  itemCount?: number;  // "Burger (10)"
+  description?: string;
+  tags?: string[];  // "Suggested", "Open"
 }

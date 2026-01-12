@@ -1,6 +1,7 @@
 /* ============================================
    SEARCH PAGE STYLES
    ============================================ */
+@import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap');
 
 .search-page {
   min-height: 100vh;
@@ -36,6 +37,7 @@
   flex: 1;
   text-align: center;
   color: var(--color-text);
+  font-family: 'Sen', sans-serif;
 }
 
 .search-back-btn {
@@ -48,6 +50,7 @@
   transition: opacity 0.2s ease;
   width: 40px;
   text-align: left;
+  font-family: 'Sen', sans-serif;
 }
 
 .search-back-btn:hover {
@@ -78,7 +81,7 @@
   background-color: var(--color-background);
   color: var(--color-text);
   transition: all 0.2s ease;
-  font-family: inherit;
+  font-family: 'Sen', sans-serif;
 }
 
 .search-input:focus {
@@ -100,6 +103,7 @@
   border: none;
   cursor: pointer;
   font-size: 14px;
+  font-family: 'Sen', sans-serif;
   color: var(--color-text-secondary);
   padding: 4px;
   transition: color 0.2s ease;
@@ -135,6 +139,7 @@
   font-weight: 600;
   margin: 0;
   color: var(--color-text);
+  font-family: 'Sen', sans-serif;
 }
 
 .see-all-link {
@@ -142,6 +147,7 @@
   color: var(--color-primary);
   text-decoration: none;
   transition: opacity 0.2s ease;
+  font-family: 'Sen', sans-serif;
 }
 
 .see-all-link:hover {
@@ -165,6 +171,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   font-family: inherit;
+  font-family: 'Sen', sans-serif;
 }
 
 .keyword-btn:hover {

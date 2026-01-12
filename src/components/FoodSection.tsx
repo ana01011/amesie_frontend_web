@@ -1,25 +1,41 @@
 import React from 'react';
 import FoodCard from './FoodCard';
 import { FoodProduct } from '../types';
+// import { foodProducts } from '../data/foodProduct';
 import './styles/FoodSection.css';
+import { useNavigate } from 'react-router-dom';
 
 interface FoodSectionProps {
   title?: string;
   foods: FoodProduct[];
-  emoji?: string;
   onFoodClick?: (foodId: string) => void;
   onAddFood?: (foodId: string) => void;
   isLoading?: boolean;
 }
 
 const FoodSection: React.FC<FoodSectionProps> = ({
-  title = 'Popular Burgers',
+  title,
   foods,
-  emoji,
   onFoodClick,
   onAddFood,
   isLoading = false,
 }) => {
+const navigate = useNavigate();
+const handleFoodClick = (foodId: string) => {
+  // 1. Find food data
+    const foodItem = foods.find(f => f.id === foodId);
+    
+    // 2. Send to details page
+    navigate('/food-details', { 
+      state: { foodItem }  // Full data passed here
+    });
+    
+    // 3. Call parent callback (optional)
+    onFoodClick?.(foodId);
+};
+
+
+
   if (isLoading) {
     return (
       <div className="food-section">
@@ -56,12 +72,8 @@ const FoodSection: React.FC<FoodSectionProps> = ({
         {foods.map((food) => (
           <FoodCard
             key={food.id}
-            id={food.id}
-            image={food.image}
-            name={food.name}
-            restaurant={food.restaurant || 'Restaurant'}
-            price={food.price}
-            onClick={() => onFoodClick?.(food.id)}
+             foodproduct ={food}
+            onClick={() => handleFoodClick(food.id)}
             onAddClick={() => onAddFood?.(food.id)}
           />
         ))}

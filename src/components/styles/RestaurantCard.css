@@ -11,6 +11,7 @@
   transition: all 0.3s ease;
   cursor: pointer;
   font-family: 'Sen', sans-serif;
+  max-width: 370px;
 }
 
 .restaurant-card:hover {

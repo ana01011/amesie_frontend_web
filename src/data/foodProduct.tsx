@@ -9,10 +9,13 @@ export const foodProducts: FoodProduct[] = [
     restaurant: 'Rose Garden',
     price: 40,
     image: '/images/burger.png',  // Use your uploaded images
-    category: 'burgers',
+    category: 'burger',
     tags: ['popular', 'fast-food'],
     rating: 4.5,
-    prepTime: '5 min'
+    prepTime: '5 min',
+    ingredients: ['salt', 'chicken', 'garlic', 'veg'],
+    deliveryFee: 0, // 0 = Free
+
   },
   
 
@@ -20,40 +23,46 @@ export const foodProducts: FoodProduct[] = [
   {
     id: 'pizza-prosciutto',
     name: 'Pizza',
-    restaurant: 'Coffee House',
+    restaurant: 'Rose Garden',
     description: 'Prosciutto E Funghi - A pizza variety that is topped with tomato sauce',
     price: 20,
-    image: '/images/pizza-i.png',
+    image: '/images/burger.png',
     category: 'pizza',
     tags: ['popular','featured'],
     rating: 4.7,
     prepTime: '20 min',
     sizes: ['10"', '14"', '16"'],
-    ingredients: ['salt', 'chicken', 'garlic', 'veg']
+    ingredients: ['salt', 'chicken', 'garlic', 'veg'],
+    deliveryFee: 0,
   },
   {
     id: 'burger-classic',
     name: 'Classic Burger',
-    restaurant: 'Burger House',
+    restaurant: 'Rose Garden',
     price: 45,
     image: '/images/burger.png',
-    category: 'burgers',
+    category: 'burger',
     tags: ['popular','bestseller'],
     rating: 4.7,
-    prepTime: '7 min'
+    prepTime: '7 min',
+    ingredients: ['salt', 'chicken', 'garlic', 'veg'],
+    deliveryFee: 0,
   },
 
   // Signature coffee from code snippet [file:30]
   {
     id: 'signature-espresso',
-    name: 'Signature Espresso',
+    name: 'Espresso',
+    restaurant: 'Rose Garden',
     description: 'Rich, bold espresso with velvet crema',
     price: 4.5,
-    image: 'https://images.unsplash.com/photos/312418962?ixlib=rb-4.0.3&auto=format&fit=crop&w=3148&q=80',
+    image: '/images/burger.png',
     category: 'coffee',
     tags: ['bestseller'],
     rating: 4.8,
-    prepTime: '3 min'
+    prepTime: '3 min',
+    ingredients: [ 'coffee', 'sugar', 'milk'],
+    deliveryFee: 0,
   },
 
   // More for categories
@@ -62,11 +71,13 @@ export const foodProducts: FoodProduct[] = [
     name: 'Margherita Pizza',
     restaurant: 'Pizza Palace',
     price: 35,
-    image: '/images/pizza-i.png',
+    image: '/images/burger.png',
     category: 'pizza',
     tags: ['popular'],
     rating: 4.6,
     prepTime: '15 min',
-    sizes: ['12"', '16"']
+    sizes: ['12"', '16"'],
+    ingredients: ['salt', 'chicken', 'garlic', 'veg'],
+    deliveryFee: 0,
   }
 ];

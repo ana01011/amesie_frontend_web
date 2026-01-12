@@ -1,22 +1,15 @@
 import React from 'react';
 import './styles/FoodCard.css';
+import { FoodProduct } from '../types';
 
 interface FoodCardProps {
-  id: string;
-  image: string;
-  name: string;
-  restaurant: string;
-  price: number;
+  foodproduct: FoodProduct;
   onClick?: () => void;
   onAddClick?: () => void;
 }
 
 const FoodCard: React.FC<FoodCardProps> = ({
-  id,
-  image,
-  name,
-  restaurant,
-  price,
+  foodproduct,
   onClick,
   onAddClick,
 }) => {
@@ -30,8 +23,8 @@ const FoodCard: React.FC<FoodCardProps> = ({
       {/* Food Image - Rounded with dark background */}
       <div className="food-card__image-wrapper">
         <img 
-          src={image} 
-          alt={name} 
+          src={foodproduct.image} 
+          alt={foodproduct.name} 
           className="food-card__image"
         />
       </div>
@@ -39,19 +32,19 @@ const FoodCard: React.FC<FoodCardProps> = ({
       {/* Card Content */}
       <div className="food-card__content">
         {/* Name */}
-        <h3 className="food-card__name">{name}</h3>
+        <h3 className="food-card__name">{foodproduct.name}</h3>
         
         {/* Restaurant */}
-        <p className="food-card__restaurant">{restaurant}</p>
+        <p className="food-card__restaurant">{foodproduct.restaurant}</p>
         
         {/* Footer: Price + Add Button */}
         <div className="food-card__footer">
-          <span className="food-card__price">₹{price}</span>
+          <span className="food-card__price">₹{foodproduct.price}</span>
           {onAddClick && (
             <button
               className="food-card__add-btn"
               onClick={handleAddClick}
-              aria-label={`Add ${name} to cart`}
+              aria-label={`Add ${foodproduct.name} to cart`}
             >
               +
             </button>

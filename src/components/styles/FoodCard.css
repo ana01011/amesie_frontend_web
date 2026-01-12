@@ -1,6 +1,4 @@
-/* ============================================
-   FOOD CARD - EXACT DESIGN DIMENSIONS
-   ============================================ */
+/* FOOD CARD - EXACT DESIGN DIMENSIONS */
 
 .food-card {
   display: flex;
@@ -35,6 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  /* margin-bottom: 10px; */
 }
 
 .food-card__image {
@@ -59,6 +58,7 @@
   flex: 1;
   justify-content: space-between;
   border-radius: 25px;
+  margin-top: 5px;
 }
 
 /* Food Name - 13px */
@@ -221,6 +221,7 @@
     justify-content: space-between;
     border-radius: 25px;
     border: #1a1a1a !important;
+    margin-top: 5px;
   }
 
   .food-card__name {
@@ -240,31 +241,3 @@
   }
 }
 
-/* Dark Mode */
-/* @media (prefers-color-scheme: dark) {
-  .food-card {
-    background: #1a1a1a;
-  }
-
-  .food-card__name,
-  .food-card__price {
-    color: #f5f5f5;
-  }
-
-  .food-card__restaurant {
-    color: #999999;
-  }
-}
-
-[data-color-scheme="dark"] .food-card {
-  background: #1a1a1a;
-}
-
-[data-color-scheme="dark"] .food-card__name,
-[data-color-scheme="dark"] .food-card__price {
-  color: #f5f5f5;
-}
-
-[data-color-scheme="dark"] .food-card__restaurant {
-  color: #999999;
-} */

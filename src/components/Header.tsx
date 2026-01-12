@@ -54,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({
   const visibleBack = showBack ?? (isCategory || isRestaurant || isDetails || isSearchPage);
   const visibleLocation = showLocation ?? (isHome || isSearchPage);
   const visibleSearch = showSearch ?? isCategory;
-  const visibleCart = showCart ?? (isHome || isRestaurant || isSearchPage);
+  const visibleCart = showCart ?? (isHome  || isSearchPage);
   const visibleMore = isRestaurant;
 
   return (

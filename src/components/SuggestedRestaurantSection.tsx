@@ -1,13 +1,13 @@
 import React from 'react';
 import SuggestedRestaurantCard from './SuggestedRestaurantCard';
 import './styles/SuggestedRestaurantSection.css';
-
-interface Restaurant {
-  id: string;
-  image: string;
-  name: string;
-  rating: number;
-}
+import { Restaurant } from '../types';
+// interface Restaurant {
+//   id: string;
+//   image: string;
+//   name: string;
+//   rating: number;
+// }
 
 interface RestaurantSectionProps {
   title: string;

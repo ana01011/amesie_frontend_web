@@ -14,7 +14,7 @@ export const restaurants: Restaurant[] = [
     isOpen: true,
     itemCount: 10,
     description: 'Haciendo del Ogle Ruis Viverra Elit',
-    tags: ['featured']
+    tags: ['featured', 'spicy']
   },
 
   // Compact suggested/open restaurants [file:108][file:109]
@@ -22,7 +22,7 @@ export const restaurants: Restaurant[] = [
     id: 'rose-garden',
     name: 'Rose Garden',
     rating: 4.7,
-    image: '/images/restro-2.png',  // Restaurant photo
+    image: '/images/restro-1.png',  // Restaurant photo
     cuisine: ['Burger'],
     deliveryTime: '20 min',
     deliveryFee: 20,
@@ -33,7 +33,7 @@ export const restaurants: Restaurant[] = [
     id: 'burger-house',
     name: 'Burger House',
     rating: 4.7,
-    image: '/images/restaurants/burger-house.jpg',
+    image: '/images/restro-1.png',
     cuisine: ['Burger', 'Fast Food'],
     deliveryTime: '25 min',
     deliveryFee: 15,
@@ -44,7 +44,7 @@ export const restaurants: Restaurant[] = [
     id: 'pizza-palace',
     name: 'Pizza Palace',
     rating: 4.6,
-    image: '/images/restaurants/pizza-palace.jpg',
+    image: '/images/restro-1.png',
     cuisine: ['Pizza'],
     deliveryTime: '35 min',
     deliveryFee: 0,
@@ -56,7 +56,7 @@ export const restaurants: Restaurant[] = [
     id: 'chicken-rich',
     name: 'Chicken Riche',
     rating: 4.7,
-    image: '/images/restaurants/chicken-riche.jpg',  // Indian platter [file:109]
+    image: '/images/restro-1.png', // Indian platter [file:109]
     cuisine: ['Chicken', 'Rice', 'Wings'],
     deliveryTime: '20 min',
     deliveryFee: 0,

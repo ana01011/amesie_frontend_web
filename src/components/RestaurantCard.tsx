@@ -1,54 +1,57 @@
+
 import React from 'react';
 import './styles/RestaurantCard.css';
+import { Restaurant } from '../types';
+import { HeartIcon, ClockIcon, StarIcon, FreeDeliveryIcon } from '../icons';
+
+
 
 interface RestaurantCardProps {
-  id: number;
-  name: string;
-  cuisine: string;
-  rating: number;
-  delivery: string;
-  time: string;
-  image: string;
-  onClick?: (id: number) => void;
+  restaurant: Restaurant;
+  onClick?: (id: string) => void;
 }
 
+
 const RestaurantCard: React.FC<RestaurantCardProps> = ({
-  id,
-  name,
-  cuisine,
-  rating,
-  delivery,
-  time,
-  image,
+  restaurant,
   onClick,
 }) => {
+  // console.log('RestaurantCard received restaurant:', restaurant);
+  // if (!restaurant) {
+  //   console.log(' RESTAURANT IS UNDEFINED!');
+  //   return null;
+  // }
+
   return (
-    <div 
+
+    <div
       className="restaurant-card"
-      onClick={() => onClick?.(id)}
+      onClick={() => onClick?.(restaurant.id)}
     >
       <div className="restaurant-card__image-wrapper">
-        <img src={image} alt={name} className="restaurant-card__image" />
+        <img src={restaurant.image} alt={restaurant.name} className="restaurant-card__image" />
         <div className="restaurant-card__overlay">
           <span className="restaurant-card__rating">
-            <img src="/images/star-i.png" alt="Rating" />
-            {rating}
+            <StarIcon /> 
+            {restaurant.rating}
           </span>
         </div>
       </div>
 
       <div className="restaurant-card__info">
-        <h3>{name}</h3>
-        <p className="restaurant-card__cuisine">{cuisine}</p>
+        <h3>{restaurant.name}</h3>
+        <p className="restaurant-card__cuisine">{restaurant.cuisine.join(' · ')}</p>
 
         <div className="restaurant-card__meta">
           <div className="restaurant-card__meta-item">
-            <img src="/images/free-i.png" alt="Delivery" />
-            <span>{delivery}</span>
+            <FreeDeliveryIcon/>  
+            <span>
+              {restaurant.deliveryFee === 0 ? 'Free' : `₹${restaurant.deliveryFee}`}
+            </span>
           </div>
           <div className="restaurant-card__meta-item">
-            <img src="/images/timer-i.png" alt="Time" />
-            <span>{time}</span>
+            <ClockIcon />  
+            <span>{restaurant.deliveryTime}</span>
           </div>
         </div>
       </div>

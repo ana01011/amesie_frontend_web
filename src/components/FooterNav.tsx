@@ -11,10 +11,10 @@ const FooterNav: React.FC<FooterNavProps> = ({
   onTabChange,
 }) => {
   const tabs = [
-    { id: 'shop', label: 'Shop', icon: '/images/shop-i.png' },
-    { id: 'food', label: 'Food', icon: '/images/food-i.png' },
-    { id: 'instamart', label: 'Instamart', icon: '/images/instamart-i.png' },
-    { id: 'cart', label: 'Cart', icon: '/images/cart-i.png' },
+    { id: 'shop', label: 'Shop', icon: '/images/shopping-bag-svgrepo-com.svg' },
+    { id: 'food', label: 'Food', icon: '/images/fast-food-burger1-svgrepo-com.svg' },
+    { id: 'instamart', label: 'Instamart', icon: '/images/shopping-bag2-svgrepo-com.svg' },
+    { id: 'cart', label: 'Cart', icon: '/images/cart-svgrepo-com.svg' },
   ];
 
   return (

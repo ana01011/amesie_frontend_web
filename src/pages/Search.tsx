@@ -6,25 +6,17 @@ import SuggestedRestaurantSection from '../components/SuggestedRestaurantSection
 import FoodSection from '../components/FoodSection';
 import { foodProducts } from '../data/foodProduct';
 import { useNavigate } from 'react-router-dom';
-
+// everywhere
+import { Restaurant } from '../types';
+import { restaurants } from '../data/restaurants';
+import { Category } from '../types';
+import { categories } from '../data/category';
+import { Keyword } from '../types';
+import { keywords } from '../data/keywords';
 import './Search.css';
 
 
 
-interface Restaurant {
-  id: string;
-  image: string;
-  name: string;
-  rating: number;
-}
-
-
-interface Category {
-  id: string;
-  label: string;
-  icon: string;
-  description: string;
-}
 
 
 const Search: React.FC = () => {
@@ -38,72 +30,7 @@ const Search: React.FC = () => {
 
 
 
-
-  // ============================================
-  // Data - Mock Restaurants
-  // ============================================
-
-  const mockRestaurants: Restaurant[] = [
-    {
-      id: '1',
-      image: '/images/restro-1.png',
-      name: 'Burger King',
-      rating: 4.7,
-    },
-    {
-      id: '2',
-      image: '/images/restro-2.png',
-      name: 'Pizza Hut',
-      rating: 4.5,
-    },
-    {
-      id: '3',
-      image: '/images/restro-1.png',
-      name: 'KFC',
-      rating: 4.6,
-    },
-    {
-      id: '4',
-      image: '/images/restro-2.png',
-      name: 'Subway',
-      rating: 4.4,
-    },
-  ];
-
-  const categories: Category[] = [
-    {
-      id: 'all',
-      label: 'All',
-      icon: '/images/all-foods-i.png',
-      description: 'Explore all',
-    },
-    {
-      id: 'burgers',
-      label: 'Burger',
-      icon: '/images/burger-i.png',
-      description: 'Delicious burgers',
-    },
-    {
-      id: 'pizza',
-      label: 'Pizza',
-      icon: '/images/pizza-i.png',
-      description: 'Fresh pizzas',
-    },
-    {
-      id: 'coffee',
-      label: 'Coffee',
-      icon: '/images/coffee-i.png',
-      description: 'Premium coffee',
-    },
-    {
-      id: 'snacks',
-      label: 'Snacks',
-      icon: '/images/food-i.png',
-      description: 'Gourmet snacks',
-    },
-  ];
-
-  const defaultRestaurants: Restaurant[] = mockRestaurants.slice(0, 4);
+  const defaultRestaurants: Restaurant[] = restaurants.slice(0, 4);
 
 
   // ============================================
@@ -130,6 +57,34 @@ const Search: React.FC = () => {
   // ============================================
   // Search Logic
   // ============================================
+  const suggestedRestaurants = restaurants.filter(r =>
+    r.tags?.includes('suggested')
+  );
+
+  // In Search.tsx - Add this function
+
+  const handleKeywordSelect = (keywordId: string) => {
+    setSelectedCategory(keywordId);
+    console.log('Keyword selected:', keywordId);
+
+    // SMART LOGIC: Check if keyword exists in categories
+    const matchingCategory = categories.find(c => c.id === keywordId);
+
+    if (matchingCategory) {
+      // If keyword is ALSO a category, navigate to FoodPage with selectedCategory
+      console.log('Keyword matches a category, passing to FoodPage:', keywordId);
+      navigate('/foodpage', {
+        state: { selectedCategory: keywordId }
+      });
+    } else {
+      // If keyword is ONLY a keyword (not a category), just search but don't navigate
+      // Trigger search without navigation
+      handleSearch(keywordId);
+      console.log('Keyword-only, searching:', keywordId);
+    }
+  };
+
+
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);
@@ -143,13 +98,26 @@ const Search: React.FC = () => {
 
     // Simulate API call delay
     setTimeout(() => {
-      const results = mockRestaurants.filter((restaurant) =>
-        restaurant.name.toLowerCase().includes(query.toLowerCase())
+      const lowerQuery = query.toLowerCase();
+
+      const results = restaurants.filter((restaurant) =>
+        restaurant.cuisine.some((cuisine) =>
+          cuisine.toLowerCase().includes(lowerQuery)
+        ) ||
+
+        restaurant.tags?.some((tag) =>
+          tag.toLowerCase().includes(lowerQuery)
+        )
       );
+
       setSearchResults(results);
       setIsLoading(false);
-    }, 500);
+    }, 200);
+
   };
+
+
+
 
 
   // ============================================
@@ -203,6 +171,31 @@ const Search: React.FC = () => {
       .slice(0, 6);
   };
 
+ const getSearchFoods = () => {
+  const lowerQuery = searchQuery.toLowerCase();
+    console.log('🔍 Searching for:', lowerQuery);
+  const results = foodProducts.filter(food => {
+    const matches =
+      food.category?.toLowerCase().includes(lowerQuery) ||
+      food.tags?.some(tag => tag.toLowerCase().includes(lowerQuery)) ||
+      food.name.toLowerCase().includes(lowerQuery) ||
+      food.restaurant?.toLowerCase().includes(lowerQuery) ||
+      // ✅ FIXED: NOW IN matches!
+      food.ingredients?.some(ingredient => 
+        ingredient.toLowerCase().includes(lowerQuery)
+      );
+
+    if (matches) {
+      console.log('✅ MATCH:', food.name);
+    }
+    return matches;
+  });
+
+  console.log('Total results:', results.length);
+  return results;
+};
+
+
 
   // ============================================
   // Render
@@ -210,56 +203,56 @@ const Search: React.FC = () => {
 
   // Search.tsx - Updated JSX Structure
 
-return (
-  <div className="search-page">
-    {/* Header Component */}
-    <Header
-  variant="search"
-  locationValue= {userAddress}
-  cartCount={1}
-  onBackClick={() => navigate(-1)}
-  onLocationClick={() => setShowLocationModal(true)}
-  onSearchClick={() => navigate('/search')}
-  onCartClick={() => navigate('/cart')}
-/>
-
-
-    {/* Hero Component */}
-    <Hero
-      greeting="Good Afternoon!"
-      userName="Abc"
-      searchQuery={searchQuery}
-      onSearchChange={handleHeaderSearchChange}
-    />
-
-    {/* Categories Carousel Component */}
-    <CategoriesCarousel
-      categories={categories}
-      selectedCategory={selectedCategory}
-      onCategorySelect={handleCategorySelect}
-    />
-
-    {/* Main Content Wrapper - GRID LAYOUT */}
-    <div className="search-wrapper">
-      {/* LEFT COLUMN - Restaurant Section */}
-      <SuggestedRestaurantSection
-        title={searchQuery.trim() !== '' ? "Suggested Restaurants" : "Suggested Restaurants"}
-        restaurants={searchQuery.trim() !== '' ? searchResults : defaultRestaurants}
-        isLoading={isLoading}
-        onRestaurantClick={(restaurant) => handleRestaurantClick(restaurant.id)}
+  return (
+    <div className="search-page">
+      {/* Header Component */}
+      <Header
+        variant="search"
+        locationValue={userAddress}
+        cartCount={1}
+        onBackClick={() => navigate(-1)}
+        onLocationClick={() => setShowLocationModal(true)}
+        onSearchClick={() => navigate('/search')}
+        onCartClick={() => navigate('/cart')}
       />
 
-      {/* RIGHT COLUMN - Food Section */}
-      <FoodSection
-        title="Popular Fast Food"
-        foods={getPopularFoods()}
-        emoji="✨"
-        onFoodClick={handleFoodClick}
-        onAddFood={handleAddFood}
+
+      {/* Hero Component */}
+      <Hero
+        greeting="Good Afternoon!"
+        userName="Abc"
+        searchQuery={searchQuery}
+        onSearchChange={handleHeaderSearchChange}
       />
+
+      {/* Categories Carousel Component */}
+      <CategoriesCarousel
+        variant="keyword"
+        keywords={keywords}
+        selectedCategory={selectedCategory}
+        onCategorySelect={handleKeywordSelect}  // ← NEW HANDLER
+      />
+
+      {/* Main Content Wrapper - GRID LAYOUT */}
+      <div className="search-wrapper">
+        {/* LEFT COLUMN - Restaurant Section */}
+        <SuggestedRestaurantSection
+          title={'Suggested Restaurants'}
+          restaurants={searchResults.length ? searchResults : suggestedRestaurants}
+          isLoading={isLoading}
+          onRestaurantClick={(restaurant) => handleRestaurantClick(restaurant.id)}
+        />
+
+        {/* RIGHT COLUMN - Food Section */}
+        <FoodSection
+          title="Popular Fast Food"
+          foods={getSearchFoods()}
+          onFoodClick={handleFoodClick}
+          onAddFood={handleAddFood}
+        />
+      </div>
     </div>
-  </div>
-);
+  );
 
 };
 
