@@ -47,17 +47,28 @@
 .footer-nav__item img {
   width: 24px;
   height: 24px;
-  filter: grayscale(0.5);
-}
-
-.footer-nav__item--active {
-  color: var(--color-primary);
+  filter: grayscale(100%) brightness(0.3) opacity(0.7) !important;
+  transition: filter 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .footer-nav__item--active img {
-  filter: none;
-  filter: brightness(1) saturate(2);
+  filter: 
+    invert(60%) 
+    sepia(95%) 
+    saturate(1400%) 
+    hue-rotate(15deg) 
+    brightness(110%) 
+    contrast(80%) !important;
 }
+
+
+
+
+.footer-nav__item--active {
+  color: var(--color-primary);
+  filter: brightness(1) !important;
+}
+
 
 /* ============================================
    MOBILE LOGO SECTION
