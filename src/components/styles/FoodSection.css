@@ -1,32 +1,43 @@
 /* ============================================
    FOOD SECTION - EXACT DESIGN DIMENSIONS
    ============================================ */
+   
 @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap');
+:root {
+  --spacing-sm: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --max-width: 1200px;
+}
 .food-section {
-  width: 100%;
- padding: 16px 0;
-  margin: 0 20px;
-  background: #ffffff;
+  background: var(--color-white);
+  padding: var(--spacing-xl) var(--spacing-lg) !important;
+ 
+}
+
+.food-section__container{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
 }
 
 .food-section__title-wrapper {
-  margin-bottom: 16px;
-  padding: 16px 0px 16px;
+ display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-xl);
+  
   
 }
 
 /* Title - 150px × 24px */
 .food-section__title {
-  margin-left: 0px;
+  margin: 0;
   font-size: 24px;
   font-weight: 400;
-  color: #1a1a1a;
-  letter-spacing: -0.3px;
-  width: 100%;
-  height: 24px;
-  display: flex-start;
-  align-items: center;
-  justify-content: center;
+  color: var(--color-text);
+  letter-spacing: -0.01em;
   font-family: 'Sen', sans-serif;
 }
 
@@ -78,19 +89,35 @@
 
 @media (max-width: 590px) {
   .food-section {
-    padding: 10px 0;
-    margin: 0;
+    background: var(--color-white);
+  padding: 0px ;
+  border-bottom: 0px solid var(--color-border);
+ background: var(--color-white);
+  padding: var(--spacing-lg) var(--spacing-ml) !important;
+  font-family: 'Sen', sans-serif;
   }
+
+  .food-section__container{
+   max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0px;
+}
 
   .food-section__grid {
     grid-template-columns: repeat(2, 164px);
     gap: 28px 28px !important;
     margin: 0;
+    padding-top: 10px;
+  }
+
+  .food-section__title-wrapper{
+    margin-left: 35px !important;
+  margin-top: 24px !important;
   }
 
   .food-section__title {
     font-size: 20px;
-    padding-left: 37px;
+    
    
   }
 }
@@ -105,97 +132,55 @@
 } */
 
 @media (min-width: 590px) and (max-width: 799px) {
-  .food-section__title {
-    font-size: 20px;
-    /* padding-left: 40px; */
-    font-size: 24px;
-  }
-  .food-section__title-wrapper {
-  margin-bottom: 16px;
-  padding: 16px 0px 16px 80px;
-  
-}
-.food-section__grid {
+ .food-section__grid {
   display: grid;
   grid-template-columns: repeat(3, 164px);
   gap: 58px 28px !important;
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin-left: 0;
-  
+  margin-left: 31px;
+
 }
   /* your CSS here */
 }
 
 @media (min-width: 800px) and (max-width: 1299px) {
-  .food-section__title {
-    font-size: 20px;
-    /* padding-left: 40px; */
-    font-size: 24px;
-  }
-  .food-section__title-wrapper {
-  margin-bottom: 16px;
-  padding: 16px 0px 16px 80px;
-  
-}
-.food-section__grid {
+ .food-section__grid {
   display: grid;
   grid-template-columns: repeat(4, 164px);
   gap: 58px 28px !important;
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin-left: 0;
-  
+  margin-left: 31px;
+
 }
   /* your CSS here */
 }
 @media (min-width: 800px) {
-  /* styles for screens wider than 799px */
-  .food-section__title {
-    font-size: 20px;
-    /* padding-left: 40px; */
-    font-size: 24px;
-  }
-  .food-section__title-wrapper {
-  margin-bottom: 16px;
-  padding: 16px 0px 16px 80px;
-  
-}
-.food-section__grid {
+  .food-section__grid {
   display: grid;
   grid-template-columns: repeat(4, 164px);
   gap: 58px 28px !important;
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin-left: 0;
-  
+  margin-left: 31px;
+
 }
 }
 
 @media (min-width: 1204px) {
-  /* styles for screens wider than 799px */
-  .food-section__title {
-    font-size: 20px;
-    /* padding-left: 40px; */
-    font-size: 24px;
-  }
-  .food-section__title-wrapper {
-  margin-bottom: 16px;
-  padding: 24px 0px 24px 120px;
-  
-}
-.food-section__grid {
+  .food-section__grid {
   display: grid;
   grid-template-columns: repeat(4, 164px);
-  gap: 58px 88px !important;
+  gap: 58px 28px !important;
   width: 100%;
   align-items: center;
   justify-content: center;
-  margin-left: 0;
-  
+  margin-left: 31px;
+
 }
 }
 

@@ -28,6 +28,7 @@ const SuggestedRestaurantSection: React.FC<RestaurantSectionProps> = ({
 
   return (
     <section className="restaurant-section">
+      <div className= "restaurant-section__container">
       <div className="restaurant-section__header">
         <h2 className="restaurant-section__title">{title}</h2>
       </div>
@@ -43,6 +44,7 @@ const SuggestedRestaurantSection: React.FC<RestaurantSectionProps> = ({
             onClick={() => onRestaurantClick?.(restaurant)}
           />
         ))}
+      </div>
       </div>
     </section>
   );

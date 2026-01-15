@@ -2,6 +2,7 @@
    SUGGESTED RESTAURANT CARD
    ============================================ */
 @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap');
+
 .suggested-restaurant-card {
   display: flex;
   align-items: flex-start;
@@ -13,7 +14,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.10);
   cursor: pointer;
   transition: all 0.2s ease;
-  
+
 }
 
 /* .suggested-restaurant-card:last-child {
@@ -83,10 +84,10 @@
 
 .star {
   font-size: 25px;
- 
+
   line-height: 1;
   color: #FDC500;
- /* yellow/gold */
+  /* yellow/gold */
 }
 
 
@@ -99,11 +100,14 @@
 }
 
 @media (min-width: 640px) {
-   .suggested-restaurant-card {
+  .suggested-restaurant-card {
     gap: 10px;
     padding: 10px 10px 10px;
-    width: 437px;
+    max-width: 100%;
+    margin-right: 38px !important;
+    margin: 0px;
     
+
   }
 }
 
@@ -116,7 +120,7 @@
 
   .card-image-container {
     width: 96px;
-  height: 68px;
+    height: 68px;
     border-radius: 14px;
     margin: 0px 4px;
   }
@@ -127,12 +131,12 @@
   }
 
   .star {
-  font-size: 18px;
- 
-  line-height: 1;
-  color: #FDC500;
- /* yellow/gold */
-}
+    font-size: 18px;
+
+    line-height: 1;
+    color: #FDC500;
+    /* yellow/gold */
+  }
 
   .rating-value {
     font-size: 16px;
@@ -141,9 +145,9 @@
 }
 
 /* Dark Mode */
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   .suggested-restaurant-card {
-    /* border-bottom-color: rgba(255, 255, 255, 0.1); */
+     border-bottom-color: rgba(255, 255, 255, 0.1); 
   }
 
   .suggested-restaurant-card:hover {
@@ -152,8 +156,6 @@
 
   .card-image-container {
     border-color: rgba(255, 255, 255, 0.1);
-    /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); */
+     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); 
   }
-}
-
-
+} */

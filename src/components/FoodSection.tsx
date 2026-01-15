@@ -64,6 +64,7 @@ const handleFoodClick = (foodId: string) => {
 
   return (
     <div className="food-section">
+      <div className="food-section__container">
       <div className="food-section__title-wrapper">
         <h2 className="food-section__title">{title}</h2>
       </div>
@@ -77,6 +78,7 @@ const handleFoodClick = (foodId: string) => {
             onAddClick={() => onAddFood?.(food.id)}
           />
         ))}
+      </div>
       </div>
     </div>
   );

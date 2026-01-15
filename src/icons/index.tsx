@@ -48,7 +48,7 @@ export const FreeDeliveryIcon = () => (
     </svg>
 );
 
-// 🧂 SALT SHAKER
+//  SALT SHAKER
 export const SaltIcon = () => (
    <svg
     width="40"
@@ -77,20 +77,6 @@ export const SaltIcon = () => (
     <circle cx="12" cy="15" r="0.6" fill="#efebebff" />
   </svg>
 );
-
-
-
-
-// 🧄 GARLIC BULB
-
-
-// 🥬 VEGETABLE LEAVES
-
-
-
-
-
-
 
 // export const SaltIcon = () => <MdOpacity size={24} />;
 export const ChickenIcon = () => <FaDrumstickBite size={30} />;

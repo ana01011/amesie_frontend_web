@@ -1,12 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap');
 .restaurant-section {
-  padding: 16px 0;
-  margin: 0px 120px 0px 70px;
-  width:auto;
+  background: var(--color-white);
+  padding: var(--spacing-xl) var(--spacing-lg);
+  
+  
+  
+}
+.restaurant-section__container{
+   max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 var(--spacing-lg);
+
 }
 
 .restaurant-section__header {
-  padding: 16px 0px 12px;
+ display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-md);
 }
 
 .restaurant-section__title {
@@ -34,13 +45,29 @@
 /* Responsive */
 @media (max-width: 640px) {
   .restaurant-section {
-    padding: 12px 0;
-    margin: 0px 40px;
-  }
+   background: var(--color-white);
+  padding: 0px ;
+  border-bottom: 0px solid var(--color-border);
+  margin-left: 35px;
+  margin-top: 24px;
+  font-family: 'Sen', sans-serif;
+  
+  
+}
+.restaurant-section__container{
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0px;
 
-  .restaurant-section__header {
-    padding: 12px 0px 8px;
-  }
+}
+
+.restaurant-section__header {
+ display: flex;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
 
   .restaurant-section__list {
     gap: 10px;
@@ -49,13 +76,16 @@
 }
 
  @media (min-width: 1254px) {
+  
 .restaurant-section__list {
-  display: grid;
-  grid-template-columns: repeat(2, 664px);
- 
-  flex-direction: column;
-  gap: 12px;
-  padding: 0 16px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    justify-content: center;
+    max-width: 1250px;
+    
+
+  
 }
+
   
  }
