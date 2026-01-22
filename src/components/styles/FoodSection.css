@@ -105,7 +105,7 @@
 
   .food-section__grid {
     grid-template-columns: repeat(2, 164px);
-    gap: 28px 28px !important;
+    gap: 28px 15px !important;
     margin: 0;
     padding-top: 10px;
   }

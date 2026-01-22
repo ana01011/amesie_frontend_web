@@ -58,3 +58,36 @@ body {
 
 
 
+
+
+
+
+@media (max-width: 1279px) {
+  .restaurant-detail-layout {
+    grid-template-columns: 1fr;        /* Stack single column */
+  }
+  .restaurant-card-column{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+}
+@media (min-width: 1280px) {
+  .restaurant-detail-layout {
+    margin: auto;
+    display: grid;
+  grid-template-columns: 30% 70%;      /* Card | (Keywords+Food) */
+  gap: var(--spacing-xl);
+  max-width: var(--max-width);
+  }
+  .right-side-wrapper {
+  display: flex;
+  flex-direction: column;              /* Keywords ABOVE Food */
+  gap: var(--spacing-lg);              /* 24px gap between them */
+}
+  
+}
+
+
+
+

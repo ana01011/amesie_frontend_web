@@ -2,6 +2,7 @@ import React from 'react';
 import SuggestedRestaurantCard from './SuggestedRestaurantCard';
 import './styles/SuggestedRestaurantSection.css';
 import { Restaurant } from '../types';
+import { useNavigate } from 'react-router-dom';
 // interface Restaurant {
 //   id: string;
 //   image: string;
@@ -13,7 +14,7 @@ interface RestaurantSectionProps {
   title: string;
   restaurants: Restaurant[];
   isLoading?: boolean;
-  onRestaurantClick?: (restaurant: Restaurant) => void;
+  onRestaurantClick?: (id: string) => void;
 }
 
 const SuggestedRestaurantSection: React.FC<RestaurantSectionProps> = ({
@@ -22,6 +23,24 @@ const SuggestedRestaurantSection: React.FC<RestaurantSectionProps> = ({
   isLoading = false,
   onRestaurantClick,
 }) => {
+
+  const navigate = useNavigate();
+const  handleRestaurantClick = (Id: string) => {
+  // 1. Find restaurant data
+    const Item = restaurants.find(r => r.id === Id);
+    
+    // 2. Send to details page
+    navigate('/restaurant-details', { 
+      state: { Item }  // Full data passed here
+    });
+    
+    // 3. Call parent callback (optional)
+    onRestaurantClick?.(Id);
+};
+
+
+
+
   if (isLoading) {
     return <div className="restaurant-section__loading">Loading restaurants...</div>;
   }
@@ -41,7 +60,7 @@ const SuggestedRestaurantSection: React.FC<RestaurantSectionProps> = ({
             image={restaurant.image}
             name={restaurant.name}
             rating={restaurant.rating}
-            onClick={() => onRestaurantClick?.(restaurant)}
+            onClick={() => handleRestaurantClick(restaurant.id)}
           />
         ))}
       </div>

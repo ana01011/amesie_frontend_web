@@ -101,10 +101,15 @@ const RestaurantDetailsPage: React.FC = () => {
         cartCount={0}
       />
 
+      <div className="restaurant-detail-layout">
+
+      <div className="restaurant-card-column">
       <RestaurantDetailsCard
         Item={Item}
       />
+      </div>
 
+      <div className="right-side-wrapper">
       {/* Categories Carousel Component */}
       <CategoriesCarousel
         variant="restro-category"
@@ -120,6 +125,7 @@ const RestaurantDetailsPage: React.FC = () => {
         onFoodClick={handleFoodClick}
         onAddFood={handleAddFood}
       />
+      </div>
 
 
       {/* <AddToCartBar
@@ -129,6 +135,7 @@ const RestaurantDetailsPage: React.FC = () => {
         onDecrease={() => setQuantity(q => Math.max(1, q - 1))}
         onAddToCart={handleAddToCart}
       /> */}
+    </div>
     </div>
   );
 };
