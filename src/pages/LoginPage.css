@@ -1,0 +1,316 @@
+.page-center {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* =====================
+   ROOT
+===================== */
+.login-root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  font-family: 'Sen', sans-serif;
+  overflow-x: hidden;
+}
+
+/* =====================
+   BACKGROUND IMAGE (MOBILE)
+===================== */
+.bg-image {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+/* =====================
+   HEADER (MOBILE + DESKTOP)
+===================== */
+.login-header {
+  position: relative;
+  padding-top: env(safe-area-inset-top);
+  margin-top: 64px;
+  text-align: center;
+  color: white;
+  padding-inline: 16px;
+}
+
+.login-header h1 {
+  font-size: clamp(24px, 6vw, 32px);
+  margin: 0;
+}
+
+.login-header p {
+  font-size: clamp(14px, 4vw, 16px);
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+.header-back-btn {
+    background-color: #ffffff; /* white circle */
+    color: #000000;            /* arrow color (black) */
+    font-size: 20px;           /* arrow size */
+    width: 40px;               /* circle width */
+    height: 40px;              /* circle height */
+    border-radius: 50%;        /* makes it circular */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* subtle shadow like screenshot */
+    position: absolute;        /* place over header */
+    top: 16px;
+    left: 16px;
+    transition: background 0.2s;
+}
+
+.header-back-btn:hover {
+    background-color: #f0f0f0; /* slightly grey on hover */
+}
+.back-login-button{
+    display: none;
+  }
+  .verification-back-link{
+    display: none;
+  }
+/* =====================
+   OVERLAY (MOBILE)
+===================== */
+.login-overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  min-height: 65%;
+  background: white;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  padding: 24px;
+  z-index: 3;
+}
+
+/* =====================
+   FORM
+===================== */
+.form-container {
+  width: 100%;
+}
+
+.input-group {
+  margin-bottom: 15px;
+}
+
+.input-group label {
+  font-weight: 500;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+/* Forgot Password */
+.forgot-password {
+  text-align: right;
+  margin-bottom: 15px;
+}
+
+.forgot-password a {
+  color: #FDC500;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* Button */
+.login-button {
+  width: 100%;
+  padding: 12px;
+  background-color: #fdc500;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+/* Or */
+.or-text {
+  text-align: center;
+  color: #666;
+  margin: 20px 0;
+}
+
+/* Social */
+.social-buttons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.social-buttons button {
+  flex: 1;
+  padding: 10px;
+  color: white;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.facebook { background-color: #3b5998; }
+.google   { background-color: #db4437; }
+.twitter  { background-color: #1da1f2; }
+
+/* Footer */
+.footer {
+  text-align: center;
+}
+
+.footer a {
+  color: #FDC500;
+  font-weight: 600;
+  text-decoration: none;
+}
+/* =====================
+   VERIFICATION UI
+===================== */
+
+
+
+/* Top dark header */
+
+
+
+
+/* Back button */
+
+
+/* White card */
+
+
+
+/* Code input boxes */
+.code-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.code-row input {
+  width: 56px;
+  height: 56px;
+  text-align: center;
+  font-size: 22px;
+  border-radius: 12px;
+  border: none;
+  background: #f3f6f9;
+}
+
+/* Code / resend row */
+.resend-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.code-label {
+  font-weight: 600;
+}
+
+.resend-text {
+  color: #999;
+}
+
+/* Verify button */
+.verify-btn {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+.resend-btn {
+  background: none;
+  border: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: #fdc500;
+  cursor: pointer;
+  padding: 0;
+}
+.otp-input {
+  width: 56px;
+  height: 56px;
+  text-align: center;
+  font-size: 22px;
+  border-radius: 12px;
+  border: none;
+  background: #f3f6f9;
+  outline: none;
+
+  caret-color: black; 
+}
+
+
+
+
+/* =====================
+   DESKTOP RESPONSIVE
+===================== */
+@media (min-width: 768px) {
+  /* Switch to desktop background */
+  .login-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+     background: linear-gradient(to bottom,  white 40%, #FDC500 );
+  
+  }
+
+  /* Remove image bg on desktop */
+  .bg-image {
+    display: none;
+  }
+
+  /* Header becomes dark text */
+  .login-header {
+    position: relative;
+  padding-top: env(safe-area-inset-top);
+  margin-top: 84px;
+  text-align: center;
+  color: black;
+  padding-inline: 16px;
+  }
+
+  .header-back-btn {
+    display: none !important;
+  }
+  .back-login-button{
+    display: block;
+  }
+  .verification-back-link{
+    display: block;
+  }
+  
+
+  /* Centered card */
+  .login-overlay {
+    position: relative;
+    min-height: auto;
+    width: 100%;
+    max-width: 640px;
+    margin: 32px auto;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(243, 245, 112, 0.15);
+  }
+}

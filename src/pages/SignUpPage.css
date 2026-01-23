@@ -1,0 +1,198 @@
+/* Page wrapper */
+.page-center {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Root */
+.signup-root {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Sen", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Background image */
+.bg-image {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit:contain;
+  z-index: -1;
+}
+
+/* Header */
+.signup-header {
+  position: relative;
+  padding-top: env(safe-area-inset-top);
+  margin-top: 64px;
+  text-align: center;
+  color: white;
+  padding-inline: 16px;
+}
+
+.signup-header h1 {
+  font-size: clamp(24px, 6vw, 32px);
+  margin: 0;
+}
+
+.signup-header p {
+  font-size: clamp(14px, 4vw, 16px);
+  margin-top: 8px;
+  opacity: 0.9;
+}
+
+.header-back-btn {
+    background-color: #ffffff; /* white circle */
+    color: #000000;            /* arrow color (black) */
+    font-size: 20px;           /* arrow size */
+    width: 40px;               /* circle width */
+    height: 40px;              /* circle height */
+    border-radius: 50%;        /* makes it circular */
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2); /* subtle shadow like screenshot */
+    position: absolute;        /* place over header */
+    top: 16px;
+    left: 16px;
+    transition: background 0.2s;
+}
+
+.header-back-btn:hover {
+    background-color: #f0f0f0; /* slightly grey on hover */
+}
+
+
+/* Overlay */
+.signup-overlay {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 65%;              /* 🔒 same as login */
+  background: white;
+  border-top-left-radius: 24px;
+  border-top-right-radius: 24px;
+  padding: 24px 16px 16px;
+  z-index: 3;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.form-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+
+/* Form */
+.form-container {
+  width: 100%;
+}
+
+
+.input-group {
+  margin-bottom: 28px;
+}
+
+.input-group label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  display: block;
+  margin-bottom: 6px;
+}
+
+.input-group input {
+ font-weight: 500;
+  color: #333;
+  display: block;
+  margin-bottom: 5px;
+}
+
+/* Password eye */
+.password-group {
+  position: relative;
+}
+
+.eye {
+  position: absolute;
+  right: 12px;
+  top: 38px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #666;
+}
+
+/* Button */
+.primary-button {
+  width: 100%;
+  padding: 14px;
+  background: #fdc500;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.fix-footer {
+  padding-top: 12px;
+  text-align: center;
+  flex-shrink: 0;
+  background: white;
+}
+
+
+/* Footer */
+.footer {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.footer a {
+  color: #FDC500;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+/* DESKTOP */
+@media (min-width: 720px) {
+  .signup-root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: linear-gradient(to bottom,  white 40%, #FDC500 );
+  }
+
+  .bg-image {
+    display: none;
+  }
+
+  .signup-header {
+    position: relative;
+  padding-top: env(safe-area-inset-top);
+  margin-top: 84px;
+  text-align: center;
+  color: black;
+  padding-inline: 16px;
+  }
+  .signup-overlay {
+    position: relative;
+    min-height: auto;
+    width: 100%;
+    max-width: 640px;
+    margin: 32px auto;
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 0 20px 50px rgba(243, 245, 112, 0.15);
+  }
+}
