@@ -57,4 +57,13 @@ body {
 }
 
 
+@media (min-width :481px) {
+.foodCard{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+}
+
 

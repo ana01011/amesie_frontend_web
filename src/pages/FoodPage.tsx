@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import RestaurantsSection from '../components/RestaurantsSection';
-import './FoodPage.css';
+import './styles/FoodPage.css';
 import { foodProducts } from '../data/foodProduct';
 import { useNavigate } from 'react-router-dom';
 import { restaurants } from '../data/restaurants';
 import FoodSection from '../components/FoodSection';
 import { useLocation } from 'react-router-dom';
 import { Restaurant } from '../types';
-
+import { Category } from '../types';
+import { categories } from '../data/category';
 const FoodPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [userAddress] = useState('123 Oak Street');
-  
+
   const navigate = useNavigate();
   const [showFilters, setShowFilters] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
@@ -29,24 +30,24 @@ const FoodPage: React.FC = () => {
     }
   }, [state]);
 
-const getCategoryTitle = () => {
-  return `Popular ${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}`;
-};
+  const getCategoryTitle = () => {
+    return `Popular ${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}`;
+  };
 
 
- const getOpenRestaurants = () => {
-  if (selectedCategory === 'all') {
-    return restaurants.filter(r => r.isOpen).slice(0, 6);
-  }
-  
-  return restaurants.filter((restaurant) => {
-    const isOpen = restaurant.isOpen;
-    const hasCuisine = restaurant.cuisine.some((cuisine) =>
-      cuisine.toLowerCase().includes(selectedCategory.toLowerCase())
-    );
-    return isOpen && hasCuisine;
-  }).slice(0, 6);
-};
+  const getOpenRestaurants = () => {
+    if (selectedCategory === 'all') {
+      return restaurants.filter(r => r.isOpen).slice(0, 6);
+    }
+
+    return restaurants.filter((restaurant) => {
+      const isOpen = restaurant.isOpen;
+      const hasCuisine = restaurant.cuisine.some((cuisine) =>
+        cuisine.toLowerCase().includes(selectedCategory.toLowerCase())
+      );
+      return isOpen && hasCuisine;
+    }).slice(0, 6);
+  };
 
 
   const handleFoodClick = (foodId: string) => {
@@ -73,17 +74,20 @@ const getCategoryTitle = () => {
   };
   console.log(selectedCategory);
   return (
-    
+
     <div className="food-page">
       {/* Header */}
       <Header
         variant="category"
-        title= {selectedCategory}
+        title={selectedCategory}
         titleType="pill"
         cartCount={2}
         onBackClick={() => navigate(-1)}
         onTitleClick={() => setShowFilters(!showFilters)}
         onSearchClick={() => setShowSearch(true)}
+        selectedCategory={selectedCategory}
+        onCategorySelect={(cat) => { setSelectedCategory(cat); }}
+        categories={categories}
 
       />
 

@@ -4,7 +4,7 @@ import FoodDetailsCard from '../components/FoodDetailsCard';
 import Header from '../components/Header';
 import AddToCartBar from '../components/AddToCartBar';
 import { FoodProduct } from '../types';
-import './FoodDetailsPage.css';
+import './styles/FoodDetailsPage.css';
 
 const FoodDetailsPage: React.FC = () => {
   const location = useLocation();
@@ -41,20 +41,22 @@ const FoodDetailsPage: React.FC = () => {
         title="Details"
         cartCount={0}
       />
+      <div className="foodCard">
+        <FoodDetailsCard
+          foodItem={foodItem}
+          onFavorite={handleFavorite}
+          onSizeSelect={handleSizeSelect}
+        />
 
-      <FoodDetailsCard
-        foodItem={foodItem}
-        onFavorite={handleFavorite}
-        onSizeSelect={handleSizeSelect}
-      />
 
-      <AddToCartBar
-        price={foodItem.price}
-        quantity={quantity}
-        onIncrease={() => setQuantity(q => q + 1)}
-        onDecrease={() => setQuantity(q => Math.max(1, q - 1))}
-        onAddToCart={handleAddToCart}
-      />
+        <AddToCartBar
+          price={foodItem.price}
+          quantity={quantity}
+          onIncrease={() => setQuantity(q => q + 1)}
+          onDecrease={() => setQuantity(q => Math.max(1, q - 1))}
+          onAddToCart={handleAddToCart}
+        />
+      </div>
     </div>
   );
 };

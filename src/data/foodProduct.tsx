@@ -13,7 +13,7 @@ export const foodProducts: FoodProduct[] = [
     tags: ['popular', 'fast-food'],
     rating: 4.5,
     prepTime: '5 min',
-    ingredients: ['salt', 'chicken', 'garlic', 'veg'],
+    ingredients: ['salt', 'chicken', 'garlic', 'veg', 'chilli'],
     deliveryFee: 0, // 0 = Free
 
   },

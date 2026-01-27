@@ -9,6 +9,11 @@ import RestaurantDetailsPage from "./pages/RestaurantDetailsPage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
 import ForgotPasswordPage from "./pages/forgotpasswordpage";
+import MenuScreen from "./pages/MenuScreen";
+import PersonalInfoScreen from "./pages/PersonalInfoScreen";
+import EditProfileScreen from "./pages/EditProfileScreen";
+import AddressScreen from "./pages/AddressScreen";
+import AddNewAddressScreen from "./pages/AddNewAddressScreen";
 
 function App() {
   return (
@@ -23,6 +28,12 @@ function App() {
          <Route path="/loginpage" element={<LoginPage />} /> 
           <Route path="/signuppage" element={<SignUpPage/>} /> 
           <Route path="/forgotpassword" element={<ForgotPasswordPage/>} /> 
+          <Route path='/menu' element={<MenuScreen/>}/>
+          <Route path="/personalinfo" element={<PersonalInfoScreen/>} /> 
+          <Route path="/editprofile" element={<EditProfileScreen/>} /> 
+          <Route path="/address" element={<AddressScreen/>} /> 
+          <Route path="/add-address" element={<AddNewAddressScreen/>} /> 
+          
         {/* <Route path="/restaurant/:id" element={<RestaurantDetail />} />
         <Route path="/food/:id" element={<FoodDetail />} /> */}
       </Routes>

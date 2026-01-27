@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../components/Header';
+import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
 import CategoriesCarousel from '../components/CategoriesCarousel';
 import SuggestedRestaurantSection from '../components/SuggestedRestaurantSection';
@@ -13,21 +14,31 @@ import { Category } from '../types';
 import { categories } from '../data/category';
 import { Keyword } from '../types';
 import { keywords } from '../data/keywords';
-import './Search.css';
+import './styles/Search.css';
 
 
 
 
 
 const Search: React.FC = () => {
-  const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchResults, setSearchResults] = useState<Restaurant[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [userAddress, setUserAddress] = useState<string>('Varanasi, UP');
   const navigate = useNavigate();
   const [showLocationModal, setShowLocationModal] = useState(false);
+  const location = useLocation();
+  const state = location.state as { searchActive?: boolean };
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const searchActive = state?.searchActive ?? false;
+
+const locations = [
+    'Varanasi, UP',
+    'Lucknow, UP',
+    'Delhi',
+    'Bangalore'
+  ];
 
 
   const defaultRestaurants: Restaurant[] = restaurants.slice(0, 4);
@@ -208,10 +219,11 @@ const Search: React.FC = () => {
       {/* Header Component */}
       <Header
         variant="search"
-        locationValue={userAddress}
         cartCount={1}
         onBackClick={() => navigate(-1)}
-        onLocationClick={() => setShowLocationModal(true)}
+        locationValue={userAddress}
+        locations={locations}
+        onLocationSelect={(loc) => setUserAddress(loc)}
         onSearchClick={() => navigate('/search')}
         onCartClick={() => navigate('/cart')}
       />
@@ -223,6 +235,7 @@ const Search: React.FC = () => {
         userName="Abc"
         searchQuery={searchQuery}
         onSearchChange={handleHeaderSearchChange}
+        active={searchActive}
       />
 
       {/* Categories Carousel Component */}

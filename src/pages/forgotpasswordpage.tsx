@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useRef } from "react";
-
-import './LoginPage.css';
+import "./styles/LoginPage.css"
 
 const ForgotPasswordPage: React.FC = () => {
     const [email, setEmail] = useState('');
@@ -165,6 +164,7 @@ const ForgotPasswordPage: React.FC = () => {
                                     <div className="code-row">
                                         {code.map((digit, index) => (
                                             <input
+                                            aria-label='otp'
                                                 key={index}
                                                 ref={(el) => (inputRefs.current[index] = el)}
                                                 type="text"

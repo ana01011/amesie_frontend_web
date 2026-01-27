@@ -1,0 +1,89 @@
+
+.edit-profile-image {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0 20px;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper img {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.edit-image-btn {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #000;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.edit-form {
+  padding: 0 34px 40px;
+}
+
+.field {
+  margin-bottom: 24px;
+}
+
+.field label {
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: block;
+}
+
+.field input,
+.field textarea {
+  width: 100%;
+  padding: 16px;
+  background: #f0f5fa;
+  border-radius: 10px;
+  border: none;
+  font-size: 16px;
+}
+
+.field textarea {
+  min-height: 110px;
+  resize: none;
+}
+
+.save-btn {
+  width: 100%;
+  height: 67px;
+  background: #fdc500;
+  border-radius: 10px;
+  border: none;
+  color: #fff;
+  font-weight: 700;
+  margin-top: 40px;
+  cursor: pointer;
+  
+}
+
+
+  .save-btn {
+    margin-top: 0px;
+  }
+  .page-footer {
+  position: sticky;
+  bottom: 0;
+  border:none;
+  padding: 10px 34px 5px;
+  z-index: 10;
+  background-color: #ffffff;
+
+}
+  

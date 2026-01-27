@@ -1,4 +1,5 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
+import { Category } from '../types';
 import './styles/Header.css';
 
 export interface HeaderProps {
@@ -12,14 +13,19 @@ export interface HeaderProps {
   titleType?: 'text' | 'pill';
   locationLabel?: string;
   locationValue?: string;
+  locations?: string[];
+  onLocationSelect?: (location: string) => void;
   cartCount?: number;
   onMenuClick?: () => void;
   onBackClick?: () => void;
-  onLocationClick?: () => void;
   onTitleClick?: () => void;
   onSearchClick?: () => void;
   onCartClick?: () => void;
   onMoreClick?: () => void;
+
+  categories?: Category[];
+  selectedCategory?: string;
+  onCategorySelect?: (category: string) => void;
   rightElement?: ReactNode;
 }
 
@@ -37,12 +43,16 @@ const Header: React.FC<HeaderProps> = ({
   cartCount = 0,
   onMenuClick,
   onBackClick,
-  onLocationClick,
   onTitleClick,
   onSearchClick,
   onCartClick,
   onMoreClick,
   rightElement,
+  locations,
+  onLocationSelect,
+  categories = [],
+  selectedCategory,
+  onCategorySelect
 }) => {
   const isHome = variant === 'home';
   const isCategory = variant === 'category';
@@ -56,6 +66,12 @@ const Header: React.FC<HeaderProps> = ({
   const visibleSearch = showSearch ?? isCategory;
   const visibleCart = showCart ?? (isHome || isSearchPage);
   const visibleMore = isRestaurant;
+  const [openLocation, setOpenLocation] = useState(false);
+  const [showLocationDropdown, setShowLocationDropdown] = useState(false);
+  const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
+  const formatLabel = (text: string) =>
+    text.charAt(0).toUpperCase() + text.slice(1);
+
 
   return (
     <header className="header">
@@ -80,31 +96,89 @@ const Header: React.FC<HeaderProps> = ({
           )}
 
           {visibleLocation && (
-            <div className="header__location" onClick={onLocationClick}>
+            <div className="header__location">
               <span className="location-label">{locationLabel}</span>
-              <div className="location-value-row">
-                <span className="location-value">{locationValue}
-                  <span className="location-arrow">▼</span>
+
+              {/*WRAPPER */}
+              <div className="location-dropdown-wrapper">
+                <span className="location-value"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowLocationDropdown(prev => !prev);
+                  }}>
+                  {locationValue}
+                  <span
+                    className="location-arrow"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowLocationDropdown(prev => !prev);
+                    }}
+                  >
+                    {showLocationDropdown ? "▲" : "▼"}
+                  </span>
                 </span>
 
+                {/*DROPDOWN */}
+                {showLocationDropdown && locations && (
+                  <div className="location-dropdown">
+                    {locations.map(loc => (
+                      <div
+                        key={loc}
+                        className="location-option"
+                        onClick={() => {
+                          onLocationSelect?.(loc);
+                          setShowLocationDropdown(false);
+                        }}
+                      >
+                        {loc}
+                      </div>
+                    ))}
+                  </div>
+                )}
               </div>
             </div>
           )}
 
-          {title && !visibleLocation && (
+
+
+          {titleType === 'pill' && categories && (
             <div className="header__title-area">
-              {titleType === 'pill' ? (
-                <button className="title-pill" onClick={onTitleClick}>
-                  <span className="title-pill-text">{title}</span>
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#F59E0B">
-                    <path d="M7 10l5 5 5-5z" />
-                  </svg>
+              <div className="location-dropdown-wrapper">
+                <button
+                  className="title-pill"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setShowCategoryDropdown(prev => !prev);
+                  }}
+                >
+                  <span className="title-pill-text">
+                    {selectedCategory || title}
+                  </span>
+                  <span className="cat-arrow">
+                    {showCategoryDropdown ? "▲" : "▼"}
+                  </span>
                 </button>
-              ) : (
-                <span className="title-text">{title}</span>
-              )}
+
+                {showCategoryDropdown && (
+                  <div className="location-dropdown">
+                    {categories.slice(1).filter(cat => cat.id !== selectedCategory).map(cat => (
+                      <div
+                        key={cat.id}
+                        className="location-option"
+                        onClick={() => {
+                          onCategorySelect?.(cat.id);
+                          setShowCategoryDropdown(false);
+                        }}
+                      >
+                        {formatLabel(cat.id)}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </div>
           )}
+
         </div>
 
         <div className="header__right">

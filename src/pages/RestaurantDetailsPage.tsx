@@ -4,7 +4,7 @@ import RestaurantDetailsCard from '../components/RestaurantDetailsCard';
 import Header from '../components/Header';
 // import AddToCartBar from '../components/AddToCartBar';
 import { Restaurant } from '../types';
-import './RestaurantDetailsPage.css';
+import './styles/RestaurantDetailsPage.css';
 import CategoriesCarousel from '../components/CategoriesCarousel';
 import { keywords } from '../data/keywords';
 import { categories } from '../data/category';

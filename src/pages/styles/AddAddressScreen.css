@@ -1,0 +1,60 @@
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+.map-wrapper {
+  overflow: hidden;
+  border-radius: 16px;
+  margin: 0 31px 24px;
+}
+
+.address-box {
+  background: #f0f5fa;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.label-group {
+  display: flex;
+  gap: 12px;
+  margin: 16px 0 30px;
+}
+
+.label {
+  flex: 1;
+  padding: 12px;
+  border-radius: 999px;
+  border: none;
+  background: #f1f5f9;
+}
+
+.label.active {
+  background: #fdc500;
+  color: #fff;
+}
+
+.footer-bar {
+  position: sticky;
+  bottom: 0;
+  background-color: #ffffff;
+  padding: 12px 24px 5px;
+  z-index: 20;
+
+  /* visual polish */
+  
+}
+
+/* button full width */
+.footer-bar .save-btn {
+  width: 100%;
+}

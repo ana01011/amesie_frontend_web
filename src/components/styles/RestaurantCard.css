@@ -93,3 +93,18 @@
   width: 12.5px;
   height: 11px;
 }
+.restaurant-card__rating-inline {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #000;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+/* .restaurant-card__rating-inline svg {
+  width: 14px;
+  height: 14px;
+  fill: #F59E0B;
+} */
+

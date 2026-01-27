@@ -30,12 +30,12 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
     >
       <div className="restaurant-card__image-wrapper">
         <img src={restaurant.image} alt={restaurant.name} className="restaurant-card__image" />
-        <div className="restaurant-card__overlay">
+        {/* <div className="restaurant-card__overlay">
           <span className="restaurant-card__rating">
             <StarIcon /> 
             {restaurant.rating}
           </span>
-        </div>
+        </div> */}
       </div>
 
       <div className="restaurant-card__info">
@@ -43,14 +43,20 @@ const RestaurantCard: React.FC<RestaurantCardProps> = ({
         <p className="restaurant-card__cuisine">{restaurant.cuisine.join(' · ')}</p>
 
         <div className="restaurant-card__meta">
+
+          <div className="restaurant-card__meta-item restaurant-card__rating-inline">
+            <StarIcon />
+            <span>{restaurant.rating}</span>
+          </div>
+
           <div className="restaurant-card__meta-item">
-            <FreeDeliveryIcon/>  
+            <FreeDeliveryIcon />
             <span>
               {restaurant.deliveryFee === 0 ? 'Free' : `₹${restaurant.deliveryFee}`}
             </span>
           </div>
           <div className="restaurant-card__meta-item">
-            <ClockIcon />  
+            <ClockIcon />
             <span>{restaurant.deliveryTime}</span>
           </div>
         </div>

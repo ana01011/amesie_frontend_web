@@ -1,8 +1,7 @@
 .add-to-cart-bar {
   position: fixed;
   bottom: 0;
-  left: 0;
-  right: 0;
+  
 
   background: #ffffff;
   padding: 16px;
@@ -12,7 +11,7 @@
   flex-direction: column;
   gap: 14px;
 
-  box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.15);
+  /* box-shadow: 0 -6px 16px rgba(0, 0, 0, 0.15); */
   z-index: 100;
 }
 
@@ -68,4 +67,18 @@
 
 .add-to-cart-btn:hover {
   opacity: 0.95;
+}
+
+@media (min-width:1024px) {
+  .add-to-cart-bar {
+  width: 1024px;
+  }
+  
+}
+@media (max-width:1023px) {
+  .add-to-cart-bar {
+  left: 0;
+  right: 0;
+  }
+  
 }

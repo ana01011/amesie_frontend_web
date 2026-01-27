@@ -5,7 +5,7 @@ import { FoodProduct } from '../types';
 import { useState } from 'react';  // ← ADD useState
 import {
     HeartIcon, ClockIcon, StarIcon, FreeDeliveryIcon,
-    SaltIcon, ChickenIcon, GarlicIcon, VegIcon
+    SaltIcon, ChickenIcon, GarlicIcon, VegIcon, ChilliIcon,
 } from '../icons';
 
 
@@ -38,6 +38,7 @@ const FoodDetailsCard: React.FC<FoodDetailsCardProps> = ({
             chicken: ChickenIcon,
             garlic: GarlicIcon,
             veg: VegIcon,
+            chilli: ChilliIcon,
         };
         return icons[ingredient] || SaltIcon; // Default fallback
     };

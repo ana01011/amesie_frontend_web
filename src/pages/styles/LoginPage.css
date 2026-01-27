@@ -22,7 +22,7 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit:cover;
   z-index: -1;
 }
 
@@ -182,25 +182,7 @@
   font-weight: 600;
   text-decoration: none;
 }
-/* =====================
-   VERIFICATION UI
-===================== */
 
-
-
-/* Top dark header */
-
-
-
-
-/* Back button */
-
-
-/* White card */
-
-
-
-/* Code input boxes */
 .code-row {
   display: flex;
   justify-content: space-between;
@@ -217,7 +199,7 @@
   background: #f3f6f9;
 }
 
-/* Code / resend row */
+
 .resend-row {
   display: flex;
   justify-content: space-between;
@@ -233,7 +215,6 @@
   color: #999;
 }
 
-/* Verify button */
 .verify-btn {
   font-weight: 600;
   letter-spacing: 1px;
@@ -263,11 +244,8 @@
 
 
 
-/* =====================
-   DESKTOP RESPONSIVE
-===================== */
 @media (min-width: 768px) {
-  /* Switch to desktop background */
+ 
   .login-root {
     display: flex;
     flex-direction: column;
@@ -276,12 +254,12 @@
   
   }
 
-  /* Remove image bg on desktop */
+ 
   .bg-image {
     display: none;
   }
 
-  /* Header becomes dark text */
+  
   .login-header {
     position: relative;
   padding-top: env(safe-area-inset-top);
@@ -302,7 +280,7 @@
   }
   
 
-  /* Centered card */
+ 
   .login-overlay {
     position: relative;
     min-height: auto;

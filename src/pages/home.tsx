@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { restaurants } from '../data/restaurants';
 import { Category } from '../types';
 import { categories } from '../data/category';
-import './home.css';
+import './styles/home.css';
 
 
 
@@ -23,16 +23,23 @@ const Home: React.FC = () => {
   const [activeFooterTab, setActiveFooterTab] = useState<FooterTab>('food');
   const navigate = useNavigate();
   // Data
-  
+  const locations = [
+    'Varanasi, UP',
+    'Lucknow, UP',
+    'Delhi',
+    'Bangalore'
+  ];
 
- 
+
+
 
   // ============================================
   // Header Callbacks
   // ============================================
   const handleHeroSearchClick = () => {
-    navigate('/search');
-  };
+  navigate('/search', { state: { searchActive: true } });
+};
+
 
   const handleMenuClick = () => {
     console.log('Menu clicked');
@@ -65,12 +72,13 @@ const Home: React.FC = () => {
 
 
   const handleCategorySelect = (categoryId: string) => {
-  setSelectedCategory(categoryId);
-  console.log('Category selected:', categoryId);
-  navigate('/foodpage', { 
-    state: { selectedCategory: categoryId }  // ← Pass category here
-  });
-};
+    setSelectedCategory(categoryId);
+    console.log('Category selected:', categoryId);
+     if (categoryId === 'all') return;
+    navigate('/foodpage', {
+      state: { selectedCategory: categoryId }  // ← Pass category here
+    });
+  };
 
 
   const handleRestaurantClick = (restaurantId: string) => {
@@ -93,12 +101,14 @@ const Home: React.FC = () => {
       <Header
         variant="home"
         cartCount={3}
-        locationValue="Varanasi, UP"
-        onMenuClick={() => console.log('Menu')}
-        onLocationClick={() => console.log('Location')}
+        locationValue={userAddress}
+        locations={locations}
+        onLocationSelect={(loc) => setUserAddress(loc)}
+        onMenuClick={() => navigate("/menu")}
         onSearchClick={() => console.log('Search')}
         onCartClick={() => console.log('Cart')}
       />
+
 
 
       {/* Hero Component */}
@@ -108,6 +118,7 @@ const Home: React.FC = () => {
         searchQuery={searchQuery}
         onSearchChange={handleHeaderSearchChange}
         onSearchClick={handleHeroSearchClick}
+        active={false}
       />
 
       {/* Categories Carousel Component */}

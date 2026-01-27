@@ -137,7 +137,7 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
                 key={keyword.id}
                 className={`keyword-carousel__card ${
                   selectedCategory === keyword.id
-                    ? 'keyword-carousel__card--active'
+                    ? 'restro-keyword-carousel__card--active'
                     : ''
                 }`}
                 onClick={() => handleItemClick(keyword.id)}
