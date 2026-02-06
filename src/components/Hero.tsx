@@ -41,7 +41,6 @@ const Hero: React.FC<HeroProps> = ({
           onClick={() => {
             inputRef.current?.focus();
             setIsActive(true);
-            onSearchClick?.();
           }}
         >
           <img src="/images/search-i.png" alt="Search" className="hero__search-icon" />
@@ -52,6 +51,7 @@ const Hero: React.FC<HeroProps> = ({
             placeholder="Search dishes, restaurants"
             value={searchQuery}
             onChange={(e) => onSearchChange?.(e.target.value)}
+            
             onFocus={() => setIsActive(true)}
             onBlur={() => setIsActive(false)}
           />

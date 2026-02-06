@@ -10,7 +10,7 @@ import {
 
 
 interface FoodDetailsCardProps {
-    foodItem?: FoodProduct ;
+    foodItem?: FoodProduct;
     onFavorite?: () => void;
     onSizeSelect?: (size: string) => void;
 }
@@ -148,13 +148,14 @@ const FoodDetailsCard: React.FC<FoodDetailsCardProps> = ({
                         {food.ingredients.map((ingredient, index) => {
                             const IconComponent = getIngredientIcon(ingredient);
                             return (
-                                <IconComponent
-                                    key={index}
-                                    className="food-details-card__ingredient-icon"
-                                />
+                                <div key={index} className="ingredient-circle">
+                                    <IconComponent className="ingredient-icon" />
+                                </div>
                             );
                         })}
                     </div>
+
+
                 </div>
             )}
         </div>

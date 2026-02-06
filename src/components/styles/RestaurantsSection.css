@@ -4,14 +4,14 @@
    @import url('https://fonts.googleapis.com/css2?family=Sen:wght@400;500;600;700;800&display=swap');
 .restaurants-section {
   background: var(--color-white);
-  padding: var(--spacing-lg) var(--spacing-lg);
+  padding: auto ;
   
 }
 
 .restaurants-section__container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 var(--spacing-lg);
+  padding: 31px;
 }
 
 .restaurants-section__header {
@@ -31,7 +31,7 @@
 
 .restaurants-section__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(369px, 1fr));
   gap: var(--spacing-lg);
 }
 

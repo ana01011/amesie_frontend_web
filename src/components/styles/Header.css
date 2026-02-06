@@ -53,7 +53,6 @@
 }
 
 .header__container {
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: flex-start;
@@ -483,7 +482,7 @@
   .header {
     border-bottom: none;
     box-shadow: none;
-    margin-top: 15px;
+    margin-top: 0px;
   }
 
   .header__container {
@@ -491,7 +490,7 @@
     gap: 12px;
     height: 56px;
     min-height: 85px;
-    padding-bottom: 10px;
+    padding-bottom: 0px;
   }
 
   .btn-menu {

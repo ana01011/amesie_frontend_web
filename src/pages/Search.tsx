@@ -14,6 +14,7 @@ import { Category } from '../types';
 import { categories } from '../data/category';
 import { Keyword } from '../types';
 import { keywords } from '../data/keywords';
+import { locations } from '../data/location';
 import './styles/Search.css';
 
 
@@ -21,24 +22,24 @@ import './styles/Search.css';
 
 
 const Search: React.FC = () => {
+  const location = useLocation();
+  const state = location.state as {
+  query?: string;
+  selectedLocation?: string;
+};
+  const [searchQuery, setSearchQuery] = useState(state?.query ?? '');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchResults, setSearchResults] = useState<Restaurant[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [userAddress, setUserAddress] = useState<string>('Varanasi, UP');
+  const [userAddress, setUserAddress] = useState<string>(
+  state?.selectedLocation ?? 'Location'
+);
+
   const navigate = useNavigate();
   const [showLocationModal, setShowLocationModal] = useState(false);
-  const location = useLocation();
-  const state = location.state as { searchActive?: boolean };
 
-  const [searchQuery, setSearchQuery] = useState('');
-  const searchActive = state?.searchActive ?? false;
+  // const searchActive = state?.searchActive ?? false;
 
-const locations = [
-    'Varanasi, UP',
-    'Lucknow, UP',
-    'Delhi',
-    'Bangalore'
-  ];
 
 
   const defaultRestaurants: Restaurant[] = restaurants.slice(0, 4);
@@ -184,14 +185,14 @@ const locations = [
 
  const getSearchFoods = () => {
   const lowerQuery = searchQuery.toLowerCase();
-    console.log('🔍 Searching for:', lowerQuery);
+    console.log('Searching for:', lowerQuery);
   const results = foodProducts.filter(food => {
     const matches =
       food.category?.toLowerCase().includes(lowerQuery) ||
       food.tags?.some(tag => tag.toLowerCase().includes(lowerQuery)) ||
       food.name.toLowerCase().includes(lowerQuery) ||
       food.restaurant?.toLowerCase().includes(lowerQuery) ||
-      // ✅ FIXED: NOW IN matches!
+      // FIXED: NOW IN matches!
       food.ingredients?.some(ingredient => 
         ingredient.toLowerCase().includes(lowerQuery)
       );
@@ -235,7 +236,7 @@ const locations = [
         userName="Abc"
         searchQuery={searchQuery}
         onSearchChange={handleHeaderSearchChange}
-        active={searchActive}
+        active={true}
       />
 
       {/* Categories Carousel Component */}

@@ -140,47 +140,52 @@ const Header: React.FC<HeaderProps> = ({
           )}
 
 
-
-          {titleType === 'pill' && categories && (
+          {title && !visibleLocation && (
             <div className="header__title-area">
-              <div className="location-dropdown-wrapper">
-                <button
-                  className="title-pill"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setShowCategoryDropdown(prev => !prev);
-                  }}
-                >
-                  <span className="title-pill-text">
-                    {selectedCategory || title}
-                  </span>
-                  <span className="cat-arrow">
-                    {showCategoryDropdown ? "▲" : "▼"}
-                  </span>
-                </button>
+              {titleType === 'pill' ? (
 
-                {showCategoryDropdown && (
-                  <div className="location-dropdown">
-                    {categories.slice(1).filter(cat => cat.id !== selectedCategory).map(cat => (
-                      <div
-                        key={cat.id}
-                        className="location-option"
-                        onClick={() => {
-                          onCategorySelect?.(cat.id);
-                          setShowCategoryDropdown(false);
-                        }}
-                      >
-                        {formatLabel(cat.id)}
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
+                <div className="location-dropdown-wrapper">
+                  <button
+                    className="title-pill"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowCategoryDropdown(prev => !prev);
+                    }}
+                  >
+                    <span className="title-pill-text">
+                      {selectedCategory || title}
+                    </span>
+                    <span className="cat-arrow">
+                      {showCategoryDropdown ? "▲" : "▼"}
+                    </span>
+                  </button>
+
+
+                  {showCategoryDropdown && (
+                    <div className="location-dropdown">
+                      {categories.slice(1).filter(cat => cat.id !== selectedCategory).map(cat => (
+                        <div
+                          key={cat.id}
+                          className="location-option"
+                          onClick={() => {
+                            onCategorySelect?.(cat.id);
+                            setShowCategoryDropdown(false);
+                          }}
+                        >
+                          {formatLabel(cat.id)}
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <span className="title-text">{title}</span>
+
+              )}
             </div>
           )}
 
         </div>
-
         <div className="header__right">
           {visibleMore && (
             <button className="btn-circle btn-grey" onClick={onMoreClick} aria-label="More options">

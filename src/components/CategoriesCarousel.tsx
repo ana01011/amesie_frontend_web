@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './styles/CategoriesCarousel.css';
 import { Category } from '../types';
 import { Keyword } from '../types';
 
 
+
 interface CategoriesCarouselProps {
- variant?: 'category' | 'keyword' | 'restro-category';
+  variant?: 'category' | 'keyword' | 'restro-category';
   categories?: Category[];
-keywords?: Keyword[];
+  keywords?: Keyword[];
   selectedCategory?: string;
   onCategorySelect?: (categoryId: string) => void;
 }
@@ -24,6 +25,18 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
   const handleItemClick = (itemId: string) => {
     onCategorySelect?.(itemId);
   };
+  const scrollRef = useRef<HTMLDivElement | null>(null);
+
+  const handleSeeAllClick = () => {
+  if (!scrollRef.current) return;
+
+  scrollRef.current.scrollTo({
+    left: scrollRef.current.scrollWidth,
+    behavior: 'smooth',
+  });
+};
+
+
 
   if (variant === 'category') {
     return (
@@ -33,25 +46,26 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
             <h2>All Categories</h2>
             <button
               className="categories-carousel__see-all-btn"
-              onClick={() => setShowAllItems(!showAllItems)}
+              onClick={handleSeeAllClick}
+
             >
               {showAllItems ? 'Show Less ←' : 'See All >'}
             </button>
           </div>
 
           <div
-            className={`categories-carousel__grid ${
-              showAllItems ? 'categories-carousel__grid--expanded' : ''
-            }`}
+            ref={scrollRef}
+            className={`categories-carousel__grid ${showAllItems ? 'categories-carousel__grid--expanded' : ''
+              }`}
           >
+
             {categories.map((category) => (
               <button
                 key={category.id}
-                className={`categories-carousel__card ${
-                  selectedCategory === category.id
-                    ? 'categories-carousel__card--active'
-                    : ''
-                }`}
+                className={`categories-carousel__card ${selectedCategory === category.id
+                  ? 'categories-carousel__card--active'
+                  : ''
+                  }`}
                 onClick={() => handleItemClick(category.id)}
               >
                 <div className="categories-carousel__icon-wrapper">
@@ -82,25 +96,26 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
             <h2>Recent Keywords</h2>
             <button
               className="keyword-carousel__see-all-btn"
-              onClick={() => setShowAllItems(!showAllItems)}
+              onClick={handleSeeAllClick}
+
             >
               {showAllItems ? 'Show Less ←' : 'See All >'}
             </button>
           </div>
 
           <div
-            className={`keyword-carousel__grid ${
-              showAllItems ? 'keyword-carousel__grid--expanded' : ''
-            }`}
+            ref={scrollRef}
+            className={`keyword-carousel__grid ${showAllItems ? 'keyword-carousel__grid--expanded' : ''
+              }`}
           >
+
             {keywords.map((keyword) => (
               <button
                 key={keyword.id}
-                className={`keyword-carousel__card ${
-                  selectedCategory === keyword.id
-                    ? 'keyword-carousel__card--active'
-                    : ''
-                }`}
+                className={`keyword-carousel__card ${selectedCategory === keyword.id
+                  ? 'keyword-carousel__card--active'
+                  : ''
+                  }`}
                 onClick={() => handleItemClick(keyword.id)}
               >
                 <span>{keyword.label}</span>
@@ -128,18 +143,19 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
           </div> */}
 
           <div
-            className={`keyword-carousel__grid ${
-              showAllItems ? 'keyword-carousel__grid--expanded' : ''
-            }`}
+            ref={scrollRef}
+            className={`keyword-carousel__grid ${showAllItems ? 'keyword-carousel__grid--expanded' : ''
+              }`}
           >
+
+
             {filteredKeywords.map((keyword) => (
               <button
                 key={keyword.id}
-                className={`keyword-carousel__card ${
-                  selectedCategory === keyword.id
-                    ? 'restro-keyword-carousel__card--active'
-                    : ''
-                }`}
+                className={`keyword-carousel__card ${selectedCategory === keyword.id
+                  ? 'restro-keyword-carousel__card--active'
+                  : ''
+                  }`}
                 onClick={() => handleItemClick(keyword.id)}
               >
                 <span>{keyword.label}</span>

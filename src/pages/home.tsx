@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import { restaurants } from '../data/restaurants';
 import { Category } from '../types';
 import { categories } from '../data/category';
+import { locations } from '../data/location';
 import './styles/home.css';
 
 
@@ -19,26 +20,33 @@ type FooterTab = 'shop' | 'food' | 'instamart' | 'cart';
 const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [userAddress, setUserAddress] = useState<string>('123 Oak Street');
+  const [userAddress, setUserAddress] = useState<string>('Location');
   const [activeFooterTab, setActiveFooterTab] = useState<FooterTab>('food');
   const navigate = useNavigate();
   // Data
-  const locations = [
-    'Varanasi, UP',
-    'Lucknow, UP',
-    'Delhi',
-    'Bangalore'
-  ];
+  // const locations = [
+  //   'Varanasi, UP',
+  //   'Lucknow, UP',
+  //   'Delhi',
+  //   'Bangalore'
+  // ];
 
+const hasNavigatedRef = React.useRef(false);
 
 
 
   // ============================================
   // Header Callbacks
   // ============================================
-  const handleHeroSearchClick = () => {
-  navigate('/search', { state: { searchActive: true } });
-};
+//  const handleHeroSearchClick = () => {
+//   navigate('/search', {
+//     state: {
+//       searchActive: true,
+//       selectedLocation: userAddress, //pass location
+//     },
+//   });
+// };
+
 
 
   const handleMenuClick = () => {
@@ -57,8 +65,21 @@ const Home: React.FC = () => {
   };
 
   const handleHeaderSearchChange = (query: string) => {
-    setSearchQuery(query);
-  };
+  setSearchQuery(query);
+
+  if (
+    query.trim().length >= 1 &&
+    !hasNavigatedRef.current
+  ) {
+    hasNavigatedRef.current = true;
+
+    navigate('/search', {
+  state: { query, selectedLocation: userAddress },
+});
+
+  }
+};
+
 
   // ============================================
   // Component Callbacks
@@ -117,7 +138,6 @@ const Home: React.FC = () => {
         userName="Abc"
         searchQuery={searchQuery}
         onSearchChange={handleHeaderSearchChange}
-        onSearchClick={handleHeroSearchClick}
         active={false}
       />
 

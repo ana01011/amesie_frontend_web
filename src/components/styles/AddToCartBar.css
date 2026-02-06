@@ -3,7 +3,8 @@
   bottom: 0;
   
 
-  background: #ffffff;
+background: rgba(246, 246, 246, 1);
+
   padding: 16px;
   border-radius: 16px 16px 0 0;
 
@@ -26,6 +27,7 @@
   font-size: 28px;
   font-weight: 400;
   color: #000;
+  margin-left: 10px;
 }
 
 /* QUANTITY */

@@ -84,13 +84,13 @@
   font-size: 16px;
   color: #666;
   line-height: 1.5;
-  margin-bottom: 20px;
+  margin-bottom: 12px;
 }
 
 .food-details-card__meta {
   display: flex;
   gap: 24px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .food-details-card__rating,
@@ -107,7 +107,7 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .food-details-card__label {
@@ -150,15 +150,31 @@
   justify-content: space-between;
   align-items: center;
 }
+/* THE YELLOW CIRCLE */
+.ingredient-circle {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(255, 223, 0, 0.4);/* yellow like screenshot */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
+/* ICON INSIDE */
+.ingredient-icon {
+  width: 22px;
+  height: 22px;
+  color: #1A1A1A; /* dark icon */
+}
 
 .food-details-card__ingredient-icon {
   width: 36px;
   height: 36px;
  
-  border-radius: 8px;
+  /* border-radius: 8px;
   background: #F5F5F5;
-  padding: 4px;
+  padding: 4px; */
 }
 
 /* Responsive */

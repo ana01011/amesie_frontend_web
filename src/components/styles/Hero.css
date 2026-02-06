@@ -71,10 +71,10 @@
   /* Mobile: White background, no gradient */
   .hero {
     background: #ffffff !important;
-    padding: 22px 0px !important;
+    padding: 12px 0px 18px !important;
     text-align: left;
     position: sticky !important;
-    margin-left: 38px ;
+    margin-left: 31px ;
   }
 
   .hero__container {

@@ -12,7 +12,7 @@
 }
 .food-section {
   background: var(--color-white);
-  padding: var(--spacing-xl) var(--spacing-lg) !important;
+  padding: var(--spacing-lg) var(--spacing-lg) !important;
  
 }
 
@@ -26,7 +26,7 @@
  display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
   
   
 }
@@ -35,7 +35,7 @@
 .food-section__title {
   margin: 0;
   font-size: 24px;
-  font-weight: 400;
+  font-weight: 500;
   color: var(--color-text);
   letter-spacing: -0.01em;
   font-family: 'Sen', sans-serif;
@@ -93,7 +93,7 @@
   padding: 0px ;
   border-bottom: 0px solid var(--color-border);
  background: var(--color-white);
-  padding: var(--spacing-lg) var(--spacing-ml) !important;
+  padding: 12px 31px!important;
   font-family: 'Sen', sans-serif;
   }
 
@@ -111,8 +111,7 @@
   }
 
   .food-section__title-wrapper{
-    margin-left: 35px !important;
-  margin-top: 24px !important;
+   
   }
 
   .food-section__title {
