@@ -180,7 +180,7 @@
 /* Responsive */
 @media (max-width: 480px) {
   .food-details-card {
-    padding: 20px;
+    padding: 10px;
     margin: 0 auto;
     max-width: 380px;
     

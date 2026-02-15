@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
@@ -31,9 +31,12 @@ const Search: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchResults, setSearchResults] = useState<Restaurant[]>([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [userAddress, setUserAddress] = useState<string>(
-  state?.selectedLocation ?? 'Location'
-);
+ const [selectedLocation, setSelectedLocation] = useState(() => {
+  return localStorage.getItem("selectedLocation") || "";
+});
+useEffect(() => {
+  localStorage.setItem("selectedLocation", selectedLocation);
+}, [selectedLocation]);
 
   const navigate = useNavigate();
   const [showLocationModal, setShowLocationModal] = useState(false);
@@ -222,9 +225,9 @@ const Search: React.FC = () => {
         variant="search"
         cartCount={1}
         onBackClick={() => navigate(-1)}
-        locationValue={userAddress}
+        locationValue={selectedLocation}
         locations={locations}
-        onLocationSelect={(loc) => setUserAddress(loc)}
+        onLocationSelect={(loc) => setSelectedLocation(loc)}
         onSearchClick={() => navigate('/search')}
         onCartClick={() => navigate('/cart')}
       />

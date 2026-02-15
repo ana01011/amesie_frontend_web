@@ -35,7 +35,7 @@
 .food-section__title {
   margin: 0;
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 400;
   color: var(--color-text);
   letter-spacing: -0.01em;
   font-family: 'Sen', sans-serif;
@@ -87,13 +87,13 @@
   }
 } */
 
-@media (max-width: 590px) {
+@media (min-width:390px) and (max-width: 590px) {
   .food-section {
     background: var(--color-white);
   padding: 0px ;
   border-bottom: 0px solid var(--color-border);
  background: var(--color-white);
-  padding: 12px 31px!important;
+  padding: 12px 15px!important;
   font-family: 'Sen', sans-serif;
   }
 
@@ -105,13 +105,9 @@
 
   .food-section__grid {
     grid-template-columns: repeat(2, 164px);
-    gap: 28px 15px !important;
+    gap: 28px 28px !important;
     margin: 0;
     padding-top: 10px;
-  }
-
-  .food-section__title-wrapper{
-   
   }
 
   .food-section__title {
@@ -121,14 +117,17 @@
   }
 }
 
-/* @media (max-width: 1299px) {
-  .food-section__title {
-    font-size: 20px;
-    padding-left: 31px;
-   
+
+
+@media (max-width: 389px) {
+  .food-section__grid {
+    grid-template-columns: repeat(2, 164px);
+    gap: 28px 15px !important;
+    margin: 0;
+    padding-top: 10px;
   }
 
-} */
+}
 
 @media (min-width: 590px) and (max-width: 799px) {
  .food-section__grid {
@@ -141,7 +140,7 @@
   margin-left: 31px;
 
 }
-  /* your CSS here */
+
 }
 
 @media (min-width: 800px) and (max-width: 1299px) {
@@ -155,7 +154,7 @@
   margin-left: 31px;
 
 }
-  /* your CSS here */
+
 }
 @media (min-width: 800px) {
   .food-section__grid {
@@ -183,26 +182,3 @@
 }
 }
 
-/* Dark Mode */
-/* @media (prefers-color-scheme: dark) {
-  .food-section {
-    background: #0a0a0a;
-  }
-
-  .food-section__title {
-    color: #f5f5f5;
-  }
-
-  .food-section__loading,
-  .food-section__empty {
-    color: #999999;
-  }
-}
-
-[data-color-scheme="dark"] .food-section {
-  background: #0a0a0a;
-}
-
-[data-color-scheme="dark"] .food-section__title {
-  color: #f5f5f5;
-} */

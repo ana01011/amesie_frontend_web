@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 import CategoriesCarousel from '../components/CategoriesCarousel';
@@ -20,7 +20,11 @@ type FooterTab = 'shop' | 'food' | 'instamart' | 'cart';
 const Home: React.FC = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [userAddress, setUserAddress] = useState<string>('Location');
+ const [selectedLocation, setSelectedLocation] = useState(() => {
+  return localStorage.getItem("selectedLocation") || "Location";
+});
+
+
   const [activeFooterTab, setActiveFooterTab] = useState<FooterTab>('food');
   const navigate = useNavigate();
   // Data
@@ -32,6 +36,9 @@ const Home: React.FC = () => {
   // ];
 
 const hasNavigatedRef = React.useRef(false);
+useEffect(() => {
+  localStorage.setItem("selectedLocation", selectedLocation);
+}, [selectedLocation]);
 
 
 
@@ -74,7 +81,7 @@ const hasNavigatedRef = React.useRef(false);
     hasNavigatedRef.current = true;
 
     navigate('/search', {
-  state: { query, selectedLocation: userAddress },
+  state: { query, selectedLocation: selectedLocation },
 });
 
   }
@@ -122,9 +129,9 @@ const hasNavigatedRef = React.useRef(false);
       <Header
         variant="home"
         cartCount={3}
-        locationValue={userAddress}
+        locationValue={selectedLocation}
         locations={locations}
-        onLocationSelect={(loc) => setUserAddress(loc)}
+        onLocationSelect={(loc) => setSelectedLocation(loc)}
         onMenuClick={() => navigate("/menu")}
         onSearchClick={() => console.log('Search')}
         onCartClick={() => console.log('Cart')}

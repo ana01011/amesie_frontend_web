@@ -11,7 +11,7 @@
 .restaurants-section__container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 31px;
+  padding: 15px;
 }
 
 .restaurants-section__header {
@@ -28,12 +28,31 @@
   margin: 0;
   font-family: 'Sen', sans-serif;
 }
-
-.restaurants-section__grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(369px, 1fr));
-  gap: var(--spacing-lg);
+.restaurants-section__see-all-btn {
+  background: none;
+  border: none;
+  color: #32343E;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Sen', sans-serif;
 }
+
+
+.restaurants-section__carousel {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
+}
+
+
+/* Hide scrollbar */
+.restaurants-section__carousel::-webkit-scrollbar {
+  display: none;
+}
+
 
 /* ============================================
    RESPONSIVE
@@ -41,7 +60,7 @@
 
 @media (max-width: 480px) {
   .restaurants-section {
-    padding-bottom: 100px;
+    padding-bottom: 5px;
   }
 
   .restaurants-section__header h2 {
@@ -49,7 +68,7 @@
     font-family: 'Sen', sans-serif;
   }
 
-  .restaurants-section__grid {
+  /* .restaurants-section__grid {
     grid-template-columns: 1fr;
-  }
+  } */
 }

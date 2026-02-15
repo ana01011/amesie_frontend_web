@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./styles/MenuScreen.css";
 import {
     IoPersonOutline,
@@ -23,11 +23,12 @@ interface MenuItem {
     label: string;
     color: string;
     path?: string;
+    action?: () => void; //  allows logout action
 }
 
 const personalItems: MenuItem[] = [
-    { icon: <IoPersonOutline />, label: "Personal Info", color: "#3B82F6", path: "/personalinfo", },
-    { icon: <IoLocationOutline />, label: "Addresses", color: "#6366F1", path:"/address"},
+    { icon: <IoPersonOutline />, label: "Personal Info", color: "#3B82F6", path: "/personalinfo" },
+    { icon: <IoLocationOutline />, label: "Addresses", color: "#6366F1", path: "/address" },
 ];
 
 const accountItems: MenuItem[] = [
@@ -43,18 +44,46 @@ const supportItems: MenuItem[] = [
     { icon: <IoSettingsOutline />, label: "Settings", color: "#3B82F6" },
 ];
 
-const loggingItems: MenuItem[] = [
-    { icon: <IoLogIn />, label: "Log In", color: "#Fdc500", path: "/loginpage", },
-    { icon: <IoLogOut />, label: "Log Out", color: "#FB4A59" }
-]
-
 const MenuScreen: React.FC = () => {
+    const navigate = useNavigate();
+
+    //  Auth check (ONLY here)
+    const token = localStorage.getItem("token");
+    const isLoggedIn = !token;
+
+    const handleLogout = () => {
+        localStorage.removeItem("token");
+        navigate("/loginpage");
+    };
+
+    //  Dynamic login/logout item
+    const loggingItems: MenuItem[] = isLoggedIn
+        ? [
+              {
+                  icon: <IoLogOut />,
+                  label: "Log Out",
+                  color: "#FB4A59",
+                  action: handleLogout
+              }
+          ]
+        : [
+              {
+                  icon: <IoLogIn />,
+                  label: "Log In",
+                  color: "#Fdc500",
+                  path: "/loginpage"
+              }
+          ];
+
     const renderMenuItem = (item: MenuItem, index: number) => (
         <div
             className="menu-item"
             key={index}
-            onClick={() => item.path && navigate(item.path)}
-            style={{ cursor: item.path ? "pointer" : "default" }}
+            onClick={() => {
+                if (item.action) item.action();
+                else if (item.path) navigate(item.path);
+            }}
+            style={{ cursor: item.path || item.action ? "pointer" : "default" }}
         >
             <div className="menu-left">
                 <div className="icon-container" style={{ color: item.color }}>
@@ -65,9 +94,8 @@ const MenuScreen: React.FC = () => {
             <IoChevronForward className="chevron" />
         </div>
     );
-    const navigate = useNavigate();
-    const handlebackbutton = () => {
-        // Otherwise, navigate to previous page
+
+    const handleBackButton = () => {
         navigate(-1);
     };
 
@@ -76,13 +104,17 @@ const MenuScreen: React.FC = () => {
             <div>
                 {/* Header */}
                 <div className="menu-header">
-                    <button className="header-btn" onClick={handlebackbutton} aria-label="backbutton" title="back">
+                    <button
+                        className="header-btn"
+                        onClick={handleBackButton}
+                        aria-label="backbutton"
+                    >
                         <IoChevronBack />
                     </button>
 
                     <h2>Profile</h2>
 
-                    <button className="header-btn" aria-label="headerbtn" title="option">
+                    <button className="header-btn">
                         <IoEllipsisVertical />
                     </button>
                 </div>
@@ -102,7 +134,6 @@ const MenuScreen: React.FC = () => {
                         </div>
                     </div>
 
-                    {/* Menu Sections */}
                     <div className="menu-section">
                         {personalItems.map(renderMenuItem)}
                     </div>

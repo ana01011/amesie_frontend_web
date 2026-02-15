@@ -44,6 +44,8 @@ body {
   height: 100%;
   background: var(--color-white);
 }
-.home .restaurants-section {
-  padding-bottom: 110px;  /* ← Only affects Home page */
+@media (max-width:390px) {
+  .home .restaurants-section {
+  padding-bottom: 80px;  
+}
 }
