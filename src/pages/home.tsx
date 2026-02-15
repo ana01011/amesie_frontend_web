@@ -10,6 +10,11 @@ import { Category } from '../types';
 import { categories } from '../data/category';
 import { locations } from '../data/location';
 import './styles/home.css';
+import MockCarousel from '../components/MockCarousel';
+import MockCarousel2 from '../components/MockCarousel2';
+import MockCarousel3 from '../components/MockCarousel3';
+import MockCarousel4 from '../components/MockCarousel4';
+import MockCarousel5 from '../components/MockCarousel5';
 
 
 
@@ -137,8 +142,9 @@ useEffect(() => {
         onCartClick={() => console.log('Cart')}
       />
 
+     
 
-
+<div className ="scrollable">
       {/* Hero Component */}
       <Hero
         greeting="Good Afternoon!"
@@ -154,12 +160,36 @@ useEffect(() => {
         selectedCategory={selectedCategory}
         onCategorySelect={handleCategorySelect}
       />
-
+ 
       {/* Restaurants Section Component */}
       <RestaurantsSection
         title="Open Restaurants"
         restaurants={getOpenRestaurants()}
       />
+      <MockCarousel
+        title="Mock Carousel 1"
+        restaurants={getOpenRestaurants()}
+      />
+      <MockCarousel2
+        title="Mock Carousel 2"
+        restaurants={getOpenRestaurants()}
+      />
+      <MockCarousel3
+        title="Mock Carousel 3"
+        restaurants={getOpenRestaurants()}
+      />
+      <MockCarousel4
+        title="Mock Carousel 4"
+        restaurants={getOpenRestaurants()}
+      />
+       <MockCarousel5
+        title="Mock Carousel 5"
+        restaurants={getOpenRestaurants()}
+      />
+    </div>
+
+
+
 
       {/* Footer Navigation Component */}
       <FooterNav

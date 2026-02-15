@@ -38,14 +38,19 @@ body {
   color: var(--color-text-dark);
   line-height: 1.6;
 }
+html, body, #root {
+  height: 100%;
+}
 
 .home {
-  width: 100%;
-  height: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   background: var(--color-white);
 }
-@media (max-width:390px) {
-  .home .restaurants-section {
-  padding-bottom: 80px;  
+  .scrollable {
+   flex: 1;
+  overflow-y: auto;
+  padding-bottom: 80px;
 }
-}
+
