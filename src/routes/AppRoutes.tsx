@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import PageLoader from "../components/PageLoader";
 import ProtectedRoute from "./ProtectedRoute";
+import VerifyOtpPage from "../pages/VerifyOtpPage";
 // Lazy imports
 const Home = lazy(() => import("../pages/home"));
 const Search = lazy(() => import("../pages/Search"));
@@ -32,6 +33,7 @@ function AppRoutes() {
         <Route path="/loginpage" element={<LoginPage />} />
         <Route path="/signuppage" element={<SignUpPage />} />
         <Route path="/forgotpassword" element={<ForgotPasswordPage />} />
+        <Route path="/verify-otp" element={<VerifyOtpPage />} />
 
         <Route
   path="/menu"

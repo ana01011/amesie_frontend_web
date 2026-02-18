@@ -1,6 +1,7 @@
 import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/SignUpPage.css"
+import { registerUser } from "../api/auth";
 
 const SignUpPage: React.FC = () => {
     const [name, setName] = useState("")
@@ -14,20 +15,28 @@ const SignUpPage: React.FC = () => {
         // Otherwise, navigate to previous page
         navigate(-1);
     };
-    const handleSignup = () => {
-        if (password !== confirmPassword) {
-            alert("Passwords do not match");
-            return;
-        }
+    
+    const handleRegister = async () => {
+  try {
+    const response = await registerUser({
+      email,
+      password,
+      full_name: name,
+    //   phone_number: phone_number,
+    });
 
-        console.log("Signing up with:", {
-            name,
-            email,
-            password,
-        });
+    alert(response.detail);
+    console.log(response.detail)
 
-        // TODO: API call here
-    };
+    // Navigate to OTP page
+    localStorage.setItem("otpEmail", email);
+    navigate("/verify-otp", { state: { email } });
+
+  } catch (error: any) {
+    console.log(error);
+    alert(error.response?.data?.detail || "Registration failed");
+  }
+};
 
 
     return (
@@ -57,7 +66,7 @@ const SignUpPage: React.FC = () => {
                     className="signup-overlay"
                     onSubmit={(e) => {
                         e.preventDefault();
-                        handleSignup();
+                        handleRegister();
                     }}
                 >
                     <div className="form-scroll">

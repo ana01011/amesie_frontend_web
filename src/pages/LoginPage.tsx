@@ -1,22 +1,57 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import './styles/LoginPage.css';
+import { useAuth } from '../context/AuthContext';
 
 const LoginPage: React.FC = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const { login } = useAuth();
     const navigate = useNavigate();
 
-    const handleLogin = () => {
-        setLoading(true);
-        setTimeout(() => setLoading(false), 1000);
-        console.log("Logging in with:", {
-            email,
-            password,
-        });
-    };
+    const handleLogin = async () => {
+  try {
+    const response = await fetch(
+      "http://76.13.17.48:8001/api/auth/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      }
+    );
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      alert(data?.detail || "Login failed");
+      return;
+    }
+
+    console.log("Login response:", data);
+
+    // Store token
+    // localStorage.setItem("accessToken", data.access_token);
+    // localStorage.setItem("tokenType", data.token_type);
+
+    // Optional: store full response
+    // localStorage.setItem("authData", JSON.stringify(data));
+
+    // Redirect
+    login(data.access_token);
+    navigate("/");
+
+  } catch (error) {
+    console.error("Login error:", error);
+    alert("Something went wrong");
+  }
+};
+
 
 
 

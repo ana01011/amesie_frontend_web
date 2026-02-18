@@ -201,7 +201,7 @@ useEffect(() => {
       );
 
     if (matches) {
-      console.log('✅ MATCH:', food.name);
+      console.log('MATCH:', food.name);
     }
     return matches;
   });

@@ -17,6 +17,7 @@ import {
     IoLogOut,
     IoLogIn
 } from "react-icons/io5";
+import { useAuth } from "../context/AuthContext";
 
 interface MenuItem {
     icon: React.ReactNode;
@@ -48,16 +49,16 @@ const MenuScreen: React.FC = () => {
     const navigate = useNavigate();
 
     //  Auth check (ONLY here)
-    const token = localStorage.getItem("token");
-    const isLoggedIn = !token;
+    const { isAuthenticated, logout } = useAuth();
+    
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
-        navigate("/loginpage");
-    };
+  logout();
+  navigate("/loginpage");
+};
 
     //  Dynamic login/logout item
-    const loggingItems: MenuItem[] = isLoggedIn
+    const loggingItems: MenuItem[] = isAuthenticated
         ? [
               {
                   icon: <IoLogOut />,
@@ -114,7 +115,7 @@ const MenuScreen: React.FC = () => {
 
                     <h2>Profile</h2>
 
-                    <button className="header-btn">
+                    <button aria-label="header button" className="header-btn">
                         <IoEllipsisVertical />
                     </button>
                 </div>
