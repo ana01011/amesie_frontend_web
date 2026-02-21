@@ -5,6 +5,9 @@ import { useRef } from "react";
 import "./styles/LoginPage.css"
 
 const ForgotPasswordPage: React.FC = () => {
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
     const [email, setEmail] = useState('');
     const [forgotPasswordActive, setForgotPasswordActive] = useState(true);
     const [verificationActive, setVerificationActive] = useState(false)

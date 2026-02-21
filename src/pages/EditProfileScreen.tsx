@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/MenuScreen.css";
 import "./styles/EditProfileScreen.css";
@@ -6,6 +6,9 @@ import { IoChevronBack, IoPencil } from "react-icons/io5";
 
 const EditProfileScreen: React.FC = () => {
     const navigate = useNavigate();
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
 
     const initialProfile = {
         fullName: "Full Name",

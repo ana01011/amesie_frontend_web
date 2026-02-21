@@ -11,7 +11,9 @@ const VerifyOtpPage: React.FC = () => {
   const [canResend, setCanResend] = useState(false);
 
   const inputRefs = useRef<Array<HTMLInputElement | null>>([]);
-
+useEffect(() => {
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}, []);
   // Focus first empty box
   useEffect(() => {
     const firstEmptyIndex = code.findIndex((d) => d === "");

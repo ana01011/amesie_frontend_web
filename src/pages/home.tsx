@@ -25,6 +25,9 @@ import FoodSection from '../components/FoodSection';
 type FooterTab = 'shop' | 'food' | 'instamart' | 'cart';
 
 const Home: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedLocation, setSelectedLocation] = useState(() => {

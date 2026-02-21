@@ -11,6 +11,9 @@ import { Restaurant } from '../types';
 import { Category } from '../types';
 import { categories } from '../data/category';
 const FoodPage: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
   const [searchQuery, setSearchQuery] = useState('');
   const [userAddress] = useState('123 Oak Street');
 

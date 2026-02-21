@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import RestaurantDetailsCard from '../components/RestaurantDetailsCard';
 import Header from '../components/Header';
@@ -17,7 +17,9 @@ const RestaurantDetailsPage: React.FC = () => {
   const Item = location.state?.Item as Restaurant | undefined;
 
   //   const [quantity, setQuantity] = useState(1);
-
+useEffect(() => {
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}, []);
   const handleBack = () => navigate(-1);
   const [selectedCategory, setSelectedCategory] = useState<string>('burger');
   //   const handleFavorite = () => console.log('Favorited:', Item?.name);

@@ -1,5 +1,5 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, {useEffect} from "react";
+import { Link, useNavigate,  } from "react-router-dom";
 import "./styles/MenuScreen.css";
 import {
     IoPersonOutline,
@@ -39,6 +39,9 @@ const personalItems: MenuItem[] = [
 ];
 
 const PersonalInfoScreen: React.FC = () => {
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
     const renderMenuItem = (item: MenuItem, index: number) => (
         <div className="menu-item" key={index}>
             <div className="menu-left">

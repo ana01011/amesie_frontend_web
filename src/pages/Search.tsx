@@ -27,6 +27,9 @@ const Search: React.FC = () => {
   query?: string;
   selectedLocation?: string;
 };
+useEffect(() => {
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}, []);
   const [searchQuery, setSearchQuery] = useState(state?.query ?? '');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchResults, setSearchResults] = useState<Restaurant[]>([]);

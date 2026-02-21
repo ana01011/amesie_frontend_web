@@ -1,5 +1,9 @@
+html, body {
+  height: 100%;
+}
 .page-center {
   min-height: 100vh;
+  min-height: 100dh;
   width: 100%;
 }
 
@@ -9,6 +13,7 @@
 .login-root {
   position: relative;
   min-height: 100vh;
+  min-height: 100dvh;
   width: 100%;
   font-family: 'Sen', sans-serif;
   overflow-x: hidden;
@@ -20,8 +25,9 @@
 .bg-image {
   position: fixed;
   inset: 0;
-  width: 100%;
-  height: 100%;
+   width: 100vw;
+  height: 100vh;
+  height: 100dvh;
   object-fit:cover;
   z-index: -1;
 }
@@ -32,10 +38,10 @@
 .login-header {
   position: relative;
   padding-top: env(safe-area-inset-top);
-  margin-top: 64px;
+  margin-top: 20px;
   text-align: center;
   color: white;
-  padding-inline: 16px;
+  padding-inline: 15px;
 }
 
 .login-header h1 {
@@ -45,7 +51,7 @@
 
 .login-header p {
   font-size: clamp(14px, 4vw, 16px);
-  margin-top: 8px;
+  margin-top: 5px;
   opacity: 0.9;
 }
 
@@ -83,8 +89,8 @@
 .login-overlay {
   position: absolute;
   bottom: 0;
-  width: 100%;
-  min-height: 65%;
+   width: 100%;
+  min-height: 65dvh;
   background: white;
   border-top-left-radius: 24px;
   border-top-right-radius: 24px;
@@ -95,6 +101,11 @@
 /* =====================
    FORM
 ===================== */
+.form-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
 .form-container {
   width: 100%;
 }
@@ -263,7 +274,7 @@
   .login-header {
     position: relative;
   padding-top: env(safe-area-inset-top);
-  margin-top: 84px;
+  margin-top: 20px;
   text-align: center;
   color: black;
   padding-inline: 16px;
@@ -286,7 +297,7 @@
     min-height: auto;
     width: 100%;
     max-width: 640px;
-    margin: 32px auto;
+    margin: 30px auto;
     border-radius: 16px;
     padding: 32px;
     box-shadow: 0 20px 50px rgba(243, 245, 112, 0.15);

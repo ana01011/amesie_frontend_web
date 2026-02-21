@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import './styles/LoginPage.css';
 import { useAuth } from '../context/AuthContext';
 
 const LoginPage: React.FC = () => {
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
@@ -79,6 +82,7 @@ const LoginPage: React.FC = () => {
 
                 {/* White overlay */}
                 <div className="login-overlay">
+                   <div className="form-scroll">
                     <div className="form-container">
 
                         {/* Email input always visible */}
@@ -98,7 +102,7 @@ const LoginPage: React.FC = () => {
                         <form onSubmit={(e) => {
                         e.preventDefault();
                         handleLogin();
-                    }}>
+                     }}>
                             <div className="input-group">
                                 <label>Password</label>
                                 <input
@@ -146,6 +150,7 @@ const LoginPage: React.FC = () => {
                             </div>
                             </form>
                         </>
+                    </div>
                     </div>
                 </div>
 

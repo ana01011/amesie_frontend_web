@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/MenuScreen.css";
 import {
@@ -33,6 +33,9 @@ const colorMap = {
 
 const AddressScreen: React.FC = () => {
     const navigate = useNavigate();
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
 
     const [addresses, setAddresses] = useState<AddressItem[]>([
         {

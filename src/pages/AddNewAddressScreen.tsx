@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useCallback, useEffect} from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import {
@@ -28,6 +28,9 @@ const defaultCenter = {
 };
 
 const AddNewAddressScreen: React.FC = () => {
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
     const navigate = useNavigate();
     const location = useLocation();
     const editingAddress = location.state?.address;

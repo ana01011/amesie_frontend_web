@@ -4,7 +4,7 @@ interface RegisterPayload {
   email: string;
   password: string;
   full_name: string;
-  phone_number: string;
+  phone_number?: string;
 }
 
 export const registerUser = async (data: RegisterPayload) => {

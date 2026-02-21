@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/MenuScreen.css";
 import {
@@ -46,6 +46,10 @@ const supportItems: MenuItem[] = [
 ];
 
 const MenuScreen: React.FC = () => {
+
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
     const navigate = useNavigate();
 
     //  Auth check (ONLY here)

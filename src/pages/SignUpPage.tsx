@@ -1,9 +1,12 @@
-import React, { useState } from "react"
+import React, { useState, useEffect} from "react"
 import { Link, useNavigate } from "react-router-dom";
 import "./styles/SignUpPage.css"
 import { registerUser } from "../api/auth";
 
 const SignUpPage: React.FC = () => {
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: 'instant' });
+    }, []);
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
