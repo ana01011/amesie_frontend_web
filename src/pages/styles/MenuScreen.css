@@ -135,7 +135,16 @@
 
 /* button full width */
 .footer-bar .save-btn {
-  width: 100%;
+   width: 100%;
+  padding: 12px;
+  background-color: #fdc500;
+  border-radius: 8px;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  
 }
 
 

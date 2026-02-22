@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useEffect} from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import {
@@ -7,6 +7,7 @@ import {
 } from "react-icons/io5";
 import "./styles/MenuScreen.css";
 import "./styles/AddAddressScreen.css";
+import { getUserLocation } from "../services/locationService";
 
 /* ---------------- TYPES ---------------- */
 type LabelType = "HOME" | "WORK" | "OTHER";
@@ -29,7 +30,7 @@ const defaultCenter = {
 
 const AddNewAddressScreen: React.FC = () => {
     useEffect(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+        window.scrollTo({ top: 0, behavior: 'instant' });
     }, []);
     const navigate = useNavigate();
     const location = useLocation();
@@ -107,7 +108,12 @@ const AddNewAddressScreen: React.FC = () => {
     };
 
     /* ---------------- SAVE ---------------- */
-    const handleSave = () => {
+    const handleSave = async () => {
+        const location = await getUserLocation();
+
+        console.log("Latitude:", location.lat);
+        console.log("Longitude:", location.lon);
+        console.log("Source:", location.source);
         if (editingAddress) {
             console.log("UPDATED ADDRESS:", form);
         } else {
@@ -227,15 +233,15 @@ const AddNewAddressScreen: React.FC = () => {
                         </form>
                     </div>
 
-                     <div className="footer-bar">
-    <button
-      className="save-btn"
-      type="submit"
-      form="add-address-form"
-    >
-      SAVE LOCATION
-    </button>
-  </div>
+                    <div className="footer-bar">
+                        <button
+                            className="save-btn"
+                            type="submit"
+                            form="add-address-form"
+                        >
+                            SAVE LOCATION
+                        </button>
+                    </div>
 
 
                 </div>
