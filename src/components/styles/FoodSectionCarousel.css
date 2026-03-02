@@ -1,0 +1,33 @@
+.food-carousel {
+  padding: 16px;
+  background: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.food-carousel__title {
+  font-size: 22px;
+  margin-bottom: 16px;
+  font-family: 'Sen', sans-serif;
+}
+
+/*  Horizontal scroll container */
+.food-carousel__track {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+.food-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Each column has 2 cards stacked */
+.food-carousel__column {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  flex: 0 0 auto; /* Prevent shrinking */
+}

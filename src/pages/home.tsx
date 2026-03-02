@@ -17,6 +17,9 @@ import MockCarousel3 from '../components/MockCarousel3';
 import MockCarousel4 from '../components/MockCarousel4';
 import MockCarousel5 from '../components/MockCarousel5';
 import FoodSection from '../components/FoodSection';
+import SupCategoryCarousel from '../components/SupCategoryCarousel';
+import { supcategories } from '../data/supcategory';
+import FoodSectionCarousel from '../components/FoodSectionCarousel';
 
 
 
@@ -28,6 +31,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
+  const [selectedSupCategory, setSelectedSupCategory] = useState<string>('');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedLocation, setSelectedLocation] = useState(() => {
@@ -53,13 +57,20 @@ const getCategoryTitle = () => {
     return `Popular ${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}`;
   };
 
+  const getCategory = () => {
+    console.log(selectedSupCategory);
+    return categories
+      .filter(category => category.Supcategory === selectedSupCategory);
+  };
+
+
+
   const getPopularFoods = () => {
     if (selectedCategory === 'all') {
       return foodProducts.filter(food => food.tags?.includes('popular')).slice(0, 6);
     }
     return foodProducts
-      .filter(food => food.category === selectedCategory)
-      .slice(0, 6);
+      .filter(food => food.category === selectedCategory);
   };
 
   const handleFoodClick = (foodId: string) => {
@@ -117,6 +128,22 @@ const handleAddFood = (foodId: string) => {
 
   // Category select: set state (no navigation),
   // then scroll food section into view
+  const handleSupCategorySelect = (categoryId: string) => {
+    setSelectedSupCategory(categoryId);
+    console.log('Sup Category selected:', categoryId);
+
+    // if (categoryId === 'all') {
+    //   // optional: collapse/hide FoodSection if you want
+    //   // or just show popular items
+    //   return;
+    // }
+
+    // // scroll food section into view after state update
+    // // requestAnimationFrame helps after DOM updates
+    // requestAnimationFrame(() => {
+    //   foodSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    // });
+  };
   // ===========================================
   const handleCategorySelect = (categoryId: string) => {
     setSelectedCategory(categoryId);
@@ -178,16 +205,23 @@ const handleAddFood = (foodId: string) => {
         />
 
         {/* Categories Carousel Component */}
+
+        <SupCategoryCarousel
+          items={supcategories}
+          selectedId={selectedSupCategory}
+          onSelect={handleSupCategorySelect}
+        />
+
         <CategoriesCarousel
-          categories={categories}
+          categories={getCategory()}
           selectedCategory={selectedCategory}
           onCategorySelect={handleCategorySelect}
         />
 
                 {/* --- NEW: FoodSection inserted above Open Restaurants --- */}
         <div ref={foodSectionRef}>
-          <FoodSection
-            title={getCategoryTitle()}
+          <FoodSectionCarousel
+            title={''}
             foods={getPopularFoods()}
             onFoodClick={handleFoodClick}
             onAddFood={handleAddFood}

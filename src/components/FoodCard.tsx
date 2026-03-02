@@ -1,6 +1,6 @@
-import React from 'react';
-import './styles/FoodCard.css';
-import { FoodProduct } from '../types';
+import React from "react";
+import "./styles/FoodCard.css";
+import { FoodProduct } from "../types";
 
 interface FoodCardProps {
   foodproduct: FoodProduct;
@@ -20,36 +20,43 @@ const FoodCard: React.FC<FoodCardProps> = ({
 
   return (
     <div className="food-card" onClick={onClick}>
-      {/* Food Image - Rounded with dark background */}
+      
+      {/* Image */}
       <div className="food-card__image-wrapper">
-        <img 
-          src={foodproduct.image} 
-          alt={foodproduct.name} 
+        <img
+          src={foodproduct.image}
+          alt={foodproduct.name}
           className="food-card__image"
         />
       </div>
 
-      {/* Card Content */}
+      {/* Content */}
       <div className="food-card__content">
-        {/* Name */}
-        <h3 className="food-card__name">{foodproduct.name}</h3>
         
-        {/* Restaurant */}
-        <p className="food-card__restaurant">{foodproduct.restaurant}</p>
-        
-        {/* Footer: Price + Add Button */}
+        <div className="food-card__text">
+          <h3 className="food-card__name">{foodproduct.name}</h3>
+          <p className="food-card__description">
+            {foodproduct.restaurant}
+          </p>
+        </div>
+
         <div className="food-card__footer">
-          <span className="food-card__price">₹{foodproduct.price}</span>
-          {onAddClick && (
+          <span className="food-card__price">
+            Rs.{foodproduct.price}
+          </span>
+
+          <div className="food-card__actions">
+            
             <button
-              className="food-card__add-btn"
+              className="food-card__icon-btn food-card__icon-btn--filled"
               onClick={handleAddClick}
-              aria-label={`Add ${foodproduct.name} to cart`}
+              aria-label={`Add ${foodproduct.name}`}
             >
               +
             </button>
-          )}
+          </div>
         </div>
+
       </div>
     </div>
   );

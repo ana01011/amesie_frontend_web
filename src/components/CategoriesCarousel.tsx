@@ -28,21 +28,21 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
   const scrollRef = useRef<HTMLDivElement | null>(null);
 
   const handleSeeAllClick = () => {
-  if (!scrollRef.current) return;
+    if (!scrollRef.current) return;
 
-  scrollRef.current.scrollTo({
-    left: scrollRef.current.scrollWidth,
-    behavior: 'smooth',
-  });
-};
+    scrollRef.current.scrollTo({
+      left: scrollRef.current.scrollWidth,
+      behavior: 'smooth',
+    });
+  };
 
 
 
   if (variant === 'category') {
     return (
-      <section className="categories-carousel">
+      <section className="categories-carousel categories-carousel--icon">
         <div className="categories-carousel__container">
-          <div className="categories-carousel__header">
+          {/* <div className="categories-carousel__header">
             <h2>All Categories</h2>
             <button
               className="categories-carousel__see-all-btn"
@@ -51,7 +51,7 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
             >
               {showAllItems ? 'Show Less ←' : 'See All >'}
             </button>
-          </div>
+          </div> */}
 
           <div
             ref={scrollRef}
@@ -62,21 +62,25 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
             {categories.map((category) => (
               <button
                 key={category.id}
-                className={`categories-carousel__card ${selectedCategory === category.id
-                  ? 'categories-carousel__card--active'
-                  : ''
+                className={`categories-carousel__item ${selectedCategory === category.id
+                    ? "categories-carousel__item--active"
+                    : ""
                   }`}
                 onClick={() => handleItemClick(category.id)}
               >
-                <div className="categories-carousel__icon-wrapper">
+                <div className="categories-carousel__image-wrapper">
                   <img
                     src={category.icon}
                     alt={category.label}
-                    className="categories-carousel__icon"
+                    className="categories-carousel__image"
                   />
                 </div>
-                <h3>{category.label}</h3>
-                <p>{category.description}</p>
+
+                <span className="categories-carousel__label">
+                  {category.label}
+                </span>
+
+                <div className="categories-carousel__underline" />
               </button>
             ))}
           </div>

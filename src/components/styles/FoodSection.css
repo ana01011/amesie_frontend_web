@@ -104,8 +104,8 @@
 }
 
   .food-section__grid {
-    grid-template-columns: repeat(2, 164px);
-    gap: 28px 28px !important;
+    grid-template-columns: repeat(3, 128px);
+    gap: 28px 18px !important;
     margin: 0;
     padding-top: 10px;
   }

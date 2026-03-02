@@ -1,8 +1,15 @@
+export interface SupCategory {
+  id: string;
+  label: string;
+  icon: string;
+  description: string;
+}
 export interface Category {
   id: string;
   label: string;
   icon: string;
   description: string;
+  Supcategory: string;
 }
 
 export interface Keyword {
