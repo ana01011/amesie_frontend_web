@@ -31,7 +31,7 @@ const Home: React.FC = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
-  const [selectedSupCategory, setSelectedSupCategory] = useState<string>('');
+  const [selectedSupCategory, setSelectedSupCategory] = useState<string>('snacks');
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedLocation, setSelectedLocation] = useState(() => {
@@ -157,9 +157,9 @@ const handleAddFood = (foodId: string) => {
 
     // scroll food section into view after state update
     // requestAnimationFrame helps after DOM updates
-    requestAnimationFrame(() => {
-      foodSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    });
+    // requestAnimationFrame(() => {
+    //   foodSectionRef.current?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    // });
   };
   
   

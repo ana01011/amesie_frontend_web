@@ -37,7 +37,7 @@ const SupCategoryCarousel: React.FC<Props> = ({
           aria-label="button"
             key={item.id}
             className={`sup-carousel__item ${
-              selectedId === item.id ? "sup-carousel__item--active" : ""
+              selectedId === item.id ? "sup-carousel__item--active" : "snacks"
             }`}
             onClick={() => onSelect(item.id)}
           >

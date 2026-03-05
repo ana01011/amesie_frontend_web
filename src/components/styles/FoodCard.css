@@ -3,7 +3,7 @@
   border-radius: 20px;
   overflow: hidden;
   cursor: pointer;
-  border:1px solid #f4f4f4;
+  border:1px solid #f1eeee;
   transition: transform 0.25s ease;
   display: flex;
   flex-direction: column;
@@ -70,7 +70,7 @@
 .food-card__footer {
   display: flex;
   align-items: center;
-  gap:35px;
+  gap:45px;
 }
 
 .food-card__price {

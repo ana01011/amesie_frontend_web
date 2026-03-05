@@ -1,17 +1,11 @@
 import { Category } from "../types";
 export const categories: Category[] = [
-  {
-      id: 'all',
+    
+    {
+       id: 'all',
       label: 'All',
       icon: '/images/cutlery-plate-svgrepo-com.svg',
       description: 'Explore all',
-      Supcategory: 'snacks'
-    },
-    {
-      id: 'burger',
-      label: 'Burger',
-      icon: '/images/burger-svgrepo-com.svg',
-      description: 'Delicious burgers',
       Supcategory: 'snacks'
     },
     {
