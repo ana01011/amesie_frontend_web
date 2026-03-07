@@ -24,8 +24,8 @@ export interface HeaderProps {
   onMoreClick?: () => void;
 
   categories?: Category[];
-  selectedCategory?: string;
-  onCategorySelect?: (category: string) => void;
+  selectedCategory?: number;
+  onCategorySelect?: (category: number) => void;
   rightElement?: ReactNode;
 }
 
@@ -69,6 +69,7 @@ const Header: React.FC<HeaderProps> = ({
   const [openLocation, setOpenLocation] = useState(false);
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
+
   const formatLabel = (text: string) =>
     text.charAt(0).toUpperCase() + text.slice(1);
 
@@ -153,28 +154,28 @@ const Header: React.FC<HeaderProps> = ({
                     }}
                   >
                     <span className="title-pill-text">
-                      {selectedCategory || title}
-                    </span>
-                    <span className="cat-arrow">
-                      {showCategoryDropdown ? "▲" : "▼"}
+                      {formatLabel(categories.find(c => c.id === selectedCategory)?.name || title)}
                     </span>
                   </button>
 
 
                   {showCategoryDropdown && (
                     <div className="location-dropdown">
-                      {categories.slice(1).filter(cat => cat.id !== selectedCategory).map(cat => (
-                        <div
-                          key={cat.id}
-                          className="location-option"
-                          onClick={() => {
-                            onCategorySelect?.(cat.id);
-                            setShowCategoryDropdown(false);
-                          }}
-                        >
-                          {formatLabel(cat.id)}
-                        </div>
-                      ))}
+                      {categories
+                        .slice(1)
+                        .filter(cat => cat.id !== selectedCategory)
+                        .map(cat => (
+                          <div
+                            key={cat.id}
+                            className="location-option"
+                            onClick={() => {
+                              onCategorySelect?.(cat.id);
+                              setShowCategoryDropdown(false);
+                            }}
+                          >
+                            {formatLabel(cat.name)}
+                          </div>
+                        ))}
                     </div>
                   )}
                 </div>

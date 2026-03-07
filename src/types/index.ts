@@ -1,20 +1,25 @@
 export interface SupCategory {
-  id: string;
+  id: number;
   label: string;
   icon: string;
   description: string;
 }
 export interface Category {
-  id: string;
-  label: string;
-  icon: string;
-  description: string;
-  Supcategory: string;
+  id: number;
+  name: string;
+  parent_id: string;
+  is_active: boolean;
+  super_category: number;
+  image_url: string;
 }
 
 export interface Keyword {
-  id: string;
-  label: string;
+  id: number;
+  name: string;
+  parent_id: string;
+  is_active: boolean;
+  super_category: number;
+  image_url: string;
 }
 
 // src/types.ts (or inline in data file)
@@ -25,7 +30,7 @@ export interface FoodProduct {
   description?: string;
   price: number;  // ₹40 → 40
   image: string;
-  category: string;  // "burgers", "pizza", "coffee"
+  category: number;  // "burgers", "pizza", "coffee"
   tags: string[];  // "popular", "bestseller", "new"
   rating?: number;  // 4.7
   prepTime?: string;  // "20 min"

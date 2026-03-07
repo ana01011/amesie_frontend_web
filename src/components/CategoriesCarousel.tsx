@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import './styles/CategoriesCarousel.css';
 import { Category } from '../types';
+import { getCategories } from "../services/categoryService";
 import { Keyword } from '../types';
 
 
@@ -9,9 +10,10 @@ interface CategoriesCarouselProps {
   variant?: 'category' | 'keyword' | 'restro-category';
   categories?: Category[];
   keywords?: Keyword[];
-  selectedCategory?: string;
-  onCategorySelect?: (categoryId: string) => void;
+  selectedCategory?: number;
+  onCategorySelect?: (categoryId: number) => void;
 }
+
 
 const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
   variant = 'category',
@@ -22,7 +24,7 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
 }) => {
   const [showAllItems, setShowAllItems] = useState(false);
 
-  const handleItemClick = (itemId: string) => {
+  const handleItemClick = (itemId: number) => {
     onCategorySelect?.(itemId);
   };
   const scrollRef = useRef<HTMLDivElement | null>(null);
@@ -70,14 +72,14 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
               >
                 <div className="categories-carousel__image-wrapper">
                   <img
-                    src={category.icon}
-                    alt={category.label}
+                    src={category.image_url}
+                    alt={category.name}
                     className="categories-carousel__image"
                   />
                 </div>
 
                 <span className="categories-carousel__label">
-                  {category.label}
+                  {category.name}
                 </span>
 
                 <div className="categories-carousel__underline" />
@@ -122,7 +124,7 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
                   }`}
                 onClick={() => handleItemClick(keyword.id)}
               >
-                <span>{keyword.label}</span>
+                <span>{keyword.name}</span>
               </button>
             ))}
           </div>
@@ -162,7 +164,7 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
                   }`}
                 onClick={() => handleItemClick(keyword.id)}
               >
-                <span>{keyword.label}</span>
+                <span>{keyword.name}</span>
               </button>
             ))}
           </div>

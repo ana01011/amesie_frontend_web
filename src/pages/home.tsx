@@ -7,7 +7,7 @@ import FooterNav from '../components/FooterNav';
 import { useNavigate } from 'react-router-dom';
 import { restaurants } from '../data/restaurants';
 import { Category } from '../types';
-import { categories } from '../data/category';
+import { getCategories } from "../services/categoryService";
 import { locations } from '../data/location';
 import { foodProducts } from '../data/foodProduct';
 import './styles/home.css';
@@ -31,14 +31,27 @@ const Home: React.FC = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
-  const [selectedSupCategory, setSelectedSupCategory] = useState<string>('snacks');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedSupCategory, setSelectedSupCategory] = useState<number>(0);
+  const [selectedCategory, setSelectedCategory] = useState<number>(9);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedLocation, setSelectedLocation] = useState(() => {
     return localStorage.getItem("selectedLocation") || "Location";
   });
 
+const [categories, setCategories] = useState<Category[]>([]);
 
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error fetching categories", error);
+      }
+    };
+
+    loadCategories();
+  }, []);
   const [activeFooterTab, setActiveFooterTab] = useState<FooterTab>('food');
   const navigate = useNavigate();
 
@@ -53,20 +66,25 @@ const Home: React.FC = () => {
 
  // Functions copied/adapted from FoodPage
 const getCategoryTitle = () => {
-    if (!selectedCategory || selectedCategory === 'all') return 'Popular';
-    return `Popular ${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}`;
-  };
+  if (!selectedCategory) return "Popular";
 
+  const name = categories.find(c => c.id === selectedCategory)?.name;
+
+  return name
+    ? `Popular ${name[0].toUpperCase()}${name.slice(1)}`
+    : "Popular";
+};
   const getCategory = () => {
     console.log(selectedSupCategory);
-    return categories
-      .filter(category => category.Supcategory === selectedSupCategory);
+    console.log(categories);
+    return categories;
+      // .filter(category => category.super_category === selectedSupCategory);
   };
 
 
 
   const getPopularFoods = () => {
-    if (selectedCategory === 'all') {
+    if (selectedCategory === 0) {
       return foodProducts.filter(food => food.tags?.includes('popular')).slice(0, 6);
     }
     return foodProducts
@@ -128,7 +146,7 @@ const handleAddFood = (foodId: string) => {
 
   // Category select: set state (no navigation),
   // then scroll food section into view
-  const handleSupCategorySelect = (categoryId: string) => {
+  const handleSupCategorySelect = (categoryId: number) => {
     setSelectedSupCategory(categoryId);
     console.log('Sup Category selected:', categoryId);
 
@@ -145,11 +163,11 @@ const handleAddFood = (foodId: string) => {
     // });
   };
   // ===========================================
-  const handleCategorySelect = (categoryId: string) => {
+  const handleCategorySelect = (categoryId: number) => {
     setSelectedCategory(categoryId);
     console.log('Category selected:', categoryId);
 
-    if (categoryId === 'all') {
+    if (categoryId === 0) {
       // optional: collapse/hide FoodSection if you want
       // or just show popular items
       return;

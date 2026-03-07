@@ -4,8 +4,8 @@ import { SupCategory } from "../types";
 
 interface Props {
   items: SupCategory[];
-  selectedId: string;
-  onSelect: (id: string) => void;
+  selectedId: number;
+  onSelect: (id: number) => void;
 }
 
 const SupCategoryCarousel: React.FC<Props> = ({
