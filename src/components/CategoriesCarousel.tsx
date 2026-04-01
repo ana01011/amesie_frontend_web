@@ -19,7 +19,7 @@ const CategoriesCarousel: React.FC<CategoriesCarouselProps> = ({
   variant = 'category',
   categories = [],
   keywords = [],
-  selectedCategory = 'all',
+  selectedCategory = 0,
   onCategorySelect,
 }) => {
   const [showAllItems, setShowAllItems] = useState(false);

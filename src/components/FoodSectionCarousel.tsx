@@ -1,14 +1,14 @@
 import React from "react";
 import FoodCard from "./FoodCard";
-import { FoodProduct } from "../types";
-import { useNavigate } from "react-router-dom";
+import { UIFoodProduct } from "../types";
 import "./styles/FoodSectionCarousel.css";
+
 
 interface Props {
   title?: string;
-  foods: FoodProduct[];
-  onFoodClick?: (foodId: string) => void;
-  onAddFood?: (foodId: string) => void;
+  foods: UIFoodProduct[];
+  onFoodClick?: (foodId: number) => void;
+  onAddFood?: (foodId: number) => void;
 }
 
 const FoodSectionCarousel: React.FC<Props> = ({
@@ -17,19 +17,12 @@ const FoodSectionCarousel: React.FC<Props> = ({
   onFoodClick,
   onAddFood,
 }) => {
-  const navigate = useNavigate();
-
-  const handleFoodClick = (foodId: string) => {
-    const foodItem = foods.find((f) => f.id === foodId);
-    navigate("/food-details", { state: { foodItem } });
-    onFoodClick?.(foodId);
-  };
 
   //  Convert flat array into pairs (2 per column)
-  const groupedFoods: FoodProduct[][] = [];
-  for (let i = 0; i < foods.length; i += 2) {
-    groupedFoods.push(foods.slice(i, i + 2));
-  }
+const groupedFoods: UIFoodProduct[][] = Array.from(
+  { length: Math.ceil(foods.length / 2) },
+  (_, i) => foods.slice(i * 2, i * 2 + 2)
+);
 
   return (
     <div className="food-carousel">
@@ -42,7 +35,7 @@ const FoodSectionCarousel: React.FC<Props> = ({
               <FoodCard
                 key={food.id}
                 foodproduct={food}
-                onClick={() => handleFoodClick(food.id)}
+                onClick={() => onFoodClick?.(food.id)}
                 onAddClick={() => onAddFood?.(food.id)}
               />
             ))}

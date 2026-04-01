@@ -7,21 +7,31 @@ import { Restaurant } from '../types';
 import './styles/RestaurantDetailsPage.css';
 import CategoriesCarousel from '../components/CategoriesCarousel';
 import { keywords } from '../data/keywords';
-import { categories } from '../data/category';
-import { foodProducts } from '../data/foodProduct';
+// import { categories } from '../data/category';
+// import { foodProducts } from '../data/foodProduct';
+
+import { Category } from '../types';
+import { getCategories } from "../services/categoryService";
+
+import { getProducts } from '../services/productService';
+import { mapProductForUI } from '../utils/mapProduct';
+import { UIFoodProduct } from '../types';
+
 import FoodSection from '../components/FoodSection';
 
 const RestaurantDetailsPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const Item = location.state?.Item as Restaurant | undefined;
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<UIFoodProduct[]>([]);
 
   //   const [quantity, setQuantity] = useState(1);
 useEffect(() => {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }, []);
   const handleBack = () => navigate(-1);
-  const [selectedCategory, setSelectedCategory] = useState<string>('burger');
+  const [selectedCategory, setSelectedCategory] = useState<number>(0); // 0 = all
   //   const handleFavorite = () => console.log('Favorited:', Item?.name);
   //   const handleSizeSelect = (size: string) => console.log('Size:', size);
 
@@ -32,28 +42,46 @@ useEffect(() => {
   //     });
   //   };
 
-  const handleCategorySelect = (categoryId: string) => {
-    setSelectedCategory(categoryId);
-    console.log('Category selected:', categoryId);
-    // navigate('/foodpage', { 
-    //   state: { selectedCategory: categoryId }  
-    // });
+  const handleCategorySelect = (categoryId: number) => {
+  setSelectedCategory(categoryId);
+};
+
+const handleFoodClick = (foodId: number) => {
+  const food = products.find(f => f.id === foodId);
+  if (!food) return;
+
+  navigate('/food-details', { state: { foodItem: food } });
+};
+
+const handleAddFood = (foodId: number) => {
+  const food = products.find(f => f.id === foodId);
+  console.log('Added to cart:', food);
+};
+
+useEffect(() => {
+  const loadProducts = async () => {
+    try {
+      const data = await getProducts();
+      setProducts(data.map(mapProductForUI));
+    } catch (err) {
+      console.error("Error fetching products", err);
+    }
   };
 
-  
-  const handleFoodClick = (foodId: string) => {
-    console.log('Food clicked:', foodId);
-    const food = foodProducts.find(f => f.id === foodId);
-    console.log('Food details:', food);
-    // Navigate to food details or add to cart
-  };
+  loadProducts();
+}, []);
+useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error fetching categories", error);
+      }
+    };
 
-  const handleAddFood = (foodId: string) => {
-    console.log('Add to cart:', foodId);
-    const food = foodProducts.find(f => f.id === foodId);
-    console.log('Added to cart:', food);
-    // Add to cart logic
-  };
+    loadCategories();
+  }, []);
 
 
 
@@ -66,34 +94,33 @@ useEffect(() => {
     );
   }
 
-  const getPopularFoods = () => {
-    if (selectedCategory === 'all') {
-      return foodProducts.filter(food => food.tags.includes('popular')).slice(0, 6);
+  const getFoods = () => {
+  if (!Item) return [];
+
+  return products.filter((p) => {
+    const matchRestaurant = p.restaurant === Item.name;
+
+    if (selectedCategory === 0) {
+      return matchRestaurant;
     }
-    return foodProducts
-      .filter(food => food.category === selectedCategory && food.restaurant === Item.name)
-      .slice(0, );
-  };
+
+    return matchRestaurant && p.category_id === selectedCategory;
+  });
+};
+const foods = getFoods();
 
   const getCategoryCount = () => {
-    
-  if (selectedCategory === 'all') {
-    return foodProducts.filter(food => 
-      food.restaurant === Item.name
-    ).length; // ← NO slice()
-  }
-  return foodProducts.filter(food => 
-    food.category === selectedCategory && 
-    food.restaurant === Item.name
-  ).length; // ← NO slice()
+  return getFoods().length;
 };
 
 
-  const getCategoryTitle = () => {
-    const count = getCategoryCount();
-    return `${selectedCategory.charAt(0).toUpperCase() + selectedCategory.slice(1)}  (${count})`;
-  };
+ const getCategoryTitle = () => {
+  if (selectedCategory === 0) return "All";
 
+  const name = categories.find(c => c.id === selectedCategory)?.name;
+
+  return name ? `${name} (${getCategoryCount()})` : "Food";
+};
   return (
     <div className="food-details-page">
       <Header
@@ -123,7 +150,7 @@ useEffect(() => {
       {/* FOOD SECTION */}
       <FoodSection
         title={getCategoryTitle()}
-        foods={getPopularFoods()}
+        foods={foods}
         onFoodClick={handleFoodClick}
         onAddFood={handleAddFood}
       />

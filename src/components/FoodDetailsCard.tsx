@@ -1,16 +1,16 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 import './styles/FoodDetailsCard.css';
-import { FoodProduct } from '../types';
 import { useState } from 'react';  // ← ADD useState
 import {
     HeartIcon, ClockIcon, StarIcon, FreeDeliveryIcon,
     SaltIcon, ChickenIcon, GarlicIcon, VegIcon, ChilliIcon,
 } from '../icons';
-
+import { UIFoodProduct } from '../types';
+import { mapProductForUI } from '../utils/mapProduct';
 
 interface FoodDetailsCardProps {
-    foodItem?: FoodProduct;
+    foodItem?: UIFoodProduct;
     onFavorite?: () => void;
     onSizeSelect?: (size: string) => void;
 }
@@ -21,7 +21,9 @@ const FoodDetailsCard: React.FC<FoodDetailsCardProps> = ({
     onSizeSelect
 }) => {
     const location = useLocation();
-    const stateFoodItem = location.state?.foodItem as FoodProduct | undefined;
+    const stateFoodItem = location.state?.foodItem
+  ? mapProductForUI(location.state.foodItem)
+  : undefined;
     const food = foodItem || stateFoodItem;
 
     if (!food) {
@@ -42,6 +44,9 @@ const FoodDetailsCard: React.FC<FoodDetailsCardProps> = ({
         };
         return icons[ingredient] || SaltIcon; // Default fallback
     };
+    const imageUrl =
+        food.image || // from mapper
+        food.images?.[0]?.image_url;
 
 
 
@@ -53,7 +58,7 @@ const FoodDetailsCard: React.FC<FoodDetailsCardProps> = ({
             {/* Image + Favorite */}
             <div className="food-details-card__header">
                 <img
-                    src={food.image}
+                    src={imageUrl}
                     alt={food.name}
                     className="food-details-card__image"
                 />

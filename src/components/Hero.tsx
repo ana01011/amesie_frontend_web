@@ -51,9 +51,11 @@ const Hero: React.FC<HeroProps> = ({
             placeholder="Search dishes, restaurants"
             value={searchQuery}
             onChange={(e) => onSearchChange?.(e.target.value)}
-            
+
             onFocus={() => setIsActive(true)}
-            onBlur={() => setIsActive(false)}
+            onBlur={() => {
+              if (!searchQuery) setIsActive(false);
+            }}
           />
         </div>
       </div>

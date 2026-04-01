@@ -5,14 +5,15 @@ import Hero from '../components/Hero';
 import CategoriesCarousel from '../components/CategoriesCarousel';
 import SuggestedRestaurantSection from '../components/SuggestedRestaurantSection';
 import FoodSection from '../components/FoodSection';
-import { foodProducts } from '../data/foodProduct';
+import { getProducts } from '../services/productService';
+import { mapProductForUI } from '../utils/mapProduct';
+import { UIFoodProduct } from '../types';
 import { useNavigate } from 'react-router-dom';
 // everywhere
 import { Restaurant } from '../types';
 import { restaurants } from '../data/restaurants';
 import { Category } from '../types';
-import { categories } from '../data/category';
-import { Keyword } from '../types';
+import { getCategories } from "../services/categoryService";
 import { keywords } from '../data/keywords';
 import { locations } from '../data/location';
 import './styles/Search.css';
@@ -24,22 +25,67 @@ import './styles/Search.css';
 const Search: React.FC = () => {
   const location = useLocation();
   const state = location.state as {
-  query?: string;
-  selectedLocation?: string;
-};
-useEffect(() => {
-  window.scrollTo({ top: 0, behavior: 'instant' });
-}, []);
+    query?: string;
+    selectedLocation?: string;
+  };
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, []);
+  useEffect(() => {
+    if (state?.query) {
+      handleSearch(state.query);
+    }
+  }, []);
+  const [products, setProducts] = useState<UIFoodProduct[]>([]);
   const [searchQuery, setSearchQuery] = useState(state?.query ?? '');
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [searchActive, setSearchActive] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState<number>(9);
   const [searchResults, setSearchResults] = useState<Restaurant[]>([]);
   const [isLoading, setIsLoading] = useState(false);
- const [selectedLocation, setSelectedLocation] = useState(() => {
-  return localStorage.getItem("selectedLocation") || "";
-});
-useEffect(() => {
-  localStorage.setItem("selectedLocation", selectedLocation);
-}, [selectedLocation]);
+  const isSearching = searchQuery.trim().length > 0;
+  const [selectedLocation, setSelectedLocation] = useState(() => {
+    return localStorage.getItem("selectedLocation") || "";
+  });
+  useEffect(() => {
+  const loadProducts = async () => {
+    try {
+      const data = await getProducts();
+      setProducts(data.map(mapProductForUI));
+    } catch (err) {
+      console.error("Error fetching products", err);
+    }
+  };
+
+  loadProducts();
+}, []);
+  useEffect(() => {
+    localStorage.setItem("selectedLocation", selectedLocation);
+  }, [selectedLocation]);
+
+  const getCategory = () => {
+    if (!searchQuery.trim()) return categories;
+    const filteredKeywords = categories.filter(category =>
+      category.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    console.log(filteredKeywords);
+    return filteredKeywords;
+    // .filter(category => category.super_category === selectedSupCategory);
+  };
+
+  const [categories, setCategories] = useState<Category[]>([]);
+
+  useEffect(() => {
+    const loadCategories = async () => {
+      try {
+        const data = await getCategories();
+        setCategories(data);
+      } catch (error) {
+        console.error("Error fetching categories", error);
+      }
+    };
+
+    loadCategories();
+  }, []);
 
   const navigate = useNavigate();
   const [showLocationModal, setShowLocationModal] = useState(false);
@@ -68,6 +114,7 @@ useEffect(() => {
   };
 
   const handleHeaderSearchChange = (query: string) => {
+    setSearchQuery(query);
     handleSearch(query);
   };
 
@@ -81,27 +128,25 @@ useEffect(() => {
 
   // In Search.tsx - Add this function
 
-  const handleKeywordSelect = (keywordId: string) => {
+  const handleKeywordSelect = (keywordId: number) => {
     setSelectedCategory(keywordId);
-    console.log('Keyword selected:', keywordId);
 
-    // SMART LOGIC: Check if keyword exists in categories
     const matchingCategory = categories.find(c => c.id === keywordId);
 
     if (matchingCategory) {
-      // If keyword is ALSO a category, navigate to FoodPage with selectedCategory
-      console.log('Keyword matches a category, passing to FoodPage:', keywordId);
+      // If keyword is also a category → navigate
       navigate('/foodpage', {
         state: { selectedCategory: keywordId }
       });
     } else {
-      // If keyword is ONLY a keyword (not a category), just search but don't navigate
-      // Trigger search without navigation
-      handleSearch(keywordId);
-      console.log('Keyword-only, searching:', keywordId);
+      // If keyword only → search using category/keyword name
+      const keyword = keywords.find(k => k.id === keywordId);
+
+      if (keyword) {
+        handleSearch(keyword.name);  // pass name instead of id
+      }
     }
   };
-
 
 
   const handleSearch = (query: string) => {
@@ -142,10 +187,11 @@ useEffect(() => {
   // Category Callbacks
   // ============================================
 
-  const handleCategorySelect = (categoryId: string) => {
+  const handleCategorySelect = (categoryId: number) => {
     setSelectedCategory(categoryId);
-    if (categoryId !== 'all') {
-      handleSearch(categoryId);
+    const category = categories.find(c => c.id === categoryId);
+    if (category) {
+      handleSearch(category.name);
     } else {
       setSearchQuery('');
       setSearchResults([]);
@@ -162,55 +208,56 @@ useEffect(() => {
     // Navigate to restaurant details page
   };
 
-  const handleFoodClick = (foodId: string) => {
-    console.log('Food clicked:', foodId);
-    const food = foodProducts.find(f => f.id === foodId);
-    console.log('Food details:', food);
-    // Navigate to food details or add to cart
-  };
+ const handleFoodClick = (foodId: number) => {
+  const food = products.find(f => f.id === foodId);
+  if (!food) return;
 
-  const handleAddFood = (foodId: string) => {
-    console.log('Add to cart:', foodId);
-    const food = foodProducts.find(f => f.id === foodId);
-    console.log('Added to cart:', food);
-    // Add to cart logic
-  };
+  navigate('/food-details', { state: { foodItem: food } });
+};
+
+  const handleAddFood = (foodId: number) => {
+  const food = products.find(f => f.id === foodId);
+  console.log('Added to cart:', food);
+};
 
   // ============================================
   // Filter Popular Foods by Category
   // ============================================
 
-  const getPopularFoods = () => {
-    if (selectedCategory === 'all') {
-      return foodProducts.filter(food => food.tags.includes('popular')).slice(0, 6);
-    }
-    return foodProducts
-      .filter(food => food.category === selectedCategory && food.tags.includes('popular'))
-      .slice(0, 6);
-  };
+ const getPopularFoods = () => {
+  if (selectedCategory === 0) {
+    return products.slice(0, 6);
+  }
 
- const getSearchFoods = () => {
-  const lowerQuery = searchQuery.toLowerCase();
-    console.log('Searching for:', lowerQuery);
-  const results = foodProducts.filter(food => {
-    const matches =
-      food.category?.toLowerCase().includes(lowerQuery) ||
-      food.tags?.some(tag => tag.toLowerCase().includes(lowerQuery)) ||
-      food.name.toLowerCase().includes(lowerQuery) ||
-      food.restaurant?.toLowerCase().includes(lowerQuery) ||
-      // FIXED: NOW IN matches!
-      food.ingredients?.some(ingredient => 
-        ingredient.toLowerCase().includes(lowerQuery)
-      );
+  return products
+    .filter(p => p.category_id === selectedCategory)
+    .slice(0, 6);
+};
 
-    if (matches) {
-      console.log('MATCH:', food.name);
-    }
-    return matches;
-  });
+const getCategoryName = (id: number) =>
+  categories.find(c => c.id === id)?.name || "";
 
-  console.log('Total results:', results.length);
-  return results;
+  const getSearchFoods = () => {
+  if (!searchQuery.trim()) return [];
+
+  const q = searchQuery.toLowerCase();
+
+  // 1. name
+  let results = products.filter(p =>
+    p.name.toLowerCase().includes(q)
+  );
+  if (results.length) return results;
+
+  // 2. category
+  results = products.filter(p =>
+  getCategoryName(p.category_id).toLowerCase().includes(q)
+);
+  if (results.length) return results;
+
+  // 3. ingredients / tags
+  return products.filter(p =>
+    p.ingredients?.some(i => i.toLowerCase().includes(q))
+  );
 };
 
 
@@ -242,13 +289,13 @@ useEffect(() => {
         userName="Abc"
         searchQuery={searchQuery}
         onSearchChange={handleHeaderSearchChange}
-        active={true}
+        active={searchActive}
       />
 
       {/* Categories Carousel Component */}
       <CategoriesCarousel
         variant="keyword"
-        keywords={keywords}
+        keywords={getCategory()}
         selectedCategory={selectedCategory}
         onCategorySelect={handleKeywordSelect}  // ← NEW HANDLER
       />
@@ -260,13 +307,13 @@ useEffect(() => {
           title={'Suggested Restaurants'}
           restaurants={searchResults.length ? searchResults : suggestedRestaurants}
           isLoading={isLoading}
-          onRestaurantClick={(restaurant) => handleRestaurantClick(restaurant.id)}
+          onRestaurantClick={(restaurant) => handleRestaurantClick(restaurant)}
         />
 
         {/* RIGHT COLUMN - Food Section */}
         <FoodSection
-          title="Popular Fast Food"
-          foods={getSearchFoods()}
+          title={isSearching ? "Search Results" : "Popular Fast Food"}
+          foods={isSearching ? getSearchFoods() : getPopularFoods()}
           onFoodClick={handleFoodClick}
           onAddFood={handleAddFood}
         />

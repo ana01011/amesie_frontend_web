@@ -2,7 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import RestaurantsSection from '../components/RestaurantsSection';
 import './styles/FoodPage.css';
-import { foodProducts } from '../data/foodProduct';
+import { getProducts } from '../services/productService';
+
+import { mapProductForUI } from "../utils/mapProduct";
+import { UIFoodProduct } from "../types";
 import { useNavigate } from 'react-router-dom';
 import { restaurants } from '../data/restaurants';
 import FoodSection from '../components/FoodSection';
@@ -15,6 +18,7 @@ const FoodPage: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
   const [categories, setCategories] = useState<Category[]>([]);
+  const [products, setProducts] = useState<UIFoodProduct[]>([]);
   useEffect(() => {
       const loadCategories = async () => {
         try {
@@ -26,6 +30,21 @@ const FoodPage: React.FC = () => {
       };
   
       loadCategories();
+    }, []);
+    useEffect(() => {
+      const loadProducts = async () => {
+        try {
+          const data = await getProducts();
+    
+          const mapped = data.map(mapProductForUI);
+    
+          setProducts(mapped);
+        } catch (err) {
+          console.error("Error fetching products", err);
+        }
+      };
+    
+      loadProducts();
     }, []);
   const [searchQuery, setSearchQuery] = useState('');
   const [userAddress] = useState('123 Oak Street');
@@ -64,6 +83,7 @@ const FoodPage: React.FC = () => {
   const getOpenRestaurants = () => {
     const category = categories.find(cat => cat.id === selectedCategory);
      const name = category?.name ?? "";
+     
     if (selectedCategory === 0) {
       return restaurants.filter(r => r.isOpen).slice(0, 6);
     }
@@ -78,28 +98,34 @@ const FoodPage: React.FC = () => {
   };
 
 
-  const handleFoodClick = (foodId: string) => {
-    console.log('Food clicked:', foodId);
-    const food = foodProducts.find(f => f.id === foodId);
-    console.log('Food details:', food);
-    // Navigate to food details or add to cart
-  };
+  const handleFoodClick = (foodId: number) => {
+  const food = products.find(f => f.id === foodId);
+  if (!food) return;
 
-  const handleAddFood = (foodId: string) => {
-    console.log('Add to cart:', foodId);
-    const food = foodProducts.find(f => f.id === foodId);
-    console.log('Added to cart:', food);
-    // Add to cart logic
-  };
+  navigate('/food-details', { state: { foodItem: food } });
+};
 
-  const getPopularFoods = () => {
-    // if (selectedCategory === 'all') {
-    //   return foodProducts.filter(food => food.tags.includes('popular')).slice(0, );
-    // }
-    return foodProducts
-      .filter(food => food.category === selectedCategory)
-      .slice(0, 6);
-  };
+
+  const handleAddFood = (foodId: number) => {
+  const food = products.find(f => f.id === foodId);
+  console.log('Added to cart:', food);
+};
+
+
+ const getPopularFoods = () => {
+    console.log(selectedCategory);
+    console.log( products.filter(
+    (p) => p.category_id === selectedCategory
+  ));
+  if (selectedCategory === 0){
+    return products.slice(0, 6);
+  }
+
+  return products.filter(
+    (p) => p.category_id=== selectedCategory
+  );
+  
+};
   console.log(selectedCategory);
   return (
 

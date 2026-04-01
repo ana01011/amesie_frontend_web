@@ -21,23 +21,46 @@ export interface Keyword {
   super_category: number;
   image_url: string;
 }
+export interface Seller {
+  id: number;
+  name: string;
+}
+export interface ProductImage {
+  id: number;
+  image_url: string;
+  display_order: number;
+  is_primary?: boolean;
+  product_id: number;
+  created_at: string;
+}
 
 // src/types.ts (or inline in data file)
 export interface FoodProduct {
-  id: string;
+  id: number;
   name: string;
-  restaurant?: string;  // Optional for detailed views
-  description?: string;
-  price: number;  // ₹40 → 40
-  image: string;
-  category: number;  // "burgers", "pizza", "coffee"
-  tags: string[];  // "popular", "bestseller", "new"
-  rating?: number;  // 4.7
-  prepTime?: string;  // "20 min"
-  sizes?: string[];  // ["10\"", "14\"", "16\""]
-  ingredients: string[];  // Icons for toppings
-  deliveryFee?: number; // 0 = Free
+  description?: string | null;
+  price: number;
+  stock_quantity: number;
+  category_id: number;
+  sku: string;
+  is_active: boolean;
+  is_deleted: boolean;
+  created_at: string;
+  seller?: Seller | null;
+  images: ProductImage[];
+}
 
+// types/index.ts
+
+export interface UIFoodProduct extends FoodProduct {
+  image: string;
+  restaurant: string;
+  rating: string;
+  prepTime: string;
+  deliveryFee: number;
+  sizes: string[];
+  ingredients: string[];
+  tags:string[];
 }
 
 // src/types/index.ts (add to existing)

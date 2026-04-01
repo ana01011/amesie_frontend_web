@@ -101,15 +101,35 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.5s ease;
+  
 }
 
-.food-card__icon-btn:active {
-  transform: scale(-0.2);
-}
+
 
 .food-card__icon-btn--filled {
   background: transparent;
   color: #FDC500;
   border: 2px solid #FDC500;
+}
+/* After added (✔) */
+.food-card__icon-btn--added {
+  background: #FDC500;
+  color: #fff;
+  animation: tickPop 0.25s ease;
+  border: none;
+}
+
+/* ✨ animation */
+@keyframes tickPop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

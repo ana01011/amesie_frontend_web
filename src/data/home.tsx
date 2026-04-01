@@ -39,11 +39,12 @@ const Home: React.FC = () => {
     window.scrollTo({ top: 0, behavior: 'instant' });
   }, []);
   const [selectedSupCategory, setSelectedSupCategory] = useState<number>(0);
-  const [selectedCategory, setSelectedCategory] = useState<number>(0);
+  const [selectedCategory, setSelectedCategory] = useState<number>(2);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedLocation, setSelectedLocation] = useState(() => {
     return localStorage.getItem("selectedLocation") || "Location";
   });
+  
 
 const [categories, setCategories] = useState<Category[]>([]);
 const [products, setProducts] = useState<UIFoodProduct[]>([]);
@@ -65,7 +66,9 @@ useEffect(() => {
   loadProducts();
 }, []);
 
+
   useEffect(() => {
+    
     const loadCategories = async () => {
       try {
         const data = await getCategories();
@@ -100,8 +103,11 @@ const getCategoryTitle = () => {
     : "Popular";
 };
   const getCategory = () => {
-    console.log(selectedSupCategory);
-    console.log(categories);
+   console.log("selectedCategory:", selectedCategory);
+
+products.forEach(p => {
+  console.log("product category:", p.category_id);
+});
     return categories;
       // .filter(category => category.super_category === selectedSupCategory);
   };
@@ -109,18 +115,14 @@ const getCategoryTitle = () => {
 
 
   const getPopularFoods = () => {
-    console.log(selectedCategory);
-    console.log( products.filter(
-    (p) => p.category_id === selectedCategory
-  ));
+     console.log('selected:', selectedCategory);
   if (selectedCategory === 0){
     return products.slice(0, 6);
   }
 
   return products.filter(
-    (p) => p.category_id=== selectedCategory
+    (p) => p.category_id === selectedCategory
   );
-  
 };
 
   const handleFoodClick = (foodId: number) => {
@@ -200,7 +202,11 @@ const handleAddFood = (foodId: number) => {
   // ===========================================
   const handleCategorySelect = (categoryId: number) => {
     setSelectedCategory(categoryId);
-    console.log('Category selected:', categoryId);
+    console.log("selectedCategory:", selectedCategory);
+
+products.forEach(p => {
+  console.log("product category:", p.category_id);
+});
 
     if (categoryId === 0) {
       // optional: collapse/hide FoodSection if you want

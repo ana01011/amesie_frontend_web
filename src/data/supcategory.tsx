@@ -1,31 +1,31 @@
 import { SupCategory } from "../types";
 export const supcategories: SupCategory[] = [
     {
-      id: 'snacks',
+      id: 0,
       label: 'Snacks',
       icon: '/images/fast-food-1.svg',
       description: 'Explore snacks',
     },
     {
-      id: 'beverages',
+      id: 1,
       label: 'Beverages',
       icon: '/images/fast-food-2.svg',
       description: 'Delicious beverages',
     },
     {
-      id: 'food',
+      id: 2,
       label: 'Food',
       icon: '/images/fast-food-3.svg',
       description: 'Fresh foods',
     },
     {
-      id: 'fast-food',
+      id: 3,
       label: 'Fast-foods',
       icon: '/images/fast-food-5.svg',
       description: 'Gourmet snacks',
     },
     {
-      id: 'deserts',
+      id: 4,
       label: 'Deserts',
       icon: '/images/fast-food-4.svg',
       description: 'Delicious Deserts',
