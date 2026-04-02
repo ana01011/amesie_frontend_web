@@ -1,5 +1,5 @@
-import React, {useEffect} from "react";
-import { Link, useNavigate,  } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate, } from "react-router-dom";
 import "./styles/MenuScreen.css";
 import {
     IoPersonOutline,
@@ -9,6 +9,7 @@ import {
     IoChevronForward,
     IoEllipsisVertical,
 } from "react-icons/io5";
+import { getUserProfile } from "../services/userServices";
 
 interface MenuItem {
     icon: React.ReactNode;
@@ -17,30 +18,13 @@ interface MenuItem {
     color: string;
 }
 
-const personalItems: MenuItem[] = [
-    {
-        icon: <IoPersonOutline />,
-        label: "FULL NAME",
-        holder: "FULL NAME",
-        color: "#FACC15",
-    },
-    {
-        icon: <IoMailOutline />,
-        label: "EMAIL",
-        holder: "xyz@gmail.com",
-        color: "#6366F1",
-    },
-    {
-        icon: <IoCallOutline />,
-        label: "PHONE NUMBER",
-        holder: "123-456-789",
-        color: "#6366F1",
-    },
-];
+
 
 const PersonalInfoScreen: React.FC = () => {
+    const [user, setUser] = useState<any>(null);
+
     useEffect(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+        window.scrollTo({ top: 0, behavior: 'instant' });
     }, []);
     const renderMenuItem = (item: MenuItem, index: number) => (
         <div className="menu-item" key={index}>
@@ -64,10 +48,48 @@ const PersonalInfoScreen: React.FC = () => {
         navigate(-1);
 
     };
-    const handleEdit = () =>{
+    const handleEdit = () => {
         navigate("/editprofile");
     };
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
 
+        const loadProfile = async () => {
+            try {
+                const data = await getUserProfile();
+
+                console.log("RAW API RESPONSE:", data);
+                const userData = data.data || data;
+                console.log("USER DATA", data);
+                console.log( user?.full_name);
+                setUser(userData);
+            } catch (err) {
+                console.error("Profile fetch error:", err);
+            }
+        };
+
+        loadProfile();
+    }, []);
+    const personalItems: MenuItem[] = [
+        {
+            icon: <IoPersonOutline />,
+            label: "FULL NAME",
+            holder: user?.full_name || "Not set",
+            color: "#FACC15",
+        },
+        {
+            icon: <IoMailOutline />,
+            label: "EMAIL",
+            holder: user?.email || "Not set",
+            color: "#6366F1",
+        },
+        {
+            icon: <IoCallOutline />,
+            label: "PHONE NUMBER",
+            holder: user?.phone || "Not set",
+            color: "#6366F1",
+        },
+    ];
     return (
         <div className="page">
             <div>
@@ -94,8 +116,8 @@ const PersonalInfoScreen: React.FC = () => {
                         />
 
                         <div className="profile-info">
-                            <h3>Full Name</h3>
-                            <p>I love fast food</p>
+                            <h3>{user?.full_name || "Guest User"}</h3>
+                            <p>{user?.email || "Welcome 👋"}</p>
                         </div>
                     </div>
 

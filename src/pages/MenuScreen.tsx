@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/MenuScreen.css";
 import {
@@ -18,6 +18,7 @@ import {
     IoLogIn
 } from "react-icons/io5";
 import { useAuth } from "../context/AuthContext";
+import { getUserProfile } from "../services/userServices";
 
 interface MenuItem {
     icon: React.ReactNode;
@@ -26,6 +27,7 @@ interface MenuItem {
     path?: string;
     action?: () => void; //  allows logout action
 }
+
 
 const personalItems: MenuItem[] = [
     { icon: <IoPersonOutline />, label: "Personal Info", color: "#3B82F6", path: "/personalinfo" },
@@ -46,39 +48,39 @@ const supportItems: MenuItem[] = [
 ];
 
 const MenuScreen: React.FC = () => {
-
+    const [user, setUser] = useState<any>(null);
     useEffect(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+        window.scrollTo({ top: 0, behavior: 'instant' });
     }, []);
     const navigate = useNavigate();
 
     //  Auth check (ONLY here)
     const { isAuthenticated, logout } = useAuth();
-    
+
 
     const handleLogout = () => {
-  logout();
-  navigate("/loginpage");
-};
+        logout();
+        navigate("/loginpage");
+    };
 
     //  Dynamic login/logout item
     const loggingItems: MenuItem[] = isAuthenticated
         ? [
-              {
-                  icon: <IoLogOut />,
-                  label: "Log Out",
-                  color: "#FB4A59",
-                  action: handleLogout
-              }
-          ]
+            {
+                icon: <IoLogOut />,
+                label: "Log Out",
+                color: "#FB4A59",
+                action: handleLogout
+            }
+        ]
         : [
-              {
-                  icon: <IoLogIn />,
-                  label: "Log In",
-                  color: "#Fdc500",
-                  path: "/loginpage"
-              }
-          ];
+            {
+                icon: <IoLogIn />,
+                label: "Log In",
+                color: "#Fdc500",
+                path: "/loginpage"
+            }
+        ];
 
     const renderMenuItem = (item: MenuItem, index: number) => (
         <div
@@ -103,6 +105,25 @@ const MenuScreen: React.FC = () => {
     const handleBackButton = () => {
         navigate(-1);
     };
+
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+
+        const loadProfile = async () => {
+            try {
+                const data = await getUserProfile();
+
+                console.log("RAW API RESPONSE:", data);
+                const userData = data.data || data;
+                console.log("USER DATA", data);
+                setUser(userData);
+            } catch (err) {
+                console.error("Profile fetch error:", err);
+            }
+        };
+
+        loadProfile();
+    }, []);
 
     return (
         <div className="page">
@@ -134,8 +155,8 @@ const MenuScreen: React.FC = () => {
                         />
 
                         <div className="profile-info">
-                            <h3>Full Name</h3>
-                            <p>I love fast food</p>
+                            <h3>{user?.full_name || "Guest User"}</h3>
+                            <p>{user?.email || "Welcome 👋"}</p>
                         </div>
                     </div>
 

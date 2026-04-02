@@ -1,13 +1,14 @@
-import React, { useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./styles/MenuScreen.css";
 import "./styles/EditProfileScreen.css";
 import { IoChevronBack, IoPencil } from "react-icons/io5";
+import { getUserProfile } from "../services/userServices";
 
 const EditProfileScreen: React.FC = () => {
     const navigate = useNavigate();
     useEffect(() => {
-      window.scrollTo({ top: 0, behavior: 'instant' });
+        window.scrollTo({ top: 0, behavior: 'instant' });
     }, []);
 
     const initialProfile = {
@@ -43,6 +44,30 @@ const EditProfileScreen: React.FC = () => {
 
         console.log("Changed fields:", changedFields);
     };
+    useEffect(() => {
+        const loadProfile = async () => {
+            try {
+                const data = await getUserProfile();
+
+                const u = data.data || data;
+
+                console.log("USER DATA:", u);
+
+                setProfile({
+                    fullName: u.full_name || "",
+                    email: u.email || "",
+                    phone: u.phone || "",
+                    bio: u.bio || "",
+                    image: u.profile_image || "https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg",
+                });
+
+            } catch (err) {
+                console.error("Profile fetch error:", err);
+            }
+        };
+
+        loadProfile();
+    }, []);
 
 
     return (
